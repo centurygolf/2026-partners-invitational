@@ -1,0 +1,2290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F7F2E8">
+<title>The Partners Invitational</title>
+<meta name="description" content="The live wall for the 18th Annual Partners Invitational at PGA WEST, La Quinta, California. October 4 to 7, 2026.">
+<!-- Attendees reach this by QR code, and the Teams tab carries 25 captains
+     mobile numbers and emails. There is no reason for a search engine to
+     index it, and good reason not to. -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Add to Home Screen. start_url and scope in the manifest are "./" because
+     this is served from a project subpath, not a domain root. Point them at
+     "/" and every relative fetch breaks once it launches standalone.
+     iOS ignores manifest icons for the home screen, hence apple-touch-icon,
+     and it paints black behind transparency, hence the cream matte. -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/brand/icon-golfer-180.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/icon-golfer-32.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="The Partners">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Yellowtail&family=Inter:wght@400;500;600;700&display=swap">
+
+<style id="wall-css">
+/* ==========================================================================
+   THE PARTNERS INVITATIONAL. Design system.
+   Mid-century Palm Springs: light, airy, cream and aqua and mustard.
+   This block is the single source of truth for tokens and motifs.
+   ROADMAP P0.2. Palette and rules in CLAUDE.md.
+   ========================================================================== */
+
+:root {
+  /* Palette. Fourteen tokens. */
+  --linen:     #F7F2E8;  /* page background, warm cream                    */
+  --paper:     #FFFDF6;  /* card surface                                   */
+  --sand:      #EFE7D6;  /* form fields, inactive pills, table stripes     */
+  --pool:      #3E8E90;  /* primary accent, turquoise                      */
+  --pool-deep: #2C6B6D;  /* pressed and hover, deep borders                */
+  --mustard:   #D9A441;  /* secondary accent, leader gold, awards          */
+  --terra:     #C2643F;  /* warm accent, terracotta                        */
+  --dusk:      #55496B;  /* mountain purple, quiet headers                 */
+  --ink:       #2E2A24;  /* body text, warm near-black                     */
+  --dim:       #6F6758;  /* secondary text, metadata                       */
+  --mute:      #9C927F;  /* timestamps, fine print                         */
+  --edge:      #E2D8C3;  /* card borders, dividers                         */
+  --danger:    #B0442E;  /* destructive admin actions                      */
+  --glow:      rgba(62, 142, 144, 0.10); /* pool tint, hover and selected  */
+
+  /* Type. Yellowtail is rationed to the hero greeting. Anywhere else it
+     reads as a cocktail menu. */
+  --font-display: 'Josefin Sans', 'Avenir Next', 'Futura', sans-serif;
+  --font-script:  'Yellowtail', cursive;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --shell-max: 1080px;
+  --measure: 66ch;
+
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+/* ------------------------------------------------------------- baseline */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  min-height: 100svh;
+  /* Launched from the home screen there is no address bar, so without this
+     the marquee sits under the status bar and the notch. */
+  padding-top: var(--safe-t);
+  background: var(--linen);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; font-size: 16px; }
+img { max-width: 100%; display: block; }
+a { color: var(--pool-deep); }
+
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.t-script { font-family: var(--font-script); font-weight: 400; }
+
+/* --------------------------------------------------------------- shell */
+.shell {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  padding: 0 16px calc(48px + var(--safe-b));
+}
+
+/* -------------------------------------------------------------- motifs */
+/* Breeze block screen. A quatrefoil grid, the concrete screen wall on every
+   1962 facade in the valley. Used as a low-contrast band, never full page. */
+.breeze {
+  background-color: var(--pool);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23FFFDF6' stroke-opacity='0.35' stroke-width='2'%3E%3Ccircle cx='24' cy='24' r='14'/%3E%3Ccircle cx='0' cy='0' r='14'/%3E%3Ccircle cx='48' cy='0' r='14'/%3E%3Ccircle cx='0' cy='48' r='14'/%3E%3Ccircle cx='48' cy='48' r='14'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 48px 48px;
+}
+
+/* Sunburst divider. The starburst clock, reduced to a rule. */
+.sunburst {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 28px 0 18px;
+  color: var(--mustard);
+}
+.sunburst::before, .sunburst::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--edge);
+}
+.sunburst svg { flex: none; }
+
+/* Roofline card. The butterfly roof as a header accent: two shallow angled
+   planes meeting in a valley. Applied with .roof on a .card. */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--edge);
+  border-radius: 14px;
+  padding: 16px;
+  position: relative;
+}
+.roof { padding-top: 22px; overflow: hidden; }
+.roof::before, .roof::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 8px;
+  background: var(--pool);
+}
+.roof::before { left: 0;  transform: skewY(1.6deg);  transform-origin: left top; }
+.roof::after  { right: 0; transform: skewY(-1.6deg); transform-origin: right top; }
+.roof.roof-mustard::before, .roof.roof-mustard::after { background: var(--mustard); }
+.roof.roof-terra::before,   .roof.roof-terra::after   { background: var(--terra); }
+
+/* -------------------------------------------------------------- masthead */
+.masthead { position: relative; }
+.masthead-band {
+  height: 34px;
+  border-bottom: 3px solid var(--pool-deep);
+}
+.masthead-inner {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  padding: 26px 16px 0;
+  text-align: center;
+}
+.masthead-kicker {
+  font-size: 12px;
+  color: var(--dim);
+  letter-spacing: 0.28em;
+}
+.masthead-script {
+  color: var(--terra);
+  font-size: clamp(26px, 6vw, 38px);
+  line-height: 1.1;
+  margin: 10px 0 0;
+}
+.masthead-venue {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  color: var(--pool-deep);
+}
+/* The event wordmark. Supplied as black on white with no alpha, so multiply
+   drops the white onto the cream and leaves the artwork. */
+.masthead-mark { margin: 10px 0 14px; }
+.masthead-mark img {
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  margin: 0 auto;
+  mix-blend-mode: multiply;
+}
+.con-logo {
+  height: 44px;
+  width: auto;
+  margin-bottom: 10px;
+  /* the source PNGs are dark-on-white; multiply drops the white onto paper */
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+}
+
+/* Mountain horizon, drawn. Superseded by the photo band below, kept as the
+   fallback if the photograph is ever pulled. */
+.horizon { display: block; width: 100%; height: 54px; margin-top: 6px; }
+
+/* The real Santa Rosas behind the course. Credited, because the photograph
+   is John Henebry's. */
+.masthead-photo { position: relative; margin-top: 10px; line-height: 0; }
+.masthead-photo img {
+  width: 100%;
+  height: clamp(120px, 22vw, 210px);
+  object-fit: cover;
+  object-position: center 62%;
+  border-top: 3px solid var(--pool-deep);
+  border-bottom: 3px solid var(--pool-deep);
+}
+.photo-credit {
+  position: absolute;
+  right: 8px;
+  bottom: 7px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+}
+
+/* --------------------------------------------------------------- marquee */
+.marquee {
+  background: var(--dusk);
+  color: var(--linen);
+  font-size: 14px;
+  text-align: center;
+  padding: 8px 16px;
+}
+
+/* Preview banner. Only exists until Firebase is wired. */
+.preview-banner {
+  background: var(--mustard);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  padding: 7px 16px;
+}
+
+/* Placeholder chip. Marks sample content so it can never pass for real. */
+.chip-ph {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--paper);
+  background: var(--terra);
+  border-radius: 999px;
+  padding: 2px 8px;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ nav */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: color-mix(in srgb, var(--linen) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--edge);
+}
+.nav-row {
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px 16px;
+  scrollbar-width: none;
+}
+.nav-row::-webkit-scrollbar { display: none; }
+.nav-pill {
+  flex: none;
+  border: 1px solid var(--edge);
+  background: var(--paper);
+  color: var(--dim);
+  border-radius: 999px;
+  padding: 8px 16px 7px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.nav-pill.active {
+  background: var(--pool);
+  border-color: var(--pool-deep);
+  color: var(--paper);
+}
+.nav-gear { margin-left: auto; }
+
+/* ------------------------------------------------------------- sections */
+.page-title { font-size: 22px; letter-spacing: 0.16em; margin: 26px 0 4px; }
+.page-sub   { color: var(--dim); font-size: 14px; margin: 0 0 18px; max-width: var(--measure); }
+
+.stack { display: grid; gap: 12px; }
+.grid-cards {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.empty {
+  text-align: center;
+  color: var(--dim);
+  padding: 36px 16px;
+  border: 1px dashed var(--edge);
+  border-radius: 14px;
+  background: var(--paper);
+}
+
+/* ----------------------------------------------------------------- pills */
+.day-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.day-pill {
+  border: 1px solid var(--edge);
+  background: var(--sand);
+  color: var(--dim);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.day-pill.active { background: var(--dusk); border-color: var(--dusk); color: var(--linen); }
+
+/* -------------------------------------------------------------- itinerary */
+.session { display: flex; gap: 14px; }
+.session-time {
+  flex: none;
+  width: 82px;
+  color: var(--pool-deep);
+  font-weight: 700;
+  font-size: 13px;
+  padding-top: 2px;
+}
+.session-title { font-weight: 600; }
+.session-detail { color: var(--dim); font-size: 14px; margin-top: 2px; }
+/* Last year, showing what the evening actually looks like. Beats describing
+   a dress code in a sentence. */
+.section-band {
+  width: 100%;
+  height: clamp(110px, 20vw, 190px);
+  object-fit: cover;
+  object-position: center 55%;
+  border-radius: 14px;
+  border: 1px solid var(--edge);
+  margin-bottom: 16px;
+}
+
+.session-photo {
+  /* Height-bounded rather than cropped to a fixed ratio. These are group
+     shots and a forced landscape crop takes the tops of heads off. */
+  max-height: 210px;
+  max-width: 100%;
+  width: auto;
+  border-radius: 10px;
+  border: 1px solid var(--edge);
+  margin-top: 8px;
+}
+
+/* ---------------------------------------------------------------- roster */
+.person { display: flex; gap: 12px; align-items: center; }
+.person-photo, .person-mono {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  flex: none;
+  object-fit: cover;
+  border: 2px solid var(--edge);
+}
+.person-mono {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sand);
+  color: var(--pool-deep);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+}
+.person-name { font-weight: 600; }
+.person-meta { color: var(--dim); font-size: 13px; }
+.search {
+  width: 100%;
+  border: 1px solid var(--edge);
+  background: var(--paper);
+  border-radius: 12px;
+  padding: 11px 14px;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.search::placeholder { color: var(--mute); }
+
+/* ------------------------------------------------------------ leaderboard */
+.lb-note { font-size: 13px; color: var(--mute); margin: 0 0 14px; }
+.lb-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.lb-rank {
+  flex: none;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sand);
+  color: var(--dusk);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+}
+.lb-leader .lb-rank { background: var(--mustard); color: var(--paper); }
+.lb-team { flex: 1; min-width: 0; }
+.lb-team-name { font-weight: 600; }
+.lb-players { color: var(--dim); font-size: 13px; overflow-wrap: anywhere; }
+.lb-score { text-align: right; flex: none; }
+.lb-topar {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--pool-deep);
+}
+.lb-leader .lb-topar { color: var(--mustard); }
+.lb-thru { color: var(--mute); font-size: 12px; }
+
+.lb-rounds { display: flex; gap: 12px; color: var(--dim); font-size: 12px; margin-top: 2px; flex-wrap: wrap; }
+.lb-shootout {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--mustard);
+  border-radius: 999px;
+  padding: 2px 8px;
+  vertical-align: middle;
+}
+
+/* score entry, admin only. One row per team, net score per round. */
+.se-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--edge);
+}
+.se-row:last-child { border-bottom: none; }
+.se-name { flex: 1 1 140px; min-width: 120px; font-weight: 600; }
+.se-input {
+  width: 96px;
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- cropper */
+.crop-modal { max-width: 340px; }
+.crop-title { font-size: 14px; letter-spacing: 0.14em; margin: 0 0 12px; }
+.crop-frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--sand);
+  touch-action: none;          /* the drag is ours, not the browser's scroll */
+  cursor: grab;
+  user-select: none;
+}
+.crop-frame:active { cursor: grabbing; }
+.crop-img {
+  position: absolute;
+  top: 0; left: 0;
+  max-width: none;             /* the global img rule would fight the zoom */
+  will-change: transform;
+  pointer-events: none;
+}
+/* Circular mask preview for a round destination, drawn as a ring overlay so
+   the corners stay visible while positioning. */
+.crop-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+  box-shadow: 0 0 0 9999px rgba(247, 242, 232, 0.55) inset;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  -webkit-mask: radial-gradient(circle at 50% 50%, transparent 49.5%, #000 50%);
+  mask: radial-gradient(circle at 50% 50%, transparent 49.5%, #000 50%);
+}
+.crop-zoom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--dim);
+}
+.crop-zoom input { flex: 1; accent-color: var(--pool); }
+.crop-hint { font-size: 12px; color: var(--mute); margin: 6px 0 0; text-align: center; }
+.crop-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+
+/* --------------------------------------------------------------- gallery */
+.photo-note { font-size: 13px; color: var(--mute); margin: 0 0 12px; }
+.photo-card a { display: block; }
+.photo-actions { display: flex; align-items: center; gap: 8px; }
+.photo-full {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pool-deep);
+  text-decoration: none;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+.upload-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.photo-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+.photo-card { border-radius: 12px; overflow: hidden; border: 1px solid var(--edge); background: var(--paper); }
+.photo-card img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.photo-bar { display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; }
+.like-btn {
+  border: none; background: none;
+  color: var(--dim);
+  font-size: 14px;
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px;
+}
+.like-btn.liked { color: var(--terra); font-weight: 600; }
+
+/* --------------------------------------------------------- live scoring */
+.score-card { display: flex; flex-direction: column; gap: 6px; }
+.score-today { border-color: var(--pool); box-shadow: 0 0 0 2px var(--glow); }
+.score-head { display: flex; align-items: center; gap: 10px; }
+.score-round {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 16px;
+  color: var(--dusk);
+}
+.score-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--pool);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+.score-meta { font-size: 14px; color: var(--dim); }
+/* A thumb-sized target: this gets tapped on a cart, in the sun, in a glove. */
+.score-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 14px 18px;
+  font-size: 16px;
+}
+.score-pending {
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px dashed var(--edge);
+  border-radius: 10px;
+  background: var(--sand);
+  color: var(--dim);
+  font-size: 14px;
+}
+
+/* ------------------------------------------------------------------ teams */
+.team-card { display: flex; flex-direction: column; gap: 8px; }
+.team-club {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 15px;
+  color: var(--dusk);
+}
+.team-captain-block {
+  background: var(--sand);
+  border-left: 3px solid var(--pool);
+  border-radius: 0 10px 10px 0;
+  padding: 8px 12px;
+}
+.team-captain-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pool-deep);
+}
+.team-captain-name { font-weight: 600; font-size: 15px; }
+.team-captain-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 13px;
+  margin-top: 2px;
+}
+.team-captain-contact a { overflow-wrap: anywhere; }
+.team-players { list-style: none; margin: 0; padding: 0; }
+.team-players li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--edge);
+}
+.team-players li:last-child { border-bottom: none; }
+.team-sponsored {
+  flex: none;
+  min-width: 22px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--paper);
+  background: var(--mustard);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+/* ----------------------------------------------------------- top sponsors */
+.tier-name { font-size: 14px; letter-spacing: 0.2em; }
+.tier-platinum { color: var(--dusk); }
+.tier-gold { color: var(--mustard); }
+.sponsor-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+.sponsor-card {
+  background: var(--paper);
+  border: 1px solid var(--edge);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 3px;
+}
+.sponsor-photo-wrap { width: 100%; max-width: 132px; margin-bottom: 6px; }
+.sponsor-photo, .sponsor-mono {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 100%;
+  border-radius: 50%;
+  border: 3px solid var(--sand);
+  object-fit: cover;
+}
+.sponsor-mono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sand);
+  color: var(--pool-deep);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.05em;
+}
+.sponsor-name { font-weight: 600; font-size: 15px; color: var(--ink); line-height: 1.3; }
+.sponsor-club { font-size: 13px; color: var(--dim); }
+.sponsor-count {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+.sponsor-admin { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+
+/* -------------------------------------------------------------- questions */
+.qa-textarea { display: block; width: 100%; resize: vertical; line-height: 1.5; }
+.qa-compose-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.qa-compose-row .field { flex: 1 1 180px; }
+.qa-sent { margin-top: 10px; font-size: 14px; color: var(--pool-deep); font-weight: 600; }
+.qa-item { display: flex; flex-direction: column; gap: 6px; }
+.qa-q { font-weight: 600; font-size: 16px; }
+.qa-meta { font-size: 12px; color: var(--mute); }
+.qa-pending {
+  margin-left: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--mute);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.qa-a {
+  background: var(--sand);
+  border-left: 3px solid var(--pool);
+  border-radius: 0 10px 10px 0;
+  padding: 10px 12px;
+  font-size: 15px;
+  margin-top: 2px;
+}
+.qa-a-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pool-deep);
+  margin-bottom: 3px;
+}
+.qa-answerbox { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--edge); }
+
+/* ------------------------------------------------------------- guide, info */
+.con-item { padding: 10px 0; border-bottom: 1px solid var(--edge); }
+.con-item:last-child { border-bottom: none; }
+.con-label { font-weight: 600; }
+.con-detail { color: var(--dim); font-size: 14px; }
+
+/* --------------------------------------------------------------- buttons */
+.btn {
+  border: none;
+  border-radius: 12px;
+  padding: 11px 18px;
+  font-weight: 600;
+  font-size: 15px;
+  background: var(--pool);
+  color: var(--paper);
+}
+.btn:active { background: var(--pool-deep); }
+.btn-quiet { background: var(--sand); color: var(--ink); border: 1px solid var(--edge); }
+.btn-danger { background: var(--paper); color: var(--danger); border: 1px solid var(--danger); }
+.btn-sm { padding: 7px 12px; font-size: 13px; border-radius: 10px; }
+
+.field {
+  width: 100%;
+  border: 1px solid var(--edge);
+  background: var(--paper);
+  border-radius: 12px;
+  padding: 11px 14px;
+  color: var(--ink);
+}
+
+/* ----------------------------------------------------------------- admin */
+.admin-badge {
+  background: var(--dusk);
+  color: var(--linen);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+.admin-section { margin-bottom: 20px; }
+.admin-h { font-size: 14px; letter-spacing: 0.14em; margin: 0 0 10px; color: var(--dusk); }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--edge); }
+.toggle-row:last-child { border-bottom: none; }
+
+/* modal */
+.scrim {
+  position: fixed; inset: 0;
+  background: rgba(46, 42, 36, 0.5);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+  padding: 16px;
+}
+.modal { width: 100%; max-width: 400px; }
+
+/* footer */
+.footer {
+  text-align: center;
+  color: var(--mute);
+  font-size: 12px;
+  padding: 30px 16px 10px;
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+
+<script type="text/babel" data-presets="react">
+/* =========================================================================
+   THE PARTNERS INVITATIONAL. App logic.
+   Single file, JSX transpiled in the browser. A syntax error here is a
+   white screen, not a build failure. Verify in a browser after every edit.
+   ========================================================================= */
+
+const { useState, useEffect, useMemo, useRef, useCallback } = React;
+
+/* ---------------------------------------------------------- configuration */
+/* Live since Sep 17. The wall has its OWN Realtime Database instance,
+   cgp-partners-inv-2026, which happens to sit inside the membership wall's
+   Firebase project because that Google account has hit its project quota.
+   Separate instance means separate data and separate rules: nothing here can
+   read or write the membership wall's database. If the quota is ever freed,
+   moving to a dedicated project is a one line change to databaseURL.
+
+   An apiKey in client code is normal for Firebase. It identifies the project,
+   it is not a secret. The database rules are what control access. */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyAZZfeJWyq7HVHlSEuucquCLHyXTmtrXco",
+  authDomain: "cgp-membership-wall-2026.firebaseapp.com",
+  databaseURL: "https://cgp-partners-inv-2026.firebaseio.com",
+  projectId: "cgp-membership-wall-2026",
+  storageBucket: "cgp-membership-wall-2026.firebasestorage.app",
+};
+const PREVIEW = FIREBASE_CONFIG.apiKey === "PASTE_ME";
+
+const LS = {
+  liked: "pinv_liked",
+  admin: "pinv_admin",
+  asked: "pinv_asked",
+};
+
+/* Donny's seven, in his order. Sep 15. */
+const TABS = [
+  { id: "agenda",    label: "Agenda" },
+  { id: "scoring",   label: "Live Scoring" },
+  { id: "teams",     label: "Teams" },
+  { id: "sponsors",  label: "Top Sponsors" },
+  { id: "guide",     label: "Program Guide" },
+  { id: "area",      label: "Area Guide" },
+  { id: "photos",    label: "Photos" },
+  { id: "questions", label: "Questions" },
+];
+
+/* ------------------------------------------------------------ store layer */
+/* One API, two backends. Firebase when config is pasted, memory until then.
+   Paths are slash strings, "settings/marquee". subscribe fires immediately
+   with the current value and again on every change. */
+
+function makeMemoryStore(seed) {
+  const data = seed;
+  const subs = []; // { path, cb }
+
+  const get = (path) => path.split("/").reduce(
+    (node, key) => (node == null ? null : node[key]), data);
+
+  /* Subscribers get a clone, never the live object. React compares by
+     reference, and handing back the same mutated object skips the re-render.
+     Firebase snapshots are fresh objects every time, so this mirrors that. */
+  const cloned = (path) => {
+    const v = get(path);
+    if (v === undefined) return null;   // match Firebase: missing path is null
+    return v != null && typeof v === "object" ? JSON.parse(JSON.stringify(v)) : v;
+  };
+
+  const notify = () => subs.forEach((s) => s.cb(cloned(s.path)));
+
+  const setAt = (path, val) => {
+    const keys = path.split("/");
+    const last = keys.pop();
+    let node = data;
+    for (const k of keys) {
+      if (node[k] == null || typeof node[k] !== "object") node[k] = {};
+      node = node[k];
+    }
+    if (val === null) delete node[last];
+    else node[last] = val;
+    notify();
+  };
+
+  return {
+    preview: true,
+    subscribe(path, cb) {
+      const sub = { path, cb };
+      subs.push(sub);
+      cb(cloned(path));
+      return () => subs.splice(subs.indexOf(sub), 1);
+    },
+    set: (path, val) => Promise.resolve(setAt(path, val)),
+    remove: (path) => Promise.resolve(setAt(path, null)),
+    push(path, val) {
+      const id = "m" + Date.now() + Math.random().toString(36).slice(2, 7);
+      setAt(path + "/" + id, val);
+      return Promise.resolve(id);
+    },
+    increment(path, by) {
+      const cur = get(path);
+      return Promise.resolve(setAt(path, (typeof cur === "number" ? cur : 0) + by));
+    },
+    /* No bucket in preview. Hand back a data URL so the Gallery code path is
+       identical either way, and say so via storageBacked. */
+    storageBacked: false,
+    uploadImage(_path, blob) {
+      return new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = () => res(r.result);
+        r.onerror = rej;
+        r.readAsDataURL(blob);
+      });
+    },
+    deleteFile: () => Promise.resolve(),
+  };
+}
+
+function makeFirebaseStore() {
+  firebase.initializeApp(FIREBASE_CONFIG);
+  const db = firebase.database();
+  return {
+    preview: false,
+    subscribe(path, cb) {
+      const ref = db.ref(path);
+      const h = ref.on("value", (snap) => cb(snap.val()));
+      return () => ref.off("value", h);
+    },
+    set: (path, val) => db.ref(path).set(val),
+    remove: (path) => db.ref(path).remove(),
+    push: (path, val) => db.ref(path).push(val).then((r) => r.key),
+    increment: (path, by) =>
+      db.ref(path).transaction((cur) => (typeof cur === "number" ? cur : 0) + by),
+
+    /* Photos are files in Cloud Storage, not base64 in the database. The
+       database only holds the download URLs. This is what keeps the Photos
+       tab from making every phone download every photo ever posted. */
+    storageBacked: true,
+    uploadImage(path, blob, onProgress) {
+      const ref = firebase.storage().ref(path);
+      const task = ref.put(blob, { contentType: "image/jpeg", cacheControl: "public, max-age=31536000" });
+      return new Promise((res, rej) => {
+        task.on("state_changed",
+          (s) => onProgress && onProgress(s.totalBytes ? s.bytesTransferred / s.totalBytes : 0),
+          rej,
+          () => ref.getDownloadURL().then(res, rej));
+      });
+    },
+    deleteFile: (path) =>
+      firebase.storage().ref(path).delete().catch((e) => {
+        /* An already-missing file is not a failure worth blocking a delete. */
+        if (e && e.code === "storage/object-not-found") return;
+        throw e;
+      }),
+  };
+}
+
+/* Preview seed. Everything here is sample data and says so on screen. */
+const PREVIEW_SEED = {
+  settings: {
+    marquee: "Welcome to the desert. Sample content throughout while the wall is in preview.",
+    adminPin: "0000",
+    tabs: { agenda: true, scoring: true, teams: true, sponsors: true, guide: true, area: true, photos: true, questions: true },
+    /* false: a question goes to the organizers and appears once answered.
+       true: every question is public the moment it is asked. */
+    qaPublic: false,
+  },
+  questions: {
+    q1: {
+      text: "Sample question. Is there a shuttle from the resort to the clubhouse each morning?",
+      name: "Sample Attendee",
+      ts: 1757900000000,
+      answer: "Sample answer. Answer a question from the gear icon and it appears here for everyone.",
+      answeredTs: 1757900600000,
+      sample: true,
+    },
+  },
+  photos: {},
+  photoLikes: {},
+  sponsorPhotos: {},
+};
+
+const store = PREVIEW ? makeMemoryStore(PREVIEW_SEED) : makeFirebaseStore();
+
+/* ------------------------------------------------------------------ hooks */
+function useNode(path) {
+  const [val, setVal] = useState(undefined);
+  useEffect(() => store.subscribe(path, setVal), [path]);
+  return val;
+}
+
+function useJson(url) {
+  const [val, setVal] = useState(undefined);
+  useEffect(() => {
+    let live = true;
+    fetch(url).then((r) => r.json()).then((j) => live && setVal(j))
+      .catch(() => live && setVal(null));
+    return () => { live = false; };
+  }, [url]);
+  return val;
+}
+
+function lsGet(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
+  catch { return fallback; }
+}
+function lsSet(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch {}
+}
+
+/* ------------------------------------------------------------- ornaments */
+function SunDivider() {
+  return (
+    <div className="sunburst" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 26 26">
+        <circle cx="13" cy="13" r="5" fill="currentColor" />
+        {Array.from({ length: 12 }).map((_, i) => {
+          const a = (i * 30 * Math.PI) / 180;
+          return (
+            <line key={i}
+              x1={13 + Math.cos(a) * 8} y1={13 + Math.sin(a) * 8}
+              x2={13 + Math.cos(a) * 12} y2={13 + Math.sin(a) * 12}
+              stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
+function Horizon() {
+  return (
+    <svg className="horizon" viewBox="0 0 1000 54" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,54 L0,38 L140,16 L300,40 L430,10 L590,42 L720,20 L870,44 L1000,26 L1000,54 Z"
+        fill="#55496B" opacity="0.22" />
+      <path d="M0,54 L0,46 L180,28 L360,48 L520,24 L700,50 L850,34 L1000,46 L1000,54 Z"
+        fill="#55496B" opacity="0.38" />
+      <rect x="0" y="52" width="1000" height="2" fill="#2C6B6D" />
+    </svg>
+  );
+}
+
+function PhChip() { return <span className="chip-ph">Placeholder</span>; }
+
+/* --------------------------------------------------------------- masthead */
+function Masthead({ agenda }) {
+  return (
+    <header className="masthead">
+      <div className="breeze masthead-band" aria-hidden="true"></div>
+      <div className="masthead-inner">
+        <div className="t-display masthead-kicker">
+          Century Golf Partners &middot; {agenda?.edition || "18th Annual"}
+        </div>
+        <div className="t-script masthead-script">Welcome to the desert</div>
+        <h1 className="masthead-mark">
+          <img src="assets/brand/partners-invitational-logo.jpg"
+            alt="The Partners Invitational" />
+        </h1>
+        <div className="t-display masthead-venue">
+          PGA WEST &middot; La Quinta, California
+          {agenda && <span> &middot; {agenda.dates}</span>}
+        </div>
+      </div>
+      <div className="masthead-photo">
+        <img src="assets/photos/hero-band.jpg" alt="" loading="eager" />
+        <span className="photo-credit">Photo by John Henebry</span>
+      </div>
+    </header>
+  );
+}
+
+/* ----------------------------------------------------------------- agenda */
+function Agenda() {
+  const agenda = useJson("data/agenda.json");
+  const [dayId, setDayId] = useState(null);
+  if (agenda === undefined) return null;
+  if (!agenda || !agenda.days?.length) {
+    return <div className="empty">The schedule is being finalized. Check back soon.</div>;
+  }
+  const active = agenda.days.find((d) => d.id === dayId) || agenda.days[0];
+  return (
+    <section>
+      <h2 className="t-display page-title">Agenda</h2>
+      <p className="page-sub">The schedule for your stay.</p>
+      <div className="day-pills">
+        {agenda.days.map((d) => (
+          <button key={d.id}
+            className={"day-pill" + (d.id === active.id ? " active" : "")}
+            onClick={() => setDayId(d.id)}>
+            {d.label}
+          </button>
+        ))}
+      </div>
+      <div className="card roof">
+        <div style={{ color: "var(--dim)", fontSize: 14, marginBottom: 10 }}>
+          {active.date}
+          {active.location && <span> &middot; {active.location}</span>}
+          {active.placeholder && <PhChip />}
+        </div>
+        <div className="stack">
+          {active.sessions.map((s, i) => (
+            <div className="session" key={i}>
+              <div className="session-time">{s.time}</div>
+              <div>
+                <div className="session-title">
+                  {s.title}
+                  {s.spouses && <span style={{ color: "var(--mustard)" }} title="Spouses invited"> &#10035;</span>}
+                  {s.placeholder && <span> <PhChip /></span>}
+                </div>
+                {s.detail && <div className="session-detail">{s.detail}</div>}
+                {s.photo && (
+                  <img className="session-photo" src={s.photo} alt="" loading="lazy" />
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {agenda.footnote && (
+        <p style={{ color: "var(--mute)", fontSize: 13, marginTop: 12 }}>
+          <span style={{ color: "var(--mustard)" }}>&#10035;</span> {agenda.footnote}
+        </p>
+      )}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------- live scoring */
+/* Golf Genius owns scoring. This tab is the shortcut to it. The deeplink_ggid
+   URL is the only shape that hands off to their app instead of a browser,
+   verified against their apple-app-site-association on Sep 15. Without a GGID
+   there is nothing useful to link to, so the round says so plainly rather
+   than offering a button that goes nowhere. */
+function LiveScoring() {
+  const data = useJson("data/scoring.json");
+  if (data === undefined) return null;
+  const rounds = data?.rounds || [];
+
+  /* Local date, so "today" means today where the player is standing. */
+  const today = new Date();
+  const iso = today.getFullYear() + "-" +
+    String(today.getMonth() + 1).padStart(2, "0") + "-" +
+    String(today.getDate()).padStart(2, "0");
+
+  return (
+    <section>
+      <h2 className="t-display page-title">Live Scoring</h2>
+      <p className="page-sub">{data?.intro}</p>
+
+      <div className="stack">
+        {rounds.map((r) => {
+          const isToday = r.date === iso;
+          const link = r.ggid
+            ? "https://www.golfgenius.com/deeplink_ggid?ggid=" + encodeURIComponent(r.ggid)
+            : null;
+          return (
+            <div className={"card roof score-card" + (isToday ? " score-today" : "")} key={r.id}>
+              <div className="score-head">
+                <span className="score-round">{r.label}</span>
+                {isToday && <span className="score-badge">Today</span>}
+              </div>
+              <div className="score-meta">
+                {r.day} &middot; {r.course} &middot; {r.format}
+              </div>
+              {link ? (
+                <a className="btn score-btn" href={link} target="_blank" rel="noopener">
+                  Open my scorecard
+                </a>
+              ) : (
+                <div className="score-pending">
+                  Scoring opens here on the morning of the round. <PhChip />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {data?.leaderboardUrl && (
+        <div className="card roof roof-mustard" style={{ marginTop: 12 }}>
+          <div className="con-label">Following along?</div>
+          <div className="con-detail">The live leaderboard is open to everyone.</div>
+          <a className="btn btn-quiet score-btn" href={data.leaderboardUrl}
+            target="_blank" rel="noopener">Open the leaderboard</a>
+        </div>
+      )}
+
+      <p style={{ color: "var(--mute)", fontSize: 13, marginTop: 14 }}>
+        {data?.appNote}
+      </p>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ teams */
+/* Club, captain, players. Captain contact is the only contact on the wall, by
+   design: they are the hosts attendees need to reach. Everything else in the
+   roster workbook stays out. See tools/build-roster.js. */
+function Teams() {
+  const data = useJson("data/teams.json");
+  const [q, setQ] = useState("");
+  if (data === undefined) return null;
+  const teams = data?.teams || [];
+  const needle = q.trim().toLowerCase();
+  const shown = !needle ? teams : teams.filter((t) =>
+    [t.club, t.captain?.name, ...(t.players || []).map((p) => p.name)]
+      .filter(Boolean).join(" ").toLowerCase().includes(needle));
+
+  return (
+    <section>
+      <h2 className="t-display page-title">Teams</h2>
+      <p className="page-sub">
+        Every club in the field, with its Team Captain Host and players.
+      </p>
+      <img className="section-band" src="assets/photos/teams-band.jpg" alt=""
+        loading="lazy" />
+      <input className="search" placeholder="Find a club, captain, or player" value={q}
+        onChange={(e) => setQ(e.target.value)} />
+      {teams.length === 0 ? (
+        <div className="empty">Teams will appear here once pairings are set.</div>
+      ) : shown.length === 0 ? (
+        <div className="empty">No matches.</div>
+      ) : (
+        <div className="grid-cards">
+          {shown.map((t) => (
+            <div className="card roof team-card" key={t.id}>
+              <div className="team-club">
+                {t.club} {t.placeholder && <PhChip />}
+              </div>
+
+              {t.captain && (
+                <div className="team-captain-block">
+                  <div className="team-captain-label">Team Captain Host</div>
+                  <div className="team-captain-name">{t.captain.name}</div>
+                  <div className="team-captain-contact">
+                    {t.captain.mobile && (
+                      <a href={"tel:" + t.captain.mobile.replace(/[^0-9+]/g, "")}>
+                        {t.captain.mobile}
+                      </a>
+                    )}
+                    {t.captain.email && (
+                      <a href={"mailto:" + t.captain.email}>{t.captain.email}</a>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {(t.players || []).length > 0 && (
+                <ul className="team-players">
+                  {t.players.map((p, i) => (
+                    <li key={i}>
+                      <span>{p.name}</span>
+                      {p.sponsored > 0 && (
+                        <span className="team-sponsored" title="Members sponsored">
+                          {fmtNum(p.sponsored)}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+      <p style={{ color: "var(--mute)", fontSize: 13, marginTop: 14 }}>
+        The number beside a player is how many full privilege members they
+        sponsored this year.
+      </p>
+    </section>
+  );
+}
+
+/* ----------------------------------------------------------- top sponsors */
+/* Platinum and Gold: the members who sponsored the most. Photos come from
+   assets/sponsors/<slug>.jpg, and an organizer can upload one from here,
+   which lands in Firebase and wins over the file. */
+function SponsorCard({ s, uploaded, admin }) {
+  const [broken, setBroken] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [pending, setPending] = useState(null);
+  const fileRef = useRef();
+
+  const src = uploaded || (broken ? null : s.photo);
+  /* First name plus surname, so a couple reads "TS" rather than "T". */
+  const words = s.name.split(/\s+/).filter((w) => w && w !== "&");
+  const initials = words.length
+    ? (words[0][0] + (words.length > 1 ? words[words.length - 1][0] : "")).toUpperCase()
+    : "";
+
+  const pick = (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (file) setPending(file);
+  };
+
+  const save = async (canvas) => {
+    setPending(null);
+    setBusy(true);
+    try {
+      await store.set(`sponsorPhotos/${s.slug}`, canvas.toDataURL("image/jpeg", 0.88));
+      setBroken(false);
+    } catch (err) {
+      console.error("sponsor photo failed", err);
+      alert("That photo did not go through. Try again.");
+    }
+    setBusy(false);
+  };
+
+  return (
+    <div className="sponsor-card">
+      <div className="sponsor-photo-wrap">
+        {src ? (
+          <img className="sponsor-photo" src={src} alt={s.name}
+            onError={() => setBroken(true)} />
+        ) : (
+          <div className="sponsor-mono">{initials}</div>
+        )}
+      </div>
+      <div className="sponsor-name">{s.name}</div>
+      <div className="sponsor-club">{s.club}</div>
+      <div className="sponsor-count">{fmtNum(s.count)} sponsored</div>
+      {admin && (
+        <div className="sponsor-admin">
+          <input ref={fileRef} type="file" accept="image/*"
+            style={{ display: "none" }} onChange={pick} />
+          <button className="btn btn-quiet btn-sm" disabled={busy}
+            onClick={() => fileRef.current.click()}>
+            {busy ? "Uploading…" : uploaded ? "Replace photo" : "Upload photo"}
+          </button>
+          {uploaded && (
+            <button className="btn btn-danger btn-sm"
+              onClick={() => {
+                if (confirm(`Remove the uploaded photo for ${s.name}?`)) {
+                  store.remove(`sponsorPhotos/${s.slug}`);
+                }
+              }}>Remove</button>
+          )}
+        </div>
+      )}
+      {pending && (
+        <PhotoCropper file={pending} aspect={1} maxOut={800} round
+          onCancel={() => setPending(null)} onDone={save} />
+      )}
+    </div>
+  );
+}
+
+function Sponsors({ admin }) {
+  const data = useJson("data/sponsors.json");
+  const uploads = useNode("sponsorPhotos");
+  if (data === undefined || uploads === undefined) return null;
+  const tiers = data?.tiers || [];
+  return (
+    <section>
+      <h2 className="t-display page-title">Top Sponsors</h2>
+      <p className="page-sub">{data?.intro}</p>
+      {tiers.length === 0 ? (
+        <div className="empty">Sponsors will be announced here.</div>
+      ) : (
+        <div className="stack">
+          {tiers.map((tier) => (
+            <div key={tier.tier}>
+              <div className="sunburst">
+                <span className={"t-display tier-name tier-" + tier.tier.toLowerCase()}>
+                  {tier.tier}
+                </span>
+              </div>
+              <div className="sponsor-grid">
+                {(tier.sponsors || []).map((s) => (
+                  <SponsorCard key={s.slug} s={s} admin={admin}
+                    uploaded={uploads?.[s.slug]} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {admin && (
+        <p style={{ color: "var(--mute)", fontSize: 13, marginTop: 16 }}>
+          Photos also load from assets/sponsors/&lt;name&gt;.jpg in the repo.
+          An upload here overrides the file.
+        </p>
+      )}
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------ leaderboard */
+/* DORMANT as of Sep 15. Donny's tab list has no Leaderboard, because Golf
+   Genius runs scoring for this event and computes the handicap allowances
+   itself. Keeping two leaderboards means the scoring table types every number
+   twice and they disagree by Tuesday afternoon.
+
+   This code is parked, not deleted, for two reasons: the Golf Genius GGIDs
+   have not arrived yet, and the Tuesday Shoot-Out reveal may still want a
+   home. To revive it, add { id: "leaderboard", label: "Leaderboard" } back to
+   TABS and restore its line in the tab switch in App(). It still needs the
+   teams/ and scores/ Firebase nodes, which are no longer seeded.
+   Ask Jim before deleting any of it. */
+
+/* Two rounds, net team scores, entered by the scoring table. Standings math
+   lives here and only here. Rank compares score against par for the rounds a
+   team has posted, so a one-round team and a two-round team sit fairly on one
+   board while scoring is underway. Ties (same to-par, same rounds posted)
+   share a rank. A team with nothing posted has no card yet and never outranks
+   a team that has played. */
+function computeStandings(teams, scores, rounds) {
+  const rows = Object.entries(teams || {}).map(([id, t]) => {
+    const s = scores?.[id] || {};
+    let total = 0, par = 0, played = 0;
+    const perRound = rounds.map((r) => {
+      const v = s[r.id];
+      if (typeof v === "number") { total += v; par += r.par; played += 1; return v; }
+      return null;
+    });
+    return { id, ...t, perRound, total, played, toPar: total - par };
+  });
+
+  const posted = rows.filter((r) => r.played > 0)
+    .sort((a, b) => a.toPar - b.toPar || b.played - a.played || a.total - b.total);
+  const waiting = rows.filter((r) => r.played === 0)
+    .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+
+  let prev = null, lastRank = 0;
+  posted.forEach((r, i) => {
+    const key = r.toPar + "|" + r.played;
+    r.rank = key === prev ? lastRank : i + 1;
+    r.tieKey = key;
+    prev = key;
+    lastRank = r.rank;
+  });
+  return { posted, waiting };
+}
+
+/* Handicap nets can carry a decimal. Show one place, drop it when whole. */
+const fmtNum = (n) => (Math.round(n * 10) / 10).toString();
+const fmtToPar = (n) => {
+  const r = Math.round(n * 10) / 10;
+  return r === 0 ? "E" : r > 0 ? "+" + fmtNum(r) : fmtNum(r);
+};
+
+function Leaderboard({ admin }) {
+  const teams = useNode("teams");
+  const scores = useNode("scores");
+  const config = useJson("data/course.json");
+  if (teams === undefined || scores === undefined || config === undefined) return null;
+  const rounds = config?.rounds || [];
+  const { posted, waiting } = computeStandings(teams, scores, rounds);
+  const anyTeams = posted.length + waiting.length > 0;
+
+  return (
+    <section>
+      <h2 className="t-display page-title">Leaderboard</h2>
+      <p className="page-sub">
+        {rounds.map((r, i) => (
+          <span key={r.id}>
+            {r.label}, {r.day.split(",")[0]}: {r.format.toLowerCase()} on the {r.course}.{" "}
+          </span>
+        ))}
+        Net team scores. {config?.shootout}
+        {config?.parPlaceholder && <span> Par values pending the scorecards. <PhChip /></span>}
+      </p>
+      <p className="lb-note">Scores are posted by the scoring table after each round.</p>
+      {!anyTeams ? (
+        <div className="empty">Teams will appear here once pairings are set.</div>
+      ) : (
+        <div className="stack">
+          {posted.map((r) => (
+            <div key={r.id}
+              className={"card lb-row" + (r.rank === 1 ? " lb-leader" : "")}>
+              <div className="lb-rank">{(posted.filter((p) => p.tieKey === r.tieKey).length > 1 ? "T" : "") + r.rank}</div>
+              <div className="lb-team">
+                <div className="lb-team-name">
+                  {r.name} {r.sample && <PhChip />}{" "}
+                  {r.rank <= 3 && <span className="lb-shootout">Shoot-Out</span>}
+                </div>
+                {r.players && <div className="lb-players">{r.players}</div>}
+                <div className="lb-rounds">
+                  {rounds.map((rd, i) => (
+                    <span key={rd.id}>
+                      {rd.label}: {r.perRound[i] == null ? "–" : fmtNum(r.perRound[i])}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="lb-score">
+                <div className="lb-topar">{fmtToPar(r.toPar)}</div>
+                <div className="lb-thru">
+                  {r.played === rounds.length ? "F · " + fmtNum(r.total) : "thru " + r.played + (r.played === 1 ? " round" : " rounds")}
+                </div>
+              </div>
+            </div>
+          ))}
+          {waiting.map((r) => (
+            <div key={r.id} className="card lb-row" style={{ opacity: 0.75 }}>
+              <div className="lb-rank">&ndash;</div>
+              <div className="lb-team">
+                <div className="lb-team-name">{r.name} {r.sample && <PhChip />}</div>
+                {r.players && <div className="lb-players">{r.players}</div>}
+              </div>
+              <div className="lb-score"><div className="lb-thru">No card yet</div></div>
+            </div>
+          ))}
+        </div>
+      )}
+      {admin && <ScoreEntry teams={teams} scores={scores} rounds={rounds} />}
+    </section>
+  );
+}
+
+/* Admin score entry. One row per team, one net score per round, decimals
+   allowed. Save writes, Clear removes. The scoring table owns the math that
+   produces the net number; the wall just posts it. */
+function ScoreRow({ id, team, scores, rounds }) {
+  const current = (rid) => {
+    const v = scores?.[id]?.[rid];
+    return typeof v === "number" ? String(v) : "";
+  };
+  const [draft, setDraft] = useState(() =>
+    Object.fromEntries(rounds.map((r) => [r.id, current(r.id)])));
+  const [dirty, setDirty] = useState(false);
+
+  const save = () => {
+    rounds.forEach((r) => {
+      const raw = draft[r.id].trim();
+      if (raw === "") { store.remove(`scores/${id}/${r.id}`); return; }
+      const n = parseFloat(raw);
+      if (!isNaN(n)) store.set(`scores/${id}/${r.id}`, n);
+    });
+    setDirty(false);
+  };
+
+  return (
+    <div className="se-row">
+      <span className="se-name">{team.name}</span>
+      {rounds.map((r) => (
+        <input key={r.id} className="se-input" type="number" step="0.1"
+          inputMode="decimal" placeholder={r.label}
+          aria-label={team.name + " " + r.label}
+          value={draft[r.id]}
+          onChange={(e) => { setDraft({ ...draft, [r.id]: e.target.value }); setDirty(true); }} />
+      ))}
+      <button className={"btn btn-sm" + (dirty ? "" : " btn-quiet")} onClick={save}>
+        Save
+      </button>
+    </div>
+  );
+}
+
+function ScoreEntry({ teams, scores, rounds }) {
+  const ids = Object.keys(teams || {});
+  if (ids.length === 0 || rounds.length === 0) return null;
+  return (
+    <div className="card roof roof-mustard" style={{ marginTop: 20 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+        <span className="admin-badge">Scoring table</span>
+        <span style={{ fontSize: 13, color: "var(--dim)" }}>
+          Net team score per round. Blank a field and save to clear it.
+        </span>
+      </div>
+      {ids.map((id) => (
+        <ScoreRow key={id} id={id} team={teams[id]} scores={scores} rounds={rounds} />
+      ))}
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------- gallery */
+/* Photos get downloaded and projected in a slideshow, so the stored file has
+   to survive a big screen. FULL_MAX is the long edge kept in Cloud Storage.
+   THUMB_MAX is what the grid loads, which is the whole reason the wall stays
+   fast: a phone opening Photos pulls thumbnails, not originals. */
+const FULL_MAX = 3000;
+const FULL_QUALITY = 0.92;
+const THUMB_MAX = 640;
+const THUMB_QUALITY = 0.8;
+
+const canvasToBlob = (canvas, quality) =>
+  new Promise((res, rej) =>
+    canvas.toBlob((b) => (b ? res(b) : rej(new Error("encode failed"))), "image/jpeg", quality));
+
+/* Downscale an existing canvas. Never upscales. */
+function resizeCanvas(source, maxDim) {
+  const s = Math.min(1, maxDim / Math.max(source.width, source.height));
+  if (s === 1) return source;
+  const c = document.createElement("canvas");
+  c.width = Math.round(source.width * s);
+  c.height = Math.round(source.height * s);
+  const ctx = c.getContext("2d");
+  ctx.imageSmoothingQuality = "high";
+  ctx.drawImage(source, 0, 0, c.width, c.height);
+  return c;
+}
+
+const kb = (bytes) => Math.round(bytes / 1024);
+
+function compressImage(file, maxDim, quality) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL("image/jpeg", quality));
+    };
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
+/* ---------------------------------------------------------------- cropper */
+/* Drag to move, slider to zoom, then export. No library: an event wall that
+   depends on a CDN cropper is an event wall that breaks when the venue wifi
+   blocks that CDN. Viewport maths: the image is scaled to cover the frame at
+   zoom 1, and the offset is clamped so it can never uncover an edge. */
+function PhotoCropper({ file, aspect = 1, maxOut = 800, round = false,
+                        allowSkip = false, onCancel, onDone }) {
+  const [img, setImg] = useState(null);
+  const [zoom, setZoom] = useState(1);
+  const [off, setOff] = useState({ x: 0, y: 0 });
+  const [busy, setBusy] = useState(false);
+  const frameRef = useRef();
+  const drag = useRef(null);
+
+  /* Frame is sized in CSS; read it back so the maths matches what is drawn. */
+  const [frame, setFrame] = useState({ w: 260, h: 260 });
+
+  /* Hold the object URL for the life of the modal. Revoking it on load kills
+     the <img> that draws the preview, which shows as a broken image. */
+  useEffect(() => {
+    const url = URL.createObjectURL(file);
+    const i = new Image();
+    i.onload = () => setImg(i);
+    i.onerror = () => onCancel();
+    i.src = url;
+    return () => URL.revokeObjectURL(url);
+  }, [file]);
+
+  useEffect(() => {
+    if (!frameRef.current) return;
+    const r = frameRef.current.getBoundingClientRect();
+    setFrame({ w: r.width, h: r.height });
+  }, [img]);
+
+  if (!img) {
+    return (
+      <div className="scrim">
+        <div className="card modal" style={{ textAlign: "center" }}>Loading the photo…</div>
+      </div>
+    );
+  }
+
+  const base = Math.max(frame.w / img.width, frame.h / img.height);
+  const scale = base * zoom;
+  const dispW = img.width * scale;
+  const dispH = img.height * scale;
+
+  const clamp = (o) => ({
+    x: Math.min(0, Math.max(frame.w - dispW, o.x)),
+    y: Math.min(0, Math.max(frame.h - dispH, o.y)),
+  });
+
+  /* Re-clamp whenever zoom changes, so zooming out never leaves a gap. */
+  const shown = clamp(off);
+
+  const onDown = (e) => {
+    drag.current = { x: e.clientX - shown.x, y: e.clientY - shown.y };
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+  const onMove = (e) => {
+    if (!drag.current) return;
+    setOff(clamp({ x: e.clientX - drag.current.x, y: e.clientY - drag.current.y }));
+  };
+  const onUp = (e) => {
+    drag.current = null;
+    try { e.currentTarget.releasePointerCapture(e.pointerId); } catch {}
+  };
+
+  const exportCrop = () => {
+    setBusy(true);
+    /* Never output more pixels than the frame actually covers in the source.
+       Upscaling a tight crop to maxOut only makes a bigger file, not a
+       sharper one. */
+    const available = Math.round(frame.w / scale);
+    const outW = Math.min(maxOut, available);
+    const outH = Math.round(outW / aspect);
+    const ratio = outW / frame.w;
+    const canvas = document.createElement("canvas");
+    canvas.width = outW;
+    canvas.height = outH;
+    const ctx = canvas.getContext("2d");
+    ctx.imageSmoothingQuality = "high";
+    ctx.fillStyle = "#FFFDF6";
+    ctx.fillRect(0, 0, outW, outH);
+    ctx.drawImage(img, shown.x * ratio, shown.y * ratio, dispW * ratio, dispH * ratio);
+    onDone(canvas);
+  };
+
+  /* Whole photo, untouched apart from a ceiling on the long edge. */
+  const skip = () => {
+    setBusy(true);
+    const s = Math.min(1, maxOut / Math.max(img.width, img.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(img.width * s);
+    canvas.height = Math.round(img.height * s);
+    const ctx = canvas.getContext("2d");
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    onDone(canvas);
+  };
+
+  return (
+    <div className="scrim" onClick={onCancel}>
+      <div className="card modal crop-modal" onClick={(e) => e.stopPropagation()}>
+        <h3 className="t-display crop-title">Position the photo</h3>
+        <div ref={frameRef}
+          className={"crop-frame" + (round ? " crop-round" : "")}
+          style={{ aspectRatio: String(aspect) }}
+          onPointerDown={onDown} onPointerMove={onMove}
+          onPointerUp={onUp} onPointerCancel={onUp}>
+          <img className="crop-img" src={img.src} alt=""
+            draggable="false"
+            style={{ width: dispW + "px", height: dispH + "px",
+                     transform: `translate(${shown.x}px, ${shown.y}px)` }} />
+          {round && <div className="crop-ring" />}
+        </div>
+        <label className="crop-zoom">
+          <span>Zoom</span>
+          <input type="range" min="1" max="4" step="0.01" value={zoom}
+            onChange={(e) => setZoom(parseFloat(e.target.value))} />
+        </label>
+        <p className="crop-hint">Drag the photo to move it.</p>
+        <div className="crop-actions">
+          {allowSkip ? (
+            <React.Fragment>
+              <button className="btn" disabled={busy} onClick={skip}>
+                Use the whole photo
+              </button>
+              <button className="btn btn-quiet" disabled={busy} onClick={exportCrop}>
+                Crop to square
+              </button>
+            </React.Fragment>
+          ) : (
+            <button className="btn" disabled={busy} onClick={exportCrop}>Use this crop</button>
+          )}
+          <button className="btn btn-quiet" disabled={busy} onClick={onCancel}>Cancel</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Gallery({ admin }) {
+  const photos = useNode("photos");
+  const likes = useNode("photoLikes");
+  const [liked, setLiked] = useState(() => lsGet(LS.liked, {}));
+  const [busy, setBusy] = useState(false);
+  const [pending, setPending] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const camRef = useRef();
+  const libRef = useRef();
+  if (photos === undefined) return null;
+
+  const pick = (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (file) setPending(file);
+  };
+
+  const post = async (canvas) => {
+    setPending(null);
+    setBusy(true);
+    setProgress(0);
+    const id = "p" + Date.now() + Math.random().toString(36).slice(2, 7);
+    try {
+      const full = await canvasToBlob(resizeCanvas(canvas, FULL_MAX), FULL_QUALITY);
+      const thumbCanvas = resizeCanvas(canvas, THUMB_MAX);
+      const thumb = await canvasToBlob(thumbCanvas, THUMB_QUALITY);
+      console.log("photo", canvas.width + "x" + canvas.height,
+        "full", kb(full.size) + "KB", "thumb", kb(thumb.size) + "KB");
+
+      const fullPath = `pinv/photos/${id}-full.jpg`;
+      const thumbPath = `pinv/photos/${id}-thumb.jpg`;
+      /* Thumbnail first and fast, so the grid fills even if the big one is
+         still climbing out over course wifi. */
+      const thumbUrl = await store.uploadImage(thumbPath, thumb);
+      const fullUrl = await store.uploadImage(fullPath, full, setProgress);
+
+      await store.set(`photos/${id}`, {
+        thumb: thumbUrl, full: fullUrl,
+        thumbPath, fullPath,
+        w: canvas.width, h: canvas.height,
+        bytes: full.size,
+        ts: Date.now(),
+      });
+    } catch (err) {
+      console.error("upload failed", err);
+      alert("That photo did not go through. Try again, or check your signal.");
+    }
+    setBusy(false);
+    setProgress(0);
+  };
+
+  const like = (id) => {
+    if (liked[id]) return;
+    const next = { ...liked, [id]: true };
+    setLiked(next);
+    lsSet(LS.liked, next);
+    store.increment(`photoLikes/${id}`, 1);
+  };
+
+  const remove = async (id) => {
+    if (!confirm("Remove this photo for everyone?")) return;
+    const p = photos[id] || {};
+    await store.remove(`photos/${id}`);
+    await store.remove(`photoLikes/${id}`);
+    /* Orphaned files would sit in the bucket costing money forever. */
+    if (p.thumbPath) await store.deleteFile(p.thumbPath).catch(() => {});
+    if (p.fullPath) await store.deleteFile(p.fullPath).catch(() => {});
+  };
+
+  const entries = Object.entries(photos || {}).sort((a, b) => b[1].ts - a[1].ts);
+
+  return (
+    <section>
+      <h2 className="t-display page-title">Photos</h2>
+      <p className="page-sub">Photos from the week, posted by the room.</p>
+      <div className="upload-row">
+        {/* Both paths ship together. Camera capture and library. Hard rule. */}
+        <input ref={camRef} type="file" accept="image/*" capture="environment"
+          style={{ display: "none" }} onChange={pick} />
+        <input ref={libRef} type="file" accept="image/*"
+          style={{ display: "none" }} onChange={pick} />
+        <button className="btn" disabled={busy} onClick={() => camRef.current.click()}>
+          {busy ? (progress ? `Posting ${Math.round(progress * 100)}%` : "Posting…") : "Take a photo"}
+        </button>
+        <button className="btn btn-quiet" disabled={busy} onClick={() => libRef.current.click()}>
+          Choose from library
+        </button>
+      </div>
+      <p className="photo-note">
+        Photos post at full resolution. Tap one to open the original, then
+        press and hold to save it.
+      </p>
+      {entries.length === 0 ? (
+        <div className="empty">No photos yet. Be the first.</div>
+      ) : (
+        <div className="photo-grid">
+          {entries.map(([id, p]) => (
+            <div className="photo-card" key={id}>
+              {/* The grid shows the thumbnail. Tapping opens the full size
+                  file, which is what gets saved for the slideshow. dataUrl is
+                  the pre-Storage shape, kept so nothing old breaks. */}
+              <a href={p.full || p.dataUrl} target="_blank" rel="noopener"
+                 title="Open the full size photo">
+                <img src={p.thumb || p.dataUrl} alt="Event photo" loading="lazy" />
+              </a>
+              <div className="photo-bar">
+                <button className={"like-btn" + (liked[id] ? " liked" : "")}
+                  onClick={() => like(id)}>
+                  {liked[id] ? "♥" : "♡"} {likes?.[id] || 0}
+                </button>
+                <div className="photo-actions">
+                  {(p.full || p.dataUrl) && (
+                    <a className="photo-full" href={p.full || p.dataUrl}
+                       target="_blank" rel="noopener">
+                      {p.w ? p.w + "px" : "Full size"}
+                    </a>
+                  )}
+                  {admin && (
+                    <button className="btn btn-danger btn-sm" onClick={() => remove(id)}>
+                      Remove
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {pending && (
+        <PhotoCropper file={pending} aspect={1} maxOut={FULL_MAX} allowSkip
+          onCancel={() => setPending(null)} onDone={post} />
+      )}
+    </section>
+  );
+}
+
+/* ------------------------------------------------------ guide and area guide */
+/* Both guides are the same shape: titled cards holding labelled items. One
+   renderer, two data files. */
+function InfoSections({ sections }) {
+  return (
+    <div className="stack">
+      {(sections || []).map((sec) => (
+        <div className="card roof" key={sec.id}>
+          <h3 className="t-display" style={{ fontSize: 15, letterSpacing: "0.14em", margin: "0 0 4px" }}>
+            {sec.title} {sec.placeholder && <PhChip />}
+          </h3>
+          {sec.logo && <img className="con-logo" src={sec.logo} alt="" />}
+          {(sec.items || []).map((item, i) => (
+            <div className="con-item" key={i}>
+              <div className="con-label">{item.label} {item.placeholder && <PhChip />}</div>
+              {item.detail && <div className="con-detail">{item.detail}</div>}
+              {(item.phone || item.url) && (
+                <div style={{ fontSize: 14, marginTop: 4, display: "flex", gap: 14, flexWrap: "wrap" }}>
+                  {item.phone && <a href={"tel:" + item.phone.replace(/[^0-9+]/g, "")}>{item.phone}</a>}
+                  {item.url && <a href={item.url} target="_blank" rel="noopener">{item.url.replace(/^https?:\/\/(www\.)?/, "")}</a>}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Guide() {
+  const data = useJson("data/guide.json");
+  if (data === undefined) return null;
+  const docs = data?.documents || [];
+  return (
+    <section>
+      <h2 className="t-display page-title">Event Program Guide</h2>
+      <p className="page-sub">{data?.intro}</p>
+      <InfoSections sections={data?.sections} />
+      {docs.length > 0 && (
+        <div className="card roof roof-mustard" style={{ marginTop: 12 }}>
+          <h3 className="t-display" style={{ fontSize: 15, letterSpacing: "0.14em", margin: "0 0 4px" }}>
+            Documents
+          </h3>
+          {docs.map((d, i) => (
+            <div className="con-item" key={i}>
+              <div className="con-label">
+                {d.url ? <a href={d.url} target="_blank" rel="noopener">{d.title}</a> : d.title}
+                {" "}{d.placeholder && <PhChip />}
+              </div>
+              {d.detail && <div className="con-detail">{d.detail}</div>}
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function AreaGuide() {
+  const data = useJson("data/area-guide.json");
+  if (data === undefined) return null;
+  return (
+    <section>
+      <h2 className="t-display page-title">Area Guide</h2>
+      <p className="page-sub">{data?.intro}</p>
+      <InfoSections sections={data?.sections} />
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------- questions */
+/* Attendees post, organizers answer. A question is published once it has an
+   answer, so the wall never shows a column of unanswered questions to a room
+   of partners. The asker always sees their own, marked as sent, and an
+   organizer can flip settings/qaPublic to publish everything immediately. */
+const fmtWhen = (ts) => {
+  if (!ts) return "";
+  const d = new Date(ts);
+  return d.toLocaleDateString(undefined, { month: "short", day: "numeric" }) +
+    " at " + d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+};
+
+function AnswerBox({ id, existing }) {
+  const [text, setText] = useState(existing || "");
+  const [saved, setSaved] = useState(false);
+  const post = () => {
+    const t = text.trim();
+    if (!t) return;
+    store.set(`questions/${id}/answer`, t);
+    store.set(`questions/${id}/answeredTs`, Date.now());
+    setSaved(true);
+  };
+  return (
+    <div className="qa-answerbox">
+      <textarea className="field qa-textarea" rows="3"
+        placeholder="Write an answer. It publishes to everyone."
+        value={text}
+        onChange={(e) => { setText(e.target.value); setSaved(false); }} />
+      <div style={{ display: "flex", gap: 8, marginTop: 8, alignItems: "center" }}>
+        <button className="btn btn-sm" onClick={post}>
+          {existing ? "Update answer" : "Post answer"}
+        </button>
+        {saved && <span style={{ fontSize: 13, color: "var(--pool-deep)" }}>Published.</span>}
+      </div>
+    </div>
+  );
+}
+
+function Questions({ admin }) {
+  const questions = useNode("questions");
+  const settings = useNode("settings");
+  const [text, setText] = useState("");
+  const [name, setName] = useState("");
+  const [mine, setMine] = useState(() => lsGet(LS.asked, {}));
+  const [sent, setSent] = useState(false);
+  if (questions === undefined || settings === undefined) return null;
+
+  const qaPublic = settings?.qaPublic === true;
+
+  const submit = async () => {
+    const t = text.trim();
+    if (!t) return;
+    const id = await store.push("questions", {
+      text: t,
+      name: name.trim() || null,
+      ts: Date.now(),
+    });
+    const next = { ...mine, [id]: true };
+    setMine(next);
+    lsSet(LS.asked, next);
+    setText("");
+    setSent(true);
+  };
+
+  const all = Object.entries(questions || {}).sort((a, b) => (b[1].ts || 0) - (a[1].ts || 0));
+  const visible = all.filter(([id, q]) => admin || qaPublic || q.answer || mine[id]);
+
+  return (
+    <section>
+      <h2 className="t-display page-title">Questions</h2>
+      <p className="page-sub">
+        Ask the organizers anything about the week. Answers post here for everyone.
+      </p>
+
+      <div className="card roof roof-terra">
+        <textarea className="field qa-textarea" rows="3"
+          placeholder="What would you like to know?"
+          value={text}
+          onChange={(e) => { setText(e.target.value); setSent(false); }} />
+        <div className="qa-compose-row">
+          <input className="field" placeholder="Your name (optional)" value={name}
+            onChange={(e) => setName(e.target.value)} />
+          <button className="btn" onClick={submit} disabled={!text.trim()}>Send</button>
+        </div>
+        {sent && (
+          <div className="qa-sent">
+            Sent to the organizers. You will see the answer here.
+          </div>
+        )}
+      </div>
+
+      {visible.length === 0 ? (
+        <div className="empty" style={{ marginTop: 14 }}>
+          No questions yet. Ask the first one.
+        </div>
+      ) : (
+        <div className="stack" style={{ marginTop: 14 }}>
+          {visible.map(([id, q]) => (
+            <div className="card qa-item" key={id}>
+              <div className="qa-q">{q.text} {q.sample && <PhChip />}</div>
+              <div className="qa-meta">
+                {q.name || "Asked anonymously"}
+                {q.ts && <span> &middot; {fmtWhen(q.ts)}</span>}
+                {!q.answer && mine[id] && !admin && (
+                  <span className="qa-pending">Sent to the organizers</span>
+                )}
+                {!q.answer && admin && <span className="qa-pending">Needs an answer</span>}
+              </div>
+              {q.answer && (
+                <div className="qa-a">
+                  <span className="qa-a-label">Organizers</span>
+                  {q.answer}
+                </div>
+              )}
+              {admin && (
+                <div>
+                  <AnswerBox id={id} existing={q.answer} />
+                  <button className="btn btn-danger btn-sm" style={{ marginTop: 8 }}
+                    onClick={() => {
+                      if (confirm("Remove this question for everyone?")) {
+                        store.remove(`questions/${id}`);
+                      }
+                    }}>Remove question</button>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ admin */
+function PinGate({ onPass, onClose }) {
+  const [pin, setPin] = useState("");
+  const [bad, setBad] = useState(false);
+  const savedPin = useNode("settings/adminPin");
+  const check = () => {
+    if (pin && pin === String(savedPin)) onPass();
+    else setBad(true);
+  };
+  return (
+    <div className="scrim" onClick={onClose}>
+      <div className="card roof roof-terra modal" onClick={(e) => e.stopPropagation()}>
+        <h3 className="t-display" style={{ fontSize: 15, letterSpacing: "0.14em", marginTop: 0 }}>
+          Event staff
+        </h3>
+        <input className="field" type="password" inputMode="numeric"
+          placeholder="PIN" value={pin} autoFocus
+          onChange={(e) => { setPin(e.target.value); setBad(false); }}
+          onKeyDown={(e) => e.key === "Enter" && check()} />
+        {bad && <div style={{ color: "var(--danger)", fontSize: 13, marginTop: 8 }}>
+          That PIN did not match.
+        </div>}
+        <div style={{ display: "flex", gap: 8, marginTop: 14 }}>
+          <button className="btn" onClick={check}>Enter</button>
+          <button className="btn btn-quiet" onClick={onClose}>Cancel</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function AdminPanel({ onExit }) {
+  const settings = useNode("settings");
+  const [marquee, setMarquee] = useState(null);
+  const [newPin, setNewPin] = useState("");
+  if (settings === undefined) return null;
+
+  const tabVis = settings?.tabs || {};
+  const qaPublic = settings?.qaPublic === true;
+  const marqueeVal = marquee ?? settings?.marquee ?? "";
+
+  return (
+    <section>
+      <h2 className="t-display page-title">Admin</h2>
+      <p className="page-sub">
+        Staff controls. Teams, sponsors, and both guides are set in the data
+        files, not here. Questions are answered on the Questions tab.
+      </p>
+
+      <div className="card admin-section">
+        <h3 className="t-display admin-h">Marquee</h3>
+        <input className="field" value={marqueeVal}
+          onChange={(e) => setMarquee(e.target.value)} />
+        <button className="btn btn-sm" style={{ marginTop: 10 }}
+          onClick={() => { store.set("settings/marquee", marqueeVal); setMarquee(null); }}>
+          Publish
+        </button>
+      </div>
+
+      <div className="card admin-section">
+        <h3 className="t-display admin-h">Staff PIN</h3>
+        <div style={{ fontSize: 13, color: "var(--dim)", marginBottom: 10 }}>
+          Anyone with this PIN can post answers, upload sponsor photos, and
+          remove content. Change it if it gets passed around.
+        </div>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <input className="field" style={{ flex: "1 1 140px" }}
+            inputMode="numeric" placeholder="New PIN"
+            value={newPin} onChange={(e) => setNewPin(e.target.value)} />
+          <button className="btn btn-sm" onClick={() => {
+            const p = newPin.trim();
+            if (p.length < 4) { alert("Use at least four digits."); return; }
+            store.set("settings/adminPin", p);
+            setNewPin("");
+            alert("PIN changed. Everyone signed in stays signed in.");
+          }}>Change PIN</button>
+        </div>
+      </div>
+
+      <div className="card admin-section">
+        <h3 className="t-display admin-h">Questions</h3>
+        <div className="toggle-row">
+          <div>
+            <div style={{ fontWeight: 600 }}>Publish questions before they are answered</div>
+            <div style={{ fontSize: 13, color: "var(--dim)" }}>
+              Off is safer. A question stays with the organizers until you answer
+              it, and the asker sees their own marked as sent.
+            </div>
+          </div>
+          <button className={"btn btn-sm" + (qaPublic ? "" : " btn-quiet")}
+            onClick={() => store.set("settings/qaPublic", !qaPublic)}>
+            {qaPublic ? "On" : "Off"}
+          </button>
+        </div>
+        <div style={{ fontSize: 13, color: "var(--dim)", marginTop: 10 }}>
+          Answer questions on the Questions tab while you are signed in.
+        </div>
+      </div>
+
+      <div className="card admin-section">
+        <h3 className="t-display admin-h">Tabs</h3>
+        {TABS.map((t) => (
+          <div className="toggle-row" key={t.id}>
+            <span>{t.label}</span>
+            <button className={"btn btn-sm" + (tabVis[t.id] !== false ? "" : " btn-quiet")}
+              onClick={() => store.set(`settings/tabs/${t.id}`, tabVis[t.id] === false)}>
+              {tabVis[t.id] !== false ? "Visible" : "Hidden"}
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <button className="btn btn-quiet" onClick={onExit}>Sign out of admin</button>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------- app */
+function App() {
+  const [tab, setTab] = useState("agenda");
+  const [admin, setAdmin] = useState(() => lsGet(LS.admin, false));
+  const [gate, setGate] = useState(false);
+  const settings = useNode("settings");
+  const agenda = useJson("data/agenda.json");
+
+  const tabVis = settings?.tabs || {};
+  const visibleTabs = TABS.filter((t) => admin || tabVis[t.id] !== false);
+
+  useEffect(() => {
+    if (tab !== "admin" && !visibleTabs.some((t) => t.id === tab) && visibleTabs[0]) {
+      setTab(visibleTabs[0].id);
+    }
+  }, [tab, visibleTabs.map((t) => t.id).join(",")]);
+
+  const enterAdmin = () => { setAdmin(true); lsSet(LS.admin, true); setGate(false); setTab("admin"); };
+  const exitAdmin = () => { setAdmin(false); lsSet(LS.admin, false); setTab("agenda"); };
+
+  return (
+    <React.Fragment>
+      {PREVIEW && (
+        <div className="preview-banner">
+          Preview mode. Firebase is not wired yet, so nothing here saves. Sample data is marked.
+        </div>
+      )}
+      {settings?.marquee && <div className="marquee">{settings.marquee}</div>}
+
+      <Masthead agenda={agenda} />
+
+      <nav className="nav" aria-label="Sections">
+        <div className="nav-row">
+          {visibleTabs.map((t) => (
+            <button key={t.id}
+              className={"nav-pill" + (tab === t.id ? " active" : "")}
+              onClick={() => setTab(t.id)}>
+              {t.label}
+            </button>
+          ))}
+          <button className={"nav-pill nav-gear" + (tab === "admin" ? " active" : "")}
+            aria-label="Event staff"
+            onClick={() => (admin ? setTab("admin") : setGate(true))}>
+            &#9881;
+          </button>
+        </div>
+      </nav>
+
+      <main className="shell">
+        {tab === "agenda" && <Agenda />}
+        {tab === "scoring" && <LiveScoring />}
+        {tab === "teams" && <Teams />}
+        {tab === "sponsors" && <Sponsors admin={admin} />}
+        {tab === "guide" && <Guide />}
+        {tab === "area" && <AreaGuide />}
+        {tab === "photos" && <Gallery admin={admin} />}
+        {tab === "questions" && <Questions admin={admin} />}
+        {tab === "admin" && admin && <AdminPanel onExit={exitAdmin} />}
+        <SunDivider />
+        <footer className="footer">
+          The Partners Invitational &middot; Century Golf Partners
+        </footer>
+      </main>
+
+      {gate && <PinGate onPass={enterAdmin} onClose={() => setGate(false)} />}
+    </React.Fragment>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
