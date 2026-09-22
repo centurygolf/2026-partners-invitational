@@ -1,5 +1,5 @@
 {
-  "_note": "Source: PARTNERS INVITATIONAL BROCHURE-2026.pdf (OneDrive, Partners Inv. Live Wall). CAUTION: the PGA WEST amenities page of that brochure uses a subset font whose ToUnicode table is incomplete, so extraction silently drops some digits. Hours and direct-dial numbers from THAT page were deliberately left out rather than guessed. Everything below came through cleanly. Verify before adding any number sourced from that page.",
+  "_note": "Source: PARTNERS INVITATIONAL BROCHURE-2026.pdf, plus hours and clubhouse numbers supplied by Yolanda on Sep 22. The brochure's own amenities page has a broken subset font that drops digits, so nothing numeric was ever taken from it. Anything numeric here came from Yolanda directly.",
   "intro": "La Quinta and Coachella Valley Area Guide.",
   "sections": [
     {
@@ -51,8 +51,17 @@
     {
       "id": "amenities",
       "title": "At the Private Clubhouse",
-      "placeholder": true,
       "items": [
+        {
+          "label": "Golf Shop",
+          "detail": "PGA WEST Private Clubhouse.",
+          "phone": "760.564.3914"
+        },
+        {
+          "label": "Concierge",
+          "detail": "First call for anything at the clubhouse.",
+          "phone": "760.564.7111"
+        },
         {
           "label": "Private practice facility",
           "detail": "Open daily until dusk."
@@ -68,12 +77,6 @@
         {
           "label": "Kennedy's",
           "detail": "Lunch, first come first served."
-        },
-        {
-          "label": "Hours and direct numbers",
-          "detail": "Being confirmed with the club. Concierge at the main clubhouse number can help in the meantime.",
-          "phone": "760.564.7111",
-          "placeholder": true
         }
       ]
     },
@@ -97,13 +100,11 @@
         },
         {
           "label": "Adobe Grill",
-          "detail": "Hours to come.",
-          "placeholder": true
+          "detail": "Monday to Thursday, 3 pm to 9 pm. Friday to Sunday, 11 am to 9 pm."
         },
         {
           "label": "The Marketplace",
-          "detail": "Hours to come.",
-          "placeholder": true
+          "detail": "Sunday to Thursday, 6 am to 7 pm. Friday and Saturday, 6 am to 8 pm."
         }
       ]
     },

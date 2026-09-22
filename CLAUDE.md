@@ -417,6 +417,13 @@ content streams with node's zlib and applies each font's ToUnicode CMap,
 including two-byte Type0 fonts. `tools/xlsx.js` does the same job for
 spreadsheets.
 
+**The Area Guide has no placeholders left.** Every number and opening time on
+it came from Yolanda directly on Sep 22, not from the brochure. Two of them,
+the Golf Shop on 760.564.3914 and the Concierge on 760.564.7111, happen to
+match what the mangled brochure text implied, which is a nice confirmation
+that refusing to publish the reconstruction was the right call rather than a
+wasted precaution.
+
 **A warning about the 2026 brochure.** Its PGA WEST amenities page uses a
 subset font whose ToUnicode table is incomplete, so extraction silently drops
 individual digits. "760.564.3914" comes out as "70.54.3914". Hours are

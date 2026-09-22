@@ -95,12 +95,10 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
 - [x] **P1.7 Top Sponsors.** Done Sep 17. Everyone at 4 or more sponsored.
       Donny confirmed the split: Platinum is the top two (2), Gold is 4
       through 5 (9). OPEN: headshots for all 11.
-- [x] **P1.8 Area Guide.** Done Sep 17 from PARTNERS INVITATIONAL
-      BROCHURE-2026.pdf. Nine sections: discounts, the other clubhouses,
-      private clubhouse amenities, resort dining, spas, shopping, hikes,
-      Coachella Valley and High Desert. OPEN: hours and direct numbers for the
-      Private Clubhouse, which the brochure's broken font encoding made
-      unsafe to read. Needs confirming with the club.
+- [x] **P1.8 Area Guide. COMPLETE Sep 22.** Nine sections from the 2026
+      brochure. The clubhouse numbers and the Adobe Grill and Marketplace
+      hours came from Yolanda, since the brochure's broken font encoding made
+      its own numbers unsafe to read. No placeholders remain on this tab.
 - [~] **P1.9 Golf Genius.** Live Scoring tab built Sep 19, second pill.
       Deep link and Today badge verified with test values. BLOCKED on the
       GGIDs from Amy, one per round, into data/scoring.json. Accept: deep
