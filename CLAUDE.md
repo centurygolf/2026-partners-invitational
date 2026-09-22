@@ -432,6 +432,12 @@ Area Guide deliberately omits every phone number and opening time from that
 one page rather than reconstructing them. Do not "fix" this by guessing. Get
 the numbers from the club.
 
+**A blank sponsored count becomes 1.** Yolanda, Sep 22: everyone in the field
+sponsored at least one member, so an empty cell in the workbook is a gap in
+the record rather than a zero. `build-roster.js` applies the default and
+prints every name it touched on each rebuild, so the assumption stays visible
+instead of disappearing into the data.
+
 **Generated data files.** `data/teams.json` and `data/sponsors.json` are built
 by `node tools/build-roster.js <roster.xlsx>`. Do not hand edit either one, a
 rebuild overwrites it. Rerun it whenever a new roster arrives. It prints

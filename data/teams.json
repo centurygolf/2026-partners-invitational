@@ -35,7 +35,7 @@
       "players": [
         {
           "name": "Andrew Smith",
-          "sponsored": null
+          "sponsored": 1
         },
         {
           "name": "Charles Abernathy",
@@ -182,7 +182,7 @@
         },
         {
           "name": "Tim McDaniel",
-          "sponsored": null
+          "sponsored": 1
         }
       ],
       "captain": {
@@ -224,7 +224,7 @@
       "players": [
         {
           "name": "Dan Ledee",
-          "sponsored": null
+          "sponsored": 1
         },
         {
           "name": "Geoff Parker",
@@ -255,11 +255,11 @@
         },
         {
           "name": "Glenn Wasil",
-          "sponsored": null
+          "sponsored": 1
         },
         {
           "name": "Jeff Farley",
-          "sponsored": null
+          "sponsored": 1
         },
         {
           "name": "Ryan Wynne",
@@ -344,7 +344,7 @@
         },
         {
           "name": "Stuart Johnston",
-          "sponsored": null
+          "sponsored": 1
         }
       ],
       "captain": {
@@ -521,7 +521,7 @@
       "players": [
         {
           "name": "Chris Hill",
-          "sponsored": null
+          "sponsored": 1
         },
         {
           "name": "Chris Slavin",
@@ -552,7 +552,7 @@
         },
         {
           "name": "Brandon Hanigan",
-          "sponsored": null
+          "sponsored": 1
         },
         {
           "name": "John Peterson",
@@ -579,7 +579,7 @@
         },
         {
           "name": "Jake Istnick",
-          "sponsored": null
+          "sponsored": 1
         },
         {
           "name": "Josh Weiss",

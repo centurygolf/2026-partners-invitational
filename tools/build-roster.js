@@ -86,6 +86,7 @@ const num = (v) => {
 };
 
 const warnings = [];
+const defaultedSponsors = [];
 
 /* ------------------------------------------------------------------ teams */
 const pros = sheet("Golf Pro Roster").slice(1);
@@ -117,7 +118,12 @@ for (const r of playerRows) {
   if (!clean(r[0]) || clean(r[1]) === "Team Captain") continue;
   const name = fixName(r[2], r[3]);
   if (!name) continue;
-  clubEntry(r[0], false).players.push({ name, sponsored: num(r[36]) || null });
+  /* A blank sponsored count becomes 1. Yolanda, Sep 22: everyone in the
+     field sponsored at least one member, so a missing figure is a gap in
+     the workbook rather than a zero. Nine of the hundred players hit this. */
+  const sponsored = num(r[36]) || 1;
+  if (!num(r[36])) defaultedSponsors.push(name);
+  clubEntry(r[0], false).players.push({ name, sponsored });
 }
 
 const teams = [...clubs.values()]
@@ -203,6 +209,11 @@ const missing = picked.filter((s) => !s.photo);
 if (missing.length) {
   console.log(`\nno photo yet for ${missing.length} of ${picked.length} sponsors:`);
   missing.forEach((s) => console.log(`  assets/sponsors/${s.slug}.jpg  (${s.name})`));
+}
+if (defaultedSponsors.length) {
+  console.log("\nsponsored count was blank, defaulted to 1 for " +
+    defaultedSponsors.length + ":");
+  defaultedSponsors.forEach((n) => console.log("  " + n));
 }
 if (warnings.length) {
   console.log("\nWARNINGS");
