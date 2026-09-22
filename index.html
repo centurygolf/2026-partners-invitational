@@ -640,10 +640,13 @@ a { color: var(--pool-deep); }
 .tier-platinum { color: var(--dusk); }
 .tier-gold { color: var(--mustard); }
 .sponsor-grid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
+.sponsor-grid + .sponsor-grid { margin-top: 12px; }
+.sponsor-card { flex: 0 1 158px; }
 .sponsor-card {
   background: var(--paper);
   border: 1px solid var(--edge);
@@ -1349,6 +1352,18 @@ function SponsorCard({ s, uploaded, admin }) {
   );
 }
 
+/* tier.rows is a list of row sizes, say [4, 5]. Ignored unless it adds up to
+   the number of sponsors, so a roster change cannot silently drop anyone. */
+function sponsorRows(tier) {
+  const all = tier.sponsors || [];
+  const plan = tier.rows;
+  if (!Array.isArray(plan) || plan.reduce((a, b) => a + b, 0) !== all.length) return [all];
+  const out = [];
+  let i = 0;
+  for (const size of plan) { out.push(all.slice(i, i + size)); i += size; }
+  return out;
+}
+
 function Sponsors({ admin }) {
   const data = useJson("data/sponsors.json");
   const uploads = useNode("sponsorPhotos");
@@ -1369,12 +1384,14 @@ function Sponsors({ admin }) {
                   {tier.tier}
                 </span>
               </div>
-              <div className="sponsor-grid">
-                {(tier.sponsors || []).map((s) => (
-                  <SponsorCard key={s.slug} s={s} admin={admin}
-                    uploaded={uploads?.[s.slug]} />
-                ))}
-              </div>
+              {sponsorRows(tier).map((row, ri) => (
+                <div className="sponsor-grid" key={ri}>
+                  {row.map((s) => (
+                    <SponsorCard key={s.slug} s={s} admin={admin}
+                      uploaded={uploads?.[s.slug]} />
+                  ))}
+                </div>
+              ))}
             </div>
           ))}
         </div>

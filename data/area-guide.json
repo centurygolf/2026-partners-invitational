@@ -82,6 +82,12 @@
       "title": "Dining at the Resort",
       "items": [
         {
+          "label": "La Quinta Resort & Club",
+          "detail": "49-499 Eisenhower Drive, La Quinta, California 92253. Use OpenTable to make reservations.",
+          "phone": "760.564.4111",
+          "url": "https://www.opentable.com"
+        },
+        {
           "label": "Morgans in the Desert",
           "detail": "Dinner Wednesday through Sunday, 5:30 pm to 9 pm."
         },
@@ -90,10 +96,14 @@
           "detail": "Breakfast 7 am to 11 am."
         },
         {
-          "label": "Reservations",
-          "detail": "La Quinta Resort & Club, 49-499 Eisenhower Drive. Also bookable on OpenTable.",
-          "phone": "760.564.4111",
-          "url": "https://www.laquintaresort.com"
+          "label": "Adobe Grill",
+          "detail": "Hours to come.",
+          "placeholder": true
+        },
+        {
+          "label": "The Marketplace",
+          "detail": "Hours to come.",
+          "placeholder": true
         }
       ]
     },
