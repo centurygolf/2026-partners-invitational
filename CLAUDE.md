@@ -103,7 +103,7 @@ membership wall does not travel here.
 - React 18 via CDN, single `index.html`, inline Babel transpilation
 - Firebase Realtime Database, LIVE since Sep 17
 - GitHub Pages from repo root, live at
-  https://creightonjames-jpg.github.io/cgp-partners-invitational/
+  https://centurygolf.github.io/2026-partners-invitational/
 - Google Fonts: Josefin Sans, Yellowtail, Inter
 - `FIREBASE_CONFIG` in index.html is the switch. Setting apiKey back to
   PASTE_ME drops the app into the in-memory preview store, which is useful
@@ -237,9 +237,21 @@ password). Until then, publish through the GitHub API instead:
 node tools/publish.js "commit message"
 ```
 
-It reads every file except `docs/`, writes blobs, builds one tree, commits,
-moves `main`, and turns Pages on if it is off. `gh` is already authenticated as
-creightonjames-jpg. The tree is built WITHOUT `base_tree`, so a file deleted
+It reads every file except `docs/`, writes blobs, builds one tree, commits and
+moves `main`. `gh` authenticates as **creightonjames-jpg**, which is a
+COLLABORATOR on the repo, not its owner.
+
+**Who owns what, since this confused everyone once already.** The repo lives at
+`centurygolf/2026-partners-invitational`, owned by a second personal account
+Jim made so the link would stop carrying his name. creightonjames-jpg has push
+access and nothing more. Personal-account repos have no collaborator roles, so
+that cannot be upgraded: **Claude can publish content but can never change repo
+settings.** If Pages ever needs re-enabling mid-event, only the centurygolf
+login can do it.
+
+The abandoned repo `creightonjames-jpg/2026-partners-invitational` still
+exists and still serves a FROZEN copy from before the move. It does not
+update. Retire it rather than letting a stale link circulate. The tree is built WITHOUT `base_tree`, so a file deleted
 locally is deleted upstream too. Never put secrets in this repo: it is public,
 like every other CGP wall repo.
 

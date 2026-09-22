@@ -121,8 +121,9 @@ Status marks: `[ ]` open, `[x]` done, `[~]` in progress, `[!]` blocked on Jim.
       at https://creightonjames-jpg.github.io/cgp-partners-invitational/.
       NOTE: git CLI is broken on this Mac (Xcode license), so publishing runs
       through the GitHub API. See "Publishing" in CLAUDE.md.
-- [ ] **P2.3 QR code.** Generate, place in assets/brand/, hand to organizers.
-      Accept: QR resolves on an iPhone camera from a printed page.
+- [x] **P2.3 QR code.** Done Sep 22, assets/brand/qr-wall.png (1200px) and
+      .svg, error correction H. Decoded back programmatically to confirm it
+      carries the final URL. Still wants one scan from a printed page.
 - [x] **P2.4 Add to Home Screen. Done Sep 21.** manifest.webmanifest with
       standalone display and "./" start_url and scope (subpath, not domain
       root), Apple meta tags, icons generated from the PGA WEST mark matted
@@ -142,26 +143,14 @@ Yolanda asked that the link stop reading "Creighton James". That string is the
 GitHub account name inside the domain, so renaming the repo alone does not fix
 it. Target: https://centurygolf.github.io/2026-partners-invitational
 
-- [!] **P2b.1 Create the org.** BLOCKED ON JIM, and only on him: GitHub's REST
-      API has no org-creation endpoint, it is a browser action. Free plan,
-      name `centurygolf`, still available as of Sep 22.
-- [ ] **P2b.2 Transfer and rename.** Move the repo to the org and rename to
-      `2026-partners-invitational`. May need the gh token re-authed with
-      `admin:org`; if so, doing the transfer in the browser is quicker.
-- [ ] **P2b.3 Re-point the tooling.** OWNER and REPO at the top of
-      tools/publish.js, plus every URL in CLAUDE.md, ROADMAP.md and the
-      session memory.
-- [ ] **P2b.4 Confirm Pages survived.** Transfers keep the Pages setting but
-      the site needs a rebuild. Check the new URL serves, then check the old
-      one redirects rather than 404s.
-- [ ] **P2b.5 Origin change checks.** `centurygolf.github.io` is a DIFFERENT
-      ORIGIN from `creightonjames-jpg.github.io`. Two consequences worth
-      testing rather than assuming: a photo upload still works (the Storage
-      bucket's CORS has to allow the new origin), and anyone who already
-      opened the wall loses their `pinv_` local storage, so their liked
-      photos and admin session reset. Nobody is relying on either yet.
-- [ ] **P2b.6 QR code.** Generate against the FINAL url, not before. This is
-      why P2.3 stayed open.
+- [x] **P2b.1 to P2b.6 DONE Sep 22.** The org route died on an invite that
+      would not send, so the repo went to the `centurygolf` personal account
+      instead. Live at https://centurygolf.github.io/2026-partners-invitational/
+      Verified at the new origin: Firebase reads, sponsor photos, and a full
+      3000px photo upload round trip through Cloud Storage, so CORS is fine.
+      QR generated and decoded back to the right URL.
+      OPEN: retire creightonjames-jpg/2026-partners-invitational, which now
+      serves a stale copy.
 
 ## Phase 3. Event hardening
 
