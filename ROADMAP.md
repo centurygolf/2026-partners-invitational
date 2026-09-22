@@ -150,6 +150,16 @@ it. Target: https://centurygolf.github.io/2026-partners-invitational
       OPEN: retire creightonjames-jpg/2026-partners-invitational, which now
       serves a stale copy.
 
+## Phase 2c. Photo export (Sep 22)
+
+- [x] **P2c.1 Bulk download.** tools/download-photos.js for a laptop, plus a
+      Photo export section in the admin panel that zips in the browser. Both
+      full resolution, both numbered chronologically.
+- [x] **P2c.2 Bucket CORS.** GET only from the wall's origins, so the page can
+      read its own photo bytes. Confirmed a foreign origin is still refused.
+- [x] **P2c.3 ZIP writer.** Hand written, stored method. Verified by building
+      the same archive in node and passing it to unzip -t.
+
 ## Phase 3. Event hardening
 
 - [ ] **P3.1 Display Mode for the leaderboard.** Big-screen standings view,

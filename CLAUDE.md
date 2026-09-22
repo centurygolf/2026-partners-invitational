@@ -155,6 +155,27 @@ The masthead photograph is **John Henebry's** and the credit renders over the
 bottom right of the band. Do not remove it, and confirm the licence before
 this goes anywhere beyond the event wall.
 
+**Getting the photos out.** Two routes, both full resolution, both numbered
+in the order posted so a slideshow runs chronologically.
+
+```
+node tools/download-photos.js [folder]     # default ./photo-export
+```
+
+That is the steady one: it skips anything already fetched, so it can be run
+after each day without redownloading. The admin panel also has a **Photo
+export** section that zips everything in the browser, which is handier from a
+phone but holds the archive in memory while it builds.
+
+The ZIP is written by hand, stored rather than deflated, since JPEGs are
+already compressed. Validated against the real `unzip`, CRCs and all. No
+library, same reasoning as the cropper.
+
+That export needs CORS on the bucket, set Sep 22 to GET only from
+centurygolf.github.io, the old creightonjames-jpg origin, and localhost:4179.
+**If the wall ever moves to another domain, add it there or the zip silently
+downloads nothing.**
+
 **Photos live in Cloud Storage, not the database.** They get downloaded and
 projected in a slideshow, so quality is the point. Each upload writes two
 files under `pinv/photos/` in the bucket

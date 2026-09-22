@@ -1586,6 +1586,106 @@ function ScoreEntry({ teams, scores, rounds }) {
   );
 }
 
+
+/* ------------------------------------------------------------ zip writer */
+/* Stored, not deflated: these are JPEGs, already compressed, so deflate would
+   spend time to save nothing. No library, on the same reasoning as the
+   cropper. Parts stay as Blobs and are only joined at the end, so the archive
+   never sits in memory as one giant buffer. */
+const CRC_TABLE = (() => {
+  const t = new Uint32Array(256);
+  for (let i = 0; i < 256; i++) {
+    let c = i;
+    for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1;
+    t[i] = c >>> 0;
+  }
+  return t;
+})();
+
+function crc32(bytes) {
+  let c = 0xFFFFFFFF;
+  for (let i = 0; i < bytes.length; i++) c = CRC_TABLE[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+
+function dosTime(d) {
+  const time = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1);
+  const date = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
+  return { time, date };
+}
+
+/* entries: [{ name, bytes: Uint8Array, date }] */
+function buildZip(entries) {
+  const enc = new TextEncoder();
+  const parts = [];
+  const central = [];
+  let offset = 0;
+
+  for (const e of entries) {
+    const name = enc.encode(e.name);
+    const crc = crc32(e.bytes);
+    const { time, date } = dosTime(e.date || new Date());
+
+    const local = new DataView(new ArrayBuffer(30));
+    local.setUint32(0, 0x04034b50, true);
+    local.setUint16(4, 20, true);
+    local.setUint16(6, 0, true);
+    local.setUint16(8, 0, true);            // stored
+    local.setUint16(10, time, true);
+    local.setUint16(12, date, true);
+    local.setUint32(14, crc, true);
+    local.setUint32(18, e.bytes.length, true);
+    local.setUint32(22, e.bytes.length, true);
+    local.setUint16(26, name.length, true);
+    local.setUint16(28, 0, true);
+    parts.push(local.buffer, name, e.bytes);
+
+    const cd = new DataView(new ArrayBuffer(46));
+    cd.setUint32(0, 0x02014b50, true);
+    cd.setUint16(4, 20, true);
+    cd.setUint16(6, 20, true);
+    cd.setUint16(8, 0, true);
+    cd.setUint16(10, 0, true);
+    cd.setUint16(12, time, true);
+    cd.setUint16(14, date, true);
+    cd.setUint32(16, crc, true);
+    cd.setUint32(20, e.bytes.length, true);
+    cd.setUint32(24, e.bytes.length, true);
+    cd.setUint16(28, name.length, true);
+    cd.setUint16(30, 0, true);
+    cd.setUint16(32, 0, true);
+    cd.setUint16(34, 0, true);
+    cd.setUint16(36, 0, true);
+    cd.setUint32(38, 0, true);
+    cd.setUint32(42, offset, true);
+    central.push(cd.buffer, name);
+
+    offset += 30 + name.length + e.bytes.length;
+  }
+
+  let cdSize = 0;
+  for (const c of central) cdSize += c.byteLength;
+
+  const end = new DataView(new ArrayBuffer(22));
+  end.setUint32(0, 0x06054b50, true);
+  end.setUint16(8, entries.length, true);
+  end.setUint16(10, entries.length, true);
+  end.setUint32(12, cdSize, true);
+  end.setUint32(16, offset, true);
+  end.setUint16(20, 0, true);
+
+  return new Blob([...parts, ...central, end.buffer], { type: "application/zip" });
+}
+
+/* Chronological, because that is the order a slideshow wants. */
+function exportName(p, i) {
+  const d = new Date(p.ts || Date.now());
+  const z = (v) => String(v).padStart(2, "0");
+  return String(i + 1).padStart(3, "0") + "_" +
+    d.getFullYear() + "-" + z(d.getMonth() + 1) + "-" + z(d.getDate()) + "_" +
+    z(d.getHours()) + z(d.getMinutes()) + ".jpg";
+}
+
 /* ---------------------------------------------------------------- gallery */
 /* Photos get downloaded and projected in a slideshow, so the stored file has
    to survive a big screen. FULL_MAX is the long edge kept in Cloud Storage.
@@ -2146,6 +2246,82 @@ function PinGate({ onPass, onClose }) {
   );
 }
 
+/* Every photo at full resolution, zipped in the browser. For a large archive
+   on a slow connection, tools/download-photos.js on a laptop is the calmer
+   option and it can be rerun without refetching what it already has. */
+function PhotoExport() {
+  const photos = useNode("photos");
+  const [busy, setBusy] = useState(false);
+  const [done, setDone] = useState(0);
+  const [note, setNote] = useState(null);
+  if (photos === undefined) return null;
+
+  const list = Object.entries(photos || {})
+    .map(([id, p]) => ({ id, ...p }))
+    .sort((a, b) => (a.ts || 0) - (b.ts || 0));
+  const mb = Math.round(list.reduce((n, p) => n + (p.bytes || 0), 0) / 1024 / 1024 * 10) / 10;
+
+  const run = async () => {
+    setBusy(true); setDone(0); setNote(null);
+    const entries = [];
+    let failed = 0;
+    for (let i = 0; i < list.length; i++) {
+      const p = list[i];
+      try {
+        const url = p.full || p.dataUrl;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("http " + res.status);
+        const buf = new Uint8Array(await res.arrayBuffer());
+        entries.push({ name: exportName(p, i), bytes: buf, date: new Date(p.ts || Date.now()) });
+      } catch (err) {
+        console.error("export failed for", p.id, err);
+        failed++;
+      }
+      setDone(i + 1);
+    }
+    if (!entries.length) {
+      setNote("Nothing downloaded. Check your signal and try again.");
+      setBusy(false);
+      return;
+    }
+    const blob = buildZip(entries);
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "partners-invitational-photos.zip";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 30000);
+    setNote(failed
+      ? entries.length + " photos downloaded. " + failed + " could not be fetched."
+      : entries.length + " photos downloaded.");
+    setBusy(false);
+  };
+
+  if (!list.length) {
+    return <div style={{ fontSize: 13, color: "var(--dim)" }}>No photos posted yet.</div>;
+  }
+
+  return (
+    <div>
+      <div style={{ fontSize: 13, color: "var(--dim)", marginBottom: 10 }}>
+        {list.length} photo{list.length === 1 ? "" : "s"}, {mb}MB at full
+        resolution. They arrive numbered in the order they were posted.
+      </div>
+      <button className="btn btn-sm" disabled={busy} onClick={run}>
+        {busy ? "Downloading " + done + " of " + list.length + "\u2026" : "Download all as a zip"}
+      </button>
+      {note && (
+        <div style={{ fontSize: 13, color: "var(--pool-deep)", marginTop: 10 }}>{note}</div>
+      )}
+      {mb > 250 && !busy && (
+        <div style={{ fontSize: 12, color: "var(--mute)", marginTop: 8 }}>
+          That is a big archive for a phone. On a laptop,
+          {" "}<code>node tools/download-photos.js</code> is steadier.
+        </div>
+      )}
+    </div>
+  );
+}
+
 function AdminPanel({ onExit }) {
   const settings = useNode("settings");
   const [marquee, setMarquee] = useState(null);
@@ -2172,6 +2348,11 @@ function AdminPanel({ onExit }) {
           onClick={() => { store.set("settings/marquee", marqueeVal); setMarquee(null); }}>
           Publish
         </button>
+      </div>
+
+      <div className="card admin-section">
+        <h3 className="t-display admin-h">Photo export</h3>
+        <PhotoExport />
       </div>
 
       <div className="card admin-section">
