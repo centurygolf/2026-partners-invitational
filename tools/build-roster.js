@@ -25,6 +25,22 @@ const os = require("os");
    change cannot silently drop a sponsor off the page. */
 const TIER_ROWS = { Gold: [4, 5] };
 
+/* Corrections applied on the way out of the workbook, which still carries
+   the old values. Keeping them here rather than editing the generated JSON
+   means the next rebuild does not quietly undo them. Yolanda, Sep 22. */
+
+/* Keyed on the normalised club name, so it matches whether or not the
+   sheet wrote a leading The. These are the legal club names. */
+const CLUB_RENAMES = {
+  "citrus club": "The Citrus Club",
+  "huntington club": "The Huntington Club",
+};
+
+/* Ballantyne: the Sages swapped, Melissa is the golfer now. */
+const PLAYER_RENAMES = {
+  "Bob Sage": "Melissa Sage",
+};
+
 const TOP_SPONSOR_MIN = 4;
 const PLATINUM_MIN = 6;
 
@@ -54,6 +70,9 @@ const clean = (s) => (s == null ? "" : String(s).trim());
    players, the other holding players and no captain. */
 const clubKey = (s) => clean(s).toLowerCase()
   .replace(/^the\s+/, "").replace(/[^a-z0-9]+/g, " ").trim();
+
+/* What the wall shows for a club. Renames win over whatever the sheet says. */
+const clubName = (raw) => CLUB_RENAMES[clubKey(raw)] || clean(raw);
 
 const slugify = (s) => clean(s).toLowerCase()
   .replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -95,9 +114,9 @@ const playerRows = sheet("Player Profiles").slice(1);
 const clubs = new Map();   // key -> { club, captain, players }
 function clubEntry(rawName, preferName) {
   const k = clubKey(rawName);
-  if (!clubs.has(k)) clubs.set(k, { club: clean(rawName), players: [] });
+  if (!clubs.has(k)) clubs.set(k, { club: clubName(rawName), players: [] });
   const e = clubs.get(k);
-  if (preferName) e.club = clean(rawName);   // pro roster spelling wins
+  if (preferName) e.club = clubName(rawName);   // pro roster spelling wins
   return e;
 }
 
@@ -116,8 +135,9 @@ for (const r of pros) {
 
 for (const r of playerRows) {
   if (!clean(r[0]) || clean(r[1]) === "Team Captain") continue;
-  const name = fixName(r[2], r[3]);
-  if (!name) continue;
+  const rawName = fixName(r[2], r[3]);
+  if (!rawName) continue;
+  const name = PLAYER_RENAMES[rawName] || rawName;
   /* A blank sponsored count becomes 1. Yolanda, Sep 22: everyone in the
      field sponsored at least one member, so a missing figure is a gap in
      the workbook rather than a zero. Nine of the hundred players hit this. */
@@ -172,7 +192,7 @@ for (const r of sponsorRows) {
   picked.push({
     slug,
     name,
-    club: clean(r[0]),
+    club: clubName(r[0]),
     count,
     tier: count >= PLATINUM_MIN ? "Platinum" : "Gold",
     photo,

@@ -453,6 +453,15 @@ Area Guide deliberately omits every phone number and opening time from that
 one page rather than reconstructing them. Do not "fix" this by guessing. Get
 the numbers from the club.
 
+**Corrections to the workbook live in the builder, not the JSON.** The master
+xlsx still carries the old values, so a hand edit to data/teams.json is undone
+by the next rebuild. `CLUB_RENAMES` and `PLAYER_RENAMES` at the top of
+tools/build-roster.js are where a correction goes. Currently: Citrus and
+Huntington carry their legal names with the leading "The", and Ballantyne's
+golfer is Melissa Sage rather than Bob, the Sages having swapped. Club renames
+key on the normalised name, so they match whether or not a sheet wrote the
+"The", and they apply to the sponsor list as well as Teams.
+
 **A blank sponsored count becomes 1.** Yolanda, Sep 22: everyone in the field
 sponsored at least one member, so an empty cell in the workbook is a gap in
 the record rather than a zero. `build-roster.js` applies the default and
