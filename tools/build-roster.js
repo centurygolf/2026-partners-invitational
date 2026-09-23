@@ -41,11 +41,10 @@ const CLUB_RENAMES = {
    which is derived from the workbook name and must not move: the uploaded
    photos live at sponsorPhotos/<slug> in Firebase, so renaming the slug
    would silently detach every photo.
-   Todd & Jamie Spitzer is deliberately absent. Their poster is the one
-   page whose name would not decode, so it keeps the workbook wording
-   until someone reads it off the artwork. */
+   Every name here was read off the artwork itself. */
 const SPONSOR_RENAMES = {
   "trey-showalter": "Deidre & Trey Showalter, III",
+  "todd-and-jamie-spitzer": "Jamie & Todd Spitzer",
   "rick-mclimore": "Amy & Rick McLimore",
   "kim-and-deanne-ashmore": "Deanne & Kim Ashmore",
   "hyung-and-suzie-cho": "Suzie & Hyung Cho",
@@ -205,6 +204,11 @@ for (const r of sponsorRows) {
      headshot in assets/sponsors/ named for the slug and rerun this script.
      Organizers can also upload from the wall, which lands in Firebase and
      wins over the file. */
+  /* Carol's poster for this sponsor, which is what the wall shows. */
+  const posterRel = `assets/sponsors/poster-${slug}.jpg`;
+  const poster = fs.existsSync(path.join(REPO, posterRel)) ? posterRel : null;
+  if (!poster) warnings.push(`no poster artwork for ${name} (${posterRel})`);
+
   const photo = ["jpg", "jpeg", "png", "webp"]
     .map((ext) => `assets/sponsors/${slug}.${ext}`)
     .find((rel) => fs.existsSync(path.join(REPO, rel))) || null;
@@ -214,6 +218,7 @@ for (const r of sponsorRows) {
     club: clubName(r[0]),
     count,
     tier: count >= PLATINUM_MIN ? "Platinum" : "Gold",
+    poster,
     photo,
   });
 }

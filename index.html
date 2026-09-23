@@ -646,18 +646,26 @@ a { color: var(--pool-deep); }
   gap: 12px;
 }
 .sponsor-grid + .sponsor-grid { margin-top: 12px; }
-.sponsor-card { flex: 0 1 158px; }
+/* Wide enough that the name printed on the poster stays legible, and
+   still narrow enough for Yolanda's row of five to fit the shell. */
+/* Grow to fill the row but never past 190px, which keeps the name printed
+   on the poster legible and still lets Yolanda's row of five fit the shell.
+   On a phone the same rule lands two to a row instead of one marooned card. */
+.sponsor-card { flex: 1 1 158px; max-width: 190px; }
 .sponsor-card {
   background: var(--paper);
   border: 1px solid var(--edge);
   border-radius: 14px;
-  padding: 14px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 3px;
 }
+.sponsor-poster { width: 100%; height: auto; display: block; }
+/* Only seen if a poster is missing. */
+.sponsor-fallback { padding: 14px; display: flex; flex-direction: column;
+  align-items: center; gap: 3px; }
 .sponsor-photo-wrap { width: 100%; max-width: 132px; margin-bottom: 6px; }
 .sponsor-photo, .sponsor-mono {
   width: 100%;
@@ -687,7 +695,7 @@ a { color: var(--pool-deep); }
   text-transform: uppercase;
   color: var(--mute);
 }
-.sponsor-admin { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+.sponsor-admin { padding: 10px 12px 12px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
 
 /* -------------------------------------------------------------- questions */
 .qa-textarea { display: block; width: 100%; resize: vertical; line-height: 1.5; }
@@ -1287,7 +1295,7 @@ function SponsorCard({ s, uploaded, admin }) {
   const [pending, setPending] = useState(null);
   const fileRef = useRef();
 
-  const src = uploaded || (broken ? null : s.photo);
+  const src = uploaded || (broken ? null : (s.poster || s.photo));
   /* First name plus surname, so a couple reads "TS" rather than "T". */
   const words = s.name.split(/\s+/).filter((w) => w && w !== "&");
   const initials = words.length
@@ -1315,17 +1323,20 @@ function SponsorCard({ s, uploaded, admin }) {
 
   return (
     <div className="sponsor-card">
-      <div className="sponsor-photo-wrap">
-        {src ? (
-          <img className="sponsor-photo" src={src} alt={s.name}
-            onError={() => setBroken(true)} />
-        ) : (
+      {/* Carol's poster is the card. It already carries the name, the club
+          and the sponsorship count, so nothing is repeated underneath. */}
+      {src ? (
+        <img className="sponsor-poster" src={src}
+          alt={s.name + ", " + s.club + ", " + fmtNum(s.count) + " sponsorships"}
+          loading="lazy" onError={() => setBroken(true)} />
+      ) : (
+        <div className="sponsor-fallback">
           <div className="sponsor-mono">{initials}</div>
-        )}
-      </div>
-      <div className="sponsor-name">{s.name}</div>
-      <div className="sponsor-club">{s.club}</div>
-      <div className="sponsor-count">{fmtNum(s.count)} sponsored</div>
+          <div className="sponsor-name">{s.name}</div>
+          <div className="sponsor-club">{s.club}</div>
+          <div className="sponsor-count">{fmtNum(s.count)} sponsored</div>
+        </div>
+      )}
       {admin && (
         <div className="sponsor-admin">
           <input ref={fileRef} type="file" accept="image/*"
@@ -1345,7 +1356,7 @@ function SponsorCard({ s, uploaded, admin }) {
         </div>
       )}
       {pending && (
-        <PhotoCropper file={pending} aspect={1} maxOut={800} round
+        <PhotoCropper file={pending} aspect={2 / 3} maxOut={1140} allowSkip
           onCancel={() => setPending(null)} onDone={save} />
       )}
     </div>

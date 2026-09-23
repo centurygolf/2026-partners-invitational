@@ -205,8 +205,23 @@ frame actually covers.
 Deleting a photo removes both files as well as the database node. Skipping
 that leaves orphans in the bucket costing money forever.
 
-Sponsor photos are the exception and stay as base64 in the database. There
-are eleven, shown at 132px, so the load argument does not apply.
+**The Top Sponsors tab shows Carol's posters, not headshots.** Since Sep 23
+each card IS the poster page from docs/2026-Top-Sponsors.pdf, at
+assets/sponsors/poster-<slug>.jpg, 760x1140. The artwork already carries the
+name, the club and the sponsorship count, so nothing is repeated under it and
+there are no circles left. build-roster.js emits the poster path when the file
+exists and warns when it does not; index.html falls back to a monogram card if
+an image fails to load.
+
+The eleven headshots Jim uploaded before that are still in Firebase, archived
+at `sponsorPhotosSupersededSep23` (11 entries, 1303KB). `sponsorPhotos` itself
+was emptied rather than deleted, because an uploaded photo still overrides the
+poster: that is how a poster gets replaced from the admin panel. Moving the
+archive back would hide all eleven posters again.
+
+Sponsor uploads stay as base64 in the database rather than Cloud Storage.
+There are eleven of them, so the load argument that drove the Photos tab to
+Storage does not apply here.
 
 **Storage setup, for the record.** Firebase Storage was not enabled on the
 project and the console "Get Started" click is the documented way to do it.
@@ -306,8 +321,9 @@ photo upload, question answering, marquee, tab visibility, photo removal.
 
 **Photo cropping.** `PhotoCropper` is a local component, no library, because a
 CDN cropper is one more thing that can be blocked by venue wifi. Drag to pan,
-slider to zoom, square output. Sponsor photos crop round at 800px and are
-required; gallery photos crop at 1000px and offer "Use the whole photo".
+slider to zoom. Sponsor replacements crop to the poster's 2:3 at 1140px and
+offer "Use the whole photo", since a replacement will usually already be
+poster-shaped; gallery photos crop square at 1000px with the same skip.
 Object URLs live for the life of the modal. Revoking one on load blanks the
 preview, which is how it broke the first time.
 
@@ -461,8 +477,10 @@ applied only to the display name**. The slug still derives from the workbook
 name and must never move, because the uploaded photos live at
 `sponsorPhotos/<slug>` in Firebase and a changed slug detaches them silently.
 
-Todd & Jamie Spitzer is deliberately not in that table. Their poster is the
-one page whose name would not decode, so it keeps the workbook wording.
+All eleven names were read off the artwork. Ten decoded from the PDF text.
+Jamie & Todd Spitzer would not, so page 2 was split out with JXA and PDFKit,
+rendered with `qlmanage -t -s 2000`, and read by eye. Page order was confirmed
+against page 11, Rochelle & Blake Sherman.
 
 **Corrections to the workbook live in the builder, not the JSON.** The master
 xlsx still carries the old values, so a hand edit to data/teams.json is undone
