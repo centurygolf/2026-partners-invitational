@@ -8,7 +8,7 @@
       "sponsors": [
         {
           "slug": "trey-showalter",
-          "name": "Trey Showalter",
+          "name": "Deidre & Trey Showalter, III",
           "club": "Balcones Country Club",
           "count": 7,
           "tier": "Platinum",
@@ -32,25 +32,25 @@
       ],
       "sponsors": [
         {
-          "slug": "jenny-tronson",
-          "name": "Jenny Tronson",
-          "club": "Canyon Oaks Country Club",
+          "slug": "rick-mclimore",
+          "name": "Amy & Rick McLimore",
+          "club": "Marbella Country Club",
           "count": 5,
           "tier": "Gold",
           "photo": null
         },
         {
           "slug": "kim-and-deanne-ashmore",
-          "name": "Kim & Deanne Ashmore",
+          "name": "Deanne & Kim Ashmore",
           "club": "Valor Club",
           "count": 5,
           "tier": "Gold",
           "photo": null
         },
         {
-          "slug": "rick-mclimore",
-          "name": "Rick McLimore",
-          "club": "Marbella Country Club",
+          "slug": "jenny-tronson",
+          "name": "Jenny Tronson",
+          "club": "Canyon Oaks Country Club",
           "count": 5,
           "tier": "Gold",
           "photo": null
@@ -65,40 +65,40 @@
         },
         {
           "slug": "hyung-and-suzie-cho",
-          "name": "Hyung & Suzie Cho",
+          "name": "Suzie & Hyung Cho",
           "club": "Wood Ranch Golf Club",
           "count": 4.5,
           "tier": "Gold",
           "photo": null
         },
         {
-          "slug": "blake-and-rochelle-sherman",
-          "name": "Blake & Rochelle Sherman",
-          "club": "The Club at Prescott Lakes",
-          "count": 4,
-          "tier": "Gold",
-          "photo": null
-        },
-        {
-          "slug": "jeff-blumer-and-kristy-kneiding",
-          "name": "Jeff Blumer & Kristy Kneiding",
-          "club": "Monterey Country Club",
-          "count": 4,
-          "tier": "Gold",
-          "photo": null
-        },
-        {
           "slug": "jordan-and-cynthia-gugino",
-          "name": "Jordan & Cynthia Gugino",
+          "name": "Cynthia & Jordan Gugino",
           "club": "PGA WEST",
           "count": 4,
           "tier": "Gold",
           "photo": null
         },
         {
+          "slug": "jeff-blumer-and-kristy-kneiding",
+          "name": "Kristy Kneiding & Jeff Blumer",
+          "club": "Monterey Country Club",
+          "count": 4,
+          "tier": "Gold",
+          "photo": null
+        },
+        {
           "slug": "justin-and-kylie-connelly",
-          "name": "Justin & Kylie Connelly",
+          "name": "Kylie & Justin Connelly",
           "club": "Eagle's Landing Country Club",
+          "count": 4,
+          "tier": "Gold",
+          "photo": null
+        },
+        {
+          "slug": "blake-and-rochelle-sherman",
+          "name": "Rochelle & Blake Sherman",
+          "club": "The Club at Prescott Lakes",
           "count": 4,
           "tier": "Gold",
           "photo": null

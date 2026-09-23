@@ -453,6 +453,17 @@ Area Guide deliberately omits every phone number and opening time from that
 one page rather than reconstructing them. Do not "fix" this by guessing. Get
 the numbers from the club.
 
+**Sponsor names follow the posters, which name the spouse first.** Carol's
+2026-Top-Sponsors.pdf (kept in docs/) is the authority on how each couple is
+credited, and it differs from the workbook on eight of the eleven.
+`SPONSOR_RENAMES` in tools/build-roster.js holds them, **keyed on the slug and
+applied only to the display name**. The slug still derives from the workbook
+name and must never move, because the uploaded photos live at
+`sponsorPhotos/<slug>` in Firebase and a changed slug detaches them silently.
+
+Todd & Jamie Spitzer is deliberately not in that table. Their poster is the
+one page whose name would not decode, so it keeps the workbook wording.
+
 **Corrections to the workbook live in the builder, not the JSON.** The master
 xlsx still carries the old values, so a hand edit to data/teams.json is undone
 by the next rebuild. `CLUB_RENAMES` and `PLAYER_RENAMES` at the top of

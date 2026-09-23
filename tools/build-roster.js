@@ -36,6 +36,25 @@ const CLUB_RENAMES = {
   "huntington club": "The Huntington Club",
 };
 
+/* How the sponsor posters name each couple, which is spouse first. Taken
+   from 2026-Top-Sponsors.pdf, Carol Ruskowski, Sep 23. Keyed on the SLUG,
+   which is derived from the workbook name and must not move: the uploaded
+   photos live at sponsorPhotos/<slug> in Firebase, so renaming the slug
+   would silently detach every photo.
+   Todd & Jamie Spitzer is deliberately absent. Their poster is the one
+   page whose name would not decode, so it keeps the workbook wording
+   until someone reads it off the artwork. */
+const SPONSOR_RENAMES = {
+  "trey-showalter": "Deidre & Trey Showalter, III",
+  "rick-mclimore": "Amy & Rick McLimore",
+  "kim-and-deanne-ashmore": "Deanne & Kim Ashmore",
+  "hyung-and-suzie-cho": "Suzie & Hyung Cho",
+  "justin-and-kylie-connelly": "Kylie & Justin Connelly",
+  "jeff-blumer-and-kristy-kneiding": "Kristy Kneiding & Jeff Blumer",
+  "jordan-and-cynthia-gugino": "Cynthia & Jordan Gugino",
+  "blake-and-rochelle-sherman": "Rochelle & Blake Sherman",
+};
+
 /* Ballantyne: the Sages swapped, Melissa is the golfer now. */
 const PLAYER_RENAMES = {
   "Bob Sage": "Melissa Sage",
@@ -191,7 +210,7 @@ for (const r of sponsorRows) {
     .find((rel) => fs.existsSync(path.join(REPO, rel))) || null;
   picked.push({
     slug,
-    name,
+    name: SPONSOR_RENAMES[slug] || name,
     club: clubName(r[0]),
     count,
     tier: count >= PLATINUM_MIN ? "Platinum" : "Gold",
