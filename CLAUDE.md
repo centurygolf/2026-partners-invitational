@@ -431,6 +431,39 @@ publishes when it is answered. The asker sees their own marked as sent, via
 questions. `settings/qaPublic` flips this to publish everything immediately,
 toggled from the admin panel.
 
+**Format of Play is Eric Gray's, Sep 24.** Eric is the Director of Golf and
+the authority on format. He sent corrections written against his own Terms of
+Competition documents, not against this wall, so most of them had nothing here
+to correct. Jim said to apply them anyway, so the Program Guide now carries
+what Eric stated:
+
+- Monday on the Nicklaus Private, men play the **blue tees**, scoring code
+  **PRTINV26** (he was replacing PRTINV25 in his own TOC).
+- The **Monday Member Shootout** is **25 teams**, blue tees, Group A on Hole 1
+  then Hole 9, Group B on Hole 9 then Hole 1, final hole **18**. Ties at an
+  elimination are settled by a **chip-off**, not the sudden-death playoff his
+  older TOC described.
+- "The Shoot-Out" was renamed **"The Tuesday Shoot-Out"**, because two
+  shoot-outs run this week and the Monday one is much bigger.
+- Tuesday's round and Tuesday's shoot-out were reviewed and left alone.
+
+Two gaps were left open rather than guessed. Eric gave the men's tees and said
+nothing about the women's, and he gave a scoring code for Monday and none for
+Tuesday. **Do not fill either in without asking him.**
+
+**PRTINV26 is printed, not wired.** It shows as text in Format of Play. It is
+NOT in data/scoring.json, because a GGID that turns out to be wrong gives 125
+partners a button to a dead page, and Golf Genius serves the same client-side
+page for a real code and for nonsense, so it cannot be validated from here.
+Confirm with Eric or Amy whether PRTINV26 is the deeplink GGID and whether it
+differs per round, then fill in `ggid` and the Coming Soon chips go away.
+
+**The stale site is still up.** `creightonjames-jpg.github.io/2026-partners-invitational/`
+still serves and is now a week behind: no posters, no weather, still says
+Placeholder. Jim has admin on that repo and gh can publish a redirect to it.
+It is a live suspect whenever someone reports errors they cannot find on the
+real wall. Retire it.
+
 **Weather lives on the Agenda, not in a tab.** Carol asked for a forecast on
 Sep 24. It is a strip of four tiles above the day pills, and tapping a tile
 selects that day, so it picks the schedule rather than just decorating it.
