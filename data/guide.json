@@ -1,5 +1,5 @@
 {
-  "_note": "The Event Program Guide. This is the old concierge.json content plus the format of play and any documents. Source: 2026 Partners final agenda for live wall (1).docx, the Sep 15 update. Still open: Who to Call, pending Team Captain Host names (ROADMAP P1.6).",
+  "_note": "The Event Program Guide. This is the old concierge.json content plus the format of play and any documents. Source: 2026 Partners final agenda for live wall (1).docx, the Sep 15 update. Still open: Who to Call, pending Team Captain Host names (ROADMAP P1.6). documents[] shows on the Program Guide; an entry with url:null and placeholder:true renders a Coming Soon chip instead of a dead link.",
   "intro": "Everything you need for the week, in one place.",
   "sections": [
     {
@@ -151,5 +151,12 @@
       ]
     }
   ],
-  "documents": []
+  "documents": [
+    {
+      "title": "Event Book",
+      "detail": "The printed book for the week. It posts here as soon as it is final, so keep the wall on your phone and check back.",
+      "url": null,
+      "placeholder": true
+    }
+  ]
 }

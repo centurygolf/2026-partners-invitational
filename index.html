@@ -246,7 +246,9 @@ a { color: var(--pool-deep); }
   padding: 7px 16px;
 }
 
-/* Placeholder chip. Marks sample content so it can never pass for real. */
+/* Marks content that is not final yet, so it can never pass for real.
+   It says Coming Soon rather than Placeholder because partners read this,
+   and a gap they are promised is easier than a gap they are shown. */
 .chip-ph {
   display: inline-block;
   font-size: 10px;
@@ -320,6 +322,64 @@ a { color: var(--pool-deep); }
 }
 
 /* ----------------------------------------------------------------- pills */
+/* Weather strip. Four tiles that also work as day pickers, so it earns the
+   space instead of just decorating the top of the schedule. */
+.wx-card { margin-bottom: 14px; padding: 18px 14px 14px; }
+.wx-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin-bottom: 12px;
+}
+.wx-title {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dusk);
+}
+.wx-now { font-size: 13px; color: var(--dim); }
+.wx-row { display: flex; gap: 8px; }
+.wx-day {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 4px 9px;
+  border: 1px solid var(--edge);
+  border-radius: 12px;
+  background: var(--sand);
+  color: var(--ink);
+  cursor: pointer;
+}
+.wx-day.active { background: var(--glow); border-color: var(--pool); }
+.wx-dow {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.wx-day.active .wx-dow { color: var(--pool-deep); }
+.wx-art { width: 30px; height: 30px; margin: 2px 0; }
+.wx-hi { font-weight: 700; font-size: 17px; line-height: 1.1; }
+.wx-lo { font-size: 13px; color: var(--mute); line-height: 1.1; }
+.wx-note {
+  font-size: 10px;
+  color: var(--dim);
+  margin-top: 3px;
+  text-align: center;
+  line-height: 1.2;
+}
+.wx-wet { color: var(--pool-deep); font-weight: 600; }
+.wx-foot { font-size: 12px; color: var(--mute); margin-top: 11px; }
+
 .day-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
 .day-pill {
   border: 1px solid var(--edge);
@@ -1054,7 +1114,7 @@ function Horizon() {
   );
 }
 
-function PhChip() { return <span className="chip-ph">Placeholder</span>; }
+function PhChip() { return <span className="chip-ph">Coming Soon</span>; }
 
 /* --------------------------------------------------------------- masthead */
 function Masthead({ agenda }) {
@@ -1083,6 +1143,163 @@ function Masthead({ agenda }) {
   );
 }
 
+/* ---------------------------------------------------------------- weather */
+/* Carol asked for a forecast. It sits on the Agenda rather than in a tab of
+   its own, because the only question anyone actually has is what the weather
+   is doing on the day they are looking at. Tapping a tile picks that day.
+
+   Open-Meteo, because it needs no API key. This repo is public, so a keyed
+   service would mean either a leaked key or a server, and neither is worth it
+   for a temperature. It sends Access-Control-Allow-Origin: *, so it works
+   from GitHub Pages with nothing configured.
+
+   If the fetch fails the strip renders nothing at all. On course wifi a
+   missing garnish is better than an error box under the schedule. */
+const WX = {
+  lat: 33.6634,            // PGA WEST, La Quinta
+  lon: -116.3100,
+  tz: "America/Los_Angeles",
+  ttl: 30 * 60 * 1000,     // half an hour is plenty for a daily forecast
+};
+
+/* WMO codes, grouped to the handful of words worth printing. */
+function wxLook(code) {
+  if (code === 0) return { word: "Clear", art: "sun" };
+  if (code === 1) return { word: "Mostly sunny", art: "sun" };
+  if (code === 2) return { word: "Partly cloudy", art: "part" };
+  if (code === 3) return { word: "Overcast", art: "cloud" };
+  if (code === 45 || code === 48) return { word: "Fog", art: "cloud" };
+  if (code >= 51 && code <= 57) return { word: "Drizzle", art: "rain" };
+  if (code >= 61 && code <= 67) return { word: "Rain", art: "rain" };
+  if (code >= 71 && code <= 77) return { word: "Snow", art: "cloud" };
+  if (code >= 80 && code <= 82) return { word: "Showers", art: "rain" };
+  if (code === 85 || code === 86) return { word: "Snow", art: "cloud" };
+  if (code >= 95) return { word: "Storms", art: "rain" };
+  return { word: "", art: "cloud" };
+}
+
+function WxArt({ art }) {
+  const sun = <circle cx="13" cy="11" r="6" fill="var(--mustard)" />;
+  const rays = [0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
+    <line key={a} x1="13" y1="11" x2="13" y2="1.5" stroke="var(--mustard)"
+      strokeWidth="1.6" strokeLinecap="round"
+      transform={"rotate(" + a + " 13 11)"} />
+  ));
+  const cloud = (
+    <path d="M9 25h13a5 5 0 0 0 0-10 7 7 0 0 0-13.3 2A4.2 4.2 0 0 0 9 25z"
+      fill="var(--paper)" stroke="var(--dim)" strokeWidth="1.6"
+      strokeLinejoin="round" />
+  );
+  return (
+    <svg className="wx-art" viewBox="0 0 30 30" aria-hidden="true">
+      {art === "sun" && <g>{rays}{sun}</g>}
+      {art === "part" && <g><g>{rays}</g>{sun}{cloud}</g>}
+      {art === "cloud" && cloud}
+      {art === "rain" && (
+        <g>
+          {cloud}
+          <line x1="12" y1="27" x2="10.5" y2="30" stroke="var(--pool)" strokeWidth="1.8" strokeLinecap="round" />
+          <line x1="17" y1="27" x2="15.5" y2="30" stroke="var(--pool)" strokeWidth="1.8" strokeLinecap="round" />
+          <line x1="22" y1="27" x2="20.5" y2="30" stroke="var(--pool)" strokeWidth="1.8" strokeLinecap="round" />
+        </g>
+      )}
+    </svg>
+  );
+}
+
+/* Cached in sessionStorage so hopping between tabs does not refetch. */
+function useWeather(from, to) {
+  const [wx, setWx] = useState(undefined);
+  useEffect(() => {
+    if (!from || !to) return;
+    const url = "https://api.open-meteo.com/v1/forecast" +
+      "?latitude=" + WX.lat + "&longitude=" + WX.lon +
+      "&daily=weather_code,temperature_2m_max,temperature_2m_min," +
+      "precipitation_probability_max,wind_speed_10m_max" +
+      "&current=temperature_2m,weather_code" +
+      "&temperature_unit=fahrenheit&wind_speed_unit=mph" +
+      "&timezone=" + encodeURIComponent(WX.tz) +
+      "&start_date=" + from + "&end_date=" + to;
+
+    const key = "pinv_wx";
+    let live = true;
+    try {
+      const hit = JSON.parse(sessionStorage.getItem(key) || "null");
+      if (hit && hit.url === url && Date.now() - hit.at < WX.ttl) {
+        setWx(hit.data);
+        return;
+      }
+    } catch {}
+
+    fetch(url)
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((j) => {
+        if (!live) return;
+        setWx(j);
+        try { sessionStorage.setItem(key, JSON.stringify({ url, at: Date.now(), data: j })); } catch {}
+      })
+      .catch(() => live && setWx(null));
+    return () => { live = false; };
+  }, [from, to]);
+  return wx;
+}
+
+function WeatherStrip({ days, activeId, onPick }) {
+  const dated = days.filter((d) => d.iso);
+  const wx = useWeather(dated[0]?.iso, dated[dated.length - 1]?.iso);
+  if (!dated.length || !wx || !wx.daily) return null;
+
+  const at = (iso) => wx.daily.time.indexOf(iso);
+  const today = new Date().toISOString().slice(0, 10);
+  /* Beyond about five days a daily forecast is a trend. Say so rather than
+     letting anyone pack for a number that is going to move. */
+  const lead = (new Date(dated[0].iso) - new Date(today)) / 86400000;
+  const now = wx.current;
+
+  return (
+    <div className="card roof wx-card">
+      <div className="wx-head">
+        <span className="wx-title">Weather at PGA WEST</span>
+        {now && (
+          <span className="wx-now">
+            {Math.round(now.temperature_2m)}&deg; and {wxLook(now.weather_code).word.toLowerCase()} right now
+          </span>
+        )}
+      </div>
+      <div className="wx-row">
+        {dated.map((d) => {
+          const i = at(d.iso);
+          if (i < 0) return null;
+          const look = wxLook(wx.daily.weather_code[i]);
+          const rain = wx.daily.precipitation_probability_max[i];
+          const wind = Math.round(wx.daily.wind_speed_10m_max[i]);
+          return (
+            <button key={d.id} type="button"
+              className={"wx-day" + (d.id === activeId ? " active" : "")}
+              onClick={() => onPick && onPick(d.id)}
+              aria-label={d.date + ", " + look.word + ", high " +
+                Math.round(wx.daily.temperature_2m_max[i]) + " degrees"}>
+              <span className="wx-dow">{d.label.slice(0, 3)}</span>
+              <WxArt art={look.art} />
+              <span className="wx-hi">{Math.round(wx.daily.temperature_2m_max[i])}&deg;</span>
+              <span className="wx-lo">{Math.round(wx.daily.temperature_2m_min[i])}&deg;</span>
+              {/* Only what changes a decision. In the desert a 4% chance of
+                  rain and a 6mph breeze are not news. */}
+              {rain >= 15 && <span className="wx-note wx-wet">{rain}% rain</span>}
+              {rain < 15 && wind >= 15 && <span className="wx-note">{wind} mph wind</span>}
+            </button>
+          );
+        })}
+      </div>
+      <div className="wx-foot">
+        {lead > 5
+          ? "This far out it is a trend, not a promise. It sharpens as the week gets closer."
+          : "Updated through the day. Highs and lows in Fahrenheit."}
+      </div>
+    </div>
+  );
+}
+
 /* ----------------------------------------------------------------- agenda */
 function Agenda() {
   const agenda = useJson("data/agenda.json");
@@ -1096,6 +1313,7 @@ function Agenda() {
     <section>
       <h2 className="t-display page-title">Agenda</h2>
       <p className="page-sub">The schedule for your stay.</p>
+      <WeatherStrip days={agenda.days} activeId={active.id} onPick={setDayId} />
       <div className="day-pills">
         {agenda.days.map((d) => (
           <button key={d.id}

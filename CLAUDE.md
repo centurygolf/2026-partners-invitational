@@ -431,6 +431,41 @@ publishes when it is answered. The asker sees their own marked as sent, via
 questions. `settings/qaPublic` flips this to publish everything immediately,
 toggled from the admin panel.
 
+**Weather lives on the Agenda, not in a tab.** Carol asked for a forecast on
+Sep 24. It is a strip of four tiles above the day pills, and tapping a tile
+selects that day, so it picks the schedule rather than just decorating it.
+Adding a ninth tab would have needed Donny.
+
+The source is **Open-Meteo**, chosen because it needs no API key. This repo is
+public, so a keyed service would mean either a leaked key or a server to hide
+it behind, and neither is worth a temperature. It sends
+`Access-Control-Allow-Origin: *`, so nothing is configured anywhere. Config is
+the `WX` constant in index.html: PGA WEST at 33.6634, -116.3100, results
+cached in sessionStorage for thirty minutes.
+
+The days come from the new `iso` field on each day in data/agenda.json. A day
+without one is skipped. **If the event dates ever move, change `iso` and the
+forecast follows.**
+
+If the fetch fails the strip renders nothing at all. On course wifi a missing
+garnish beats an error box under the schedule. A tile prints rain chance only
+at 15% or higher, and wind only at 15mph or higher, because in the desert a 4%
+chance and a 6mph breeze are not news. More than five days out the footer says
+the forecast is a trend rather than a promise, which it drops automatically as
+the week gets closer.
+
+**The chip says Coming Soon, not Placeholder.** Jim, Sep 24. Same component
+(`PhChip`), same `placeholder: true` flag in the data, different word.
+Partners read this wall, and a gap they are promised is easier to take than a
+gap they are shown. The flag name stayed as it is so nothing in the data files
+had to move.
+
+**The Event Book is a Coming Soon document.** It is not final until about
+Sep 28, but the link went out before that, so `documents` in data/guide.json
+carries an entry with `url: null` and `placeholder: true`. That renders the
+title with a chip instead of a dead link. **When the book arrives, drop the PDF
+in assets/ and set `url`. The chip disappears on its own.**
+
 **Live Scoring needs GGIDs.** `data/scoring.json` holds one per round. Until
 they arrive each round shows a labelled placeholder instead of a dead button.
 The ONLY URL that opens the Golf Genius app rather than a browser is

@@ -1,5 +1,5 @@
 {
-  "_note": "Source: 2026 Partners final agenda for live wall (1).docx, the Sep 15 update. spouses:true marks starred events where spouses and significant others are invited. Session photos are from last year's event, cropped from the 2026 brochure collage as a look test; swap for originals when available.",
+  "_note": "Source: 2026 Partners final agenda for live wall (1).docx, the Sep 15 update. iso is the machine readable date, which is what the weather strip keys on. spouses:true marks starred events where spouses and significant others are invited. Session photos are from last year's event, cropped from the 2026 brochure collage as a look test; swap for originals when available.",
   "eventName": "The Partners Invitational",
   "edition": "18th Annual",
   "venue": "PGA WEST, La Quinta, California",
@@ -35,7 +35,8 @@
           "spouses": true,
           "photo": "assets/photos/last-white.jpg"
         }
-      ]
+      ],
+      "iso": "2026-10-04"
     },
     {
       "id": "mon",
@@ -75,7 +76,8 @@
           "detail": "La Quinta Cliffhouse. Smart or elegant casual.",
           "spouses": true
         }
-      ]
+      ],
+      "iso": "2026-10-05"
     },
     {
       "id": "tue",
@@ -117,7 +119,8 @@
           "spouses": true,
           "photo": "assets/photos/last-dinner.jpg"
         }
-      ]
+      ],
+      "iso": "2026-10-06"
     },
     {
       "id": "wed",
@@ -129,7 +132,8 @@
           "title": "Flights and departures home",
           "detail": "Safe travels. See you next year."
         }
-      ]
+      ],
+      "iso": "2026-10-07"
     }
   ]
 }
