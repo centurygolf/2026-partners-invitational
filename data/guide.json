@@ -60,14 +60,18 @@
       "items": [
         {
           "label": "Monday, Nicklaus Private",
-          "detail": "Two-person scramble. 35% of the low handicap player plus 15% of the high."
+          "detail": "Two-person scramble. 35% of the low handicap player plus 15% of the high. Men play the blue tees. Scoring code PRTINV26."
+        },
+        {
+          "label": "Monday Member Shootout",
+          "detail": "25 teams on the Nicklaus Private. Men play the blue tees. Group A plays Hole 1 then Hole 9. Group B plays Hole 9 then Hole 1. The final hole is 18. If teams tie and one has to go out, a chip-off decides which teams advance to the next hole, or decides the winner."
         },
         {
           "label": "Tuesday, Palmer Private",
           "detail": "Two-person shamble. 70% of your GHIN handicap index."
         },
         {
-          "label": "The Shoot-Out",
+          "label": "The Tuesday Shoot-Out",
           "detail": "The top three scoring teams, and ties, play a two-hole shoot-out to crown first, second, and third."
         },
         {

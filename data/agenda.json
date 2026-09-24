@@ -68,7 +68,8 @@
           "time": "1:30 pm",
           "title": "Member Shootout",
           "spouses": true,
-          "photo": "assets/photos/last-trio.jpg"
+          "photo": "assets/photos/last-trio.jpg",
+          "detail": "25 teams. Group A plays Hole 1 then Hole 9. Group B plays Hole 9 then Hole 1. The final hole is 18. Men play the blue tees."
         },
         {
           "time": "6:00 pm",
