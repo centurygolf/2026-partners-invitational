@@ -54,9 +54,27 @@ const SPONSOR_RENAMES = {
   "blake-and-rochelle-sherman": "Rochelle & Blake Sherman",
 };
 
-/* Ballantyne: the Sages swapped, Melissa is the golfer now. */
+/* Who is playing, where the workbook still says someone else. Two shapes:
+
+     "Old Name": "New Name"
+        The same household keeps the spot, so the workbook's sponsored count
+        travels with it. The Sages swapped, so Melissa golfs and Bob does not.
+
+     "Old Name": { name: "New Name", sponsored: <n> }
+        A different person takes the spot. Their own sponsored count has to be
+        given, because the workbook row belongs to the person leaving and
+        their sponsorships are not transferable.
+
+   Substitutions do NOT touch the Top Sponsors page. That list is built from
+   the Top Sponsors sheet and keyed on slug, which is right: a member who
+   sponsored seven people keeps that credit whether or not he tees it up. */
 const PLAYER_RENAMES = {
   "Bob Sage": "Melissa Sage",
+  /* Jim, Sep 25. Steve Le takes Trey Showalter's place on the Balcones team.
+     Trey stays on Top Sponsors with his 7, which are his. Steve's own figure
+     has not been supplied, so he gets the 1 that Yolanda's rule gives every
+     player in the field with no recorded count, and the rebuild prints it. */
+  "Trey Showalter": { name: "Steve Le", sponsored: null },
 };
 
 const TOP_SPONSOR_MIN = 4;
@@ -155,12 +173,20 @@ for (const r of playerRows) {
   if (!clean(r[0]) || clean(r[1]) === "Team Captain") continue;
   const rawName = fixName(r[2], r[3]);
   if (!rawName) continue;
-  const name = PLAYER_RENAMES[rawName] || rawName;
+  const sub = PLAYER_RENAMES[rawName];
+  const name = (typeof sub === "string" ? sub : sub?.name) || rawName;
   /* A blank sponsored count becomes 1. Yolanda, Sep 22: everyone in the
      field sponsored at least one member, so a missing figure is a gap in
-     the workbook rather than a zero. Nine of the hundred players hit this. */
-  const sponsored = num(r[36]) || 1;
-  if (!num(r[36])) defaultedSponsors.push(name);
+     the workbook rather than a zero. Nine of the hundred players hit this.
+     A substitute is the same case: in the field, no figure of their own. */
+  const substituted = sub && typeof sub === "object";
+  const own = substituted ? sub.sponsored : num(r[36]);
+  const sponsored = own || 1;
+  if (!own) defaultedSponsors.push(name + (substituted ? " (substitute)" : ""));
+  if (substituted) {
+    warnings.push(`substitution: ${rawName} -> ${sub.name} on ${clean(r[0])}. ` +
+      `Top Sponsors still credits ${rawName}.`);
+  }
   clubEntry(r[0], false).players.push({ name, sponsored });
 }
 
