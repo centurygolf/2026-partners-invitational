@@ -628,9 +628,9 @@ A string keeps the workbook's sponsored count, which is right when a household
 keeps the spot, as with the Sages. An object `{ name, sponsored }` is for a
 different person taking the spot, and their count has to be given because
 sponsorships are not transferable. Currently: **Steve Le** replaces Trey
-Showalter at Balcones (Jim, Sep 25). Trey keeps his Platinum credit and his 7
-on Top Sponsors, which is correct, and Steve shows the default 1 because his
-own figure has not been supplied.
+Showalter at Balcones (Jim, Sep 25), with his own count of 3 (Jim, Sep 28).
+Trey keeps his Platinum credit and his 7 on Top Sponsors, which is correct.
+Three is under TOP_SPONSOR_MIN, so Steve does not appear on that page.
 
 **Corrections to the workbook live in the builder, not the JSON.** The master
 xlsx still carries the old values, so a hand edit to data/teams.json is undone

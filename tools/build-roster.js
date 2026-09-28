@@ -71,10 +71,10 @@ const SPONSOR_RENAMES = {
 const PLAYER_RENAMES = {
   "Bob Sage": "Melissa Sage",
   /* Jim, Sep 25. Steve Le takes Trey Showalter's place on the Balcones team.
-     Trey stays on Top Sponsors with his 7, which are his. Steve's own figure
-     has not been supplied, so he gets the 1 that Yolanda's rule gives every
-     player in the field with no recorded count, and the rebuild prints it. */
-  "Trey Showalter": { name: "Steve Le", sponsored: null },
+     His own count is 3, supplied by Jim on Sep 28. Trey keeps the 7 and his
+     Platinum poster, which are his: sponsorships do not travel with the tee
+     time. Three is below TOP_SPONSOR_MIN, so Steve does not join that page. */
+  "Trey Showalter": { name: "Steve Le", sponsored: 3 },
 };
 
 /* A club whose Team Captain Host has changed since the workbook was frozen.
