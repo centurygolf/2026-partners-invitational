@@ -77,6 +77,21 @@ const PLAYER_RENAMES = {
   "Trey Showalter": { name: "Steve Le", sponsored: null },
 };
 
+/* A club whose Team Captain Host has changed since the workbook was frozen.
+   Keyed on the normalised club name, like CLUB_RENAMES.
+
+   The captain block is the one place this wall publishes a direct mobile and
+   a work email, so an override REPLACES the whole block rather than just the
+   name. Leaving the old contact under a new name would point attendees at
+   someone who is no longer the host, and would keep publishing that person's
+   mobile after they came off the job. Omitted details render as absent, and
+   the rebuild warns about them every time until they are filled in. */
+const CAPTAIN_OVERRIDES = {
+  /* Jim, Sep 28. Logan Cook is not in the workbook, so there is no mobile or
+     email for him yet. Matt LoPresti's were deliberately not carried over. */
+  "spanish hills club": { name: "Logan Cook" },
+};
+
 const TOP_SPONSOR_MIN = 4;
 const PLATINUM_MIN = 6;
 
@@ -159,6 +174,21 @@ function clubEntry(rawName, preferName) {
 for (const r of pros) {
   if (!clean(r[0])) continue;
   const e = clubEntry(r[0], true);
+  const over = CAPTAIN_OVERRIDES[clubKey(r[0])];
+  const from = e.club;
+
+  if (over) {
+    /* Whole block, not just the name. See the note on CAPTAIN_OVERRIDES. */
+    const was = fixName(r[2], r[3]);
+    e.captain = { name: over.name };
+    if (over.mobile) e.captain.mobile = over.mobile;
+    if (over.email) e.captain.email = over.email.toLowerCase();
+    const gaps = ["mobile", "email"].filter((k) => !e.captain[k]);
+    warnings.push(`captain replaced: ${from} / ${was} -> ${over.name}` +
+      (gaps.length ? `. NO ${gaps.join(" OR ").toUpperCase()} YET, so the card shows a name only` : ""));
+    continue;
+  }
+
   e.captain = {
     name: fixName(r[2], r[3]),
     mobile: fixPhone(r[4]),
@@ -167,6 +197,12 @@ for (const r of pros) {
   if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(e.captain.mobile)) {
     warnings.push(`captain mobile not a valid US number: ${e.club} / ${e.captain.name} / "${e.captain.mobile}"`);
   }
+}
+
+/* An override for a club the pro sheet does not list would silently do
+   nothing, which is the kind of quiet failure that survives to the event. */
+for (const k of Object.keys(CAPTAIN_OVERRIDES)) {
+  if (!clubs.has(k)) warnings.push(`CAPTAIN_OVERRIDES has no matching club: "${k}"`);
 }
 
 for (const r of playerRows) {
