@@ -24,7 +24,13 @@ shamble on the Palmer Private (70% of GHIN). Top three teams and ties advance
 to a two-hole Shoot-Out. The leaderboard carries NET TEAM SCORES PER ROUND
 entered by the scoring table, not hole-by-hole gross.
 
-Source of truth for event facts: docs/2026-partners-final-agenda.docx. Known
+Source of truth for event facts: **page 10 of the 2026 registration booklet**
+(first draft, read Sep 28), which supersedes docs/2026-partners-final-agenda.docx.
+The docx had the Monday team dinners at 6:00 pm. The booklet says 6:30 pm at
+La Quinta Cliffhouse Grill and Bar, 78250 Highway 111, and the wall follows
+the booklet. The booklet is image based, so tools/pdftext.js returns nothing:
+split the page with the JXA and PDFKit script in the scratchpad and render it
+with `qlmanage -t -s 2400`. On the older docx: Known
 discrepancy in that doc: the schedule puts the Shoot-Out at Tuesday 2:00 pm,
 the Q&A section says Wednesday after play. The wall follows the schedule.
 
@@ -428,22 +434,41 @@ second on Sep 19. Measured at 375px, it now sits 347px off the right edge and
 needs a horizontal swipe past almost two tabs. That is the worst place for it
 on a tournament morning. Flagged to Jim on Sep 28.
 
-**Two tabs Carol and Donny asked for do not exist yet**, both blocked on
-content that has not arrived:
-- **Welcome**, first in Carol's list, built from Jim's welcome letter on page
-  3 of the event book. The book has not been sent. It belongs at position one
-  and nothing else has to move when it lands.
-- **Event Sponsors**, asked for by Donny on Sep 28, a table of the companies
-  sponsoring the event. This is NOT Top Sponsors, which is members ranked by
-  how many new members they brought in. No event sponsor list has been
-  supplied. Do not populate it from the Top Sponsors sheet.
+**Both are built as of Sep 28**, from the registration booklet first draft:
+
+- **Welcome** is Jim Hinckley's letter, page 3, in data/welcome.json. Note
+  that is Jim HINCKLEY, CEO of Arnold Palmer Golf Management and Century Golf
+  Partners, not Jim Creighton. It is a signed letter, so it is reproduced as
+  written rather than rewritten to the wall's voice, and the signature is set
+  in Yellowtail. **That is the one sanctioned exception to the Yellowtail
+  ration**, because a signature is the one place a script face reads as
+  meaning rather than decoration.
+- **Event Sponsors** is page 24, in data/event-sponsors.json, 28 names in the
+  three groups the page uses: Hosts, Event and Brand Sponsors, and Compliments
+  of. It is a separate tab from Top Sponsors on purpose. Top Sponsors ranks
+  members by how many full privilege members they brought in, and folding
+  brands into it would blur what the members are being thanked for.
+
+**Names only on Event Sponsors, no logos.** The artwork is embedded in the
+booklet and reproducing a trademark is Carol's call, not a technical one. If
+she clears it, add a logo field per sponsor and the grid becomes images.
+
+**One sponsor mark is missing on purpose.** Page 24 puts the adidas logo in a
+bordered box beside a second mark, three stacked wavy bars, that could not be
+identified from the artwork. Guessing a brand onto a public sponsor page is
+worse than an absence. Ask Carol what it is.
+
+**The landing tab follows TABS[0]**, it is not hardcoded. Reordering the array
+moves the opening view with it.
 
 | Tab | Function | Data source |
 |---|---|---|
-| Agenda | Schedule with day pills | data/agenda.json |
+| Welcome | Jim Hinckley's letter | data/welcome.json |
+| Events Schedule | Schedule, day pills, weather | data/agenda.json |
 | Live Scoring | Golf Genius hand-off per round | data/scoring.json |
 | Teams | Club, captain contact, players | data/teams.json (GENERATED) |
-| Top Sponsors | Platinum and Gold members, photos | data/sponsors.json (GENERATED) |
+| Top Sponsors | Platinum and Gold members, posters | data/sponsors.json (GENERATED) |
+| Event Sponsors | Companies backing the event | data/event-sponsors.json |
 | Program Guide | Venues, format, dress, travel, documents | data/guide.json |
 | Area Guide | La Quinta and Coachella Valley | data/area-guide.json |
 | Photos | Photo uploads with likes | Firebase photos/ |

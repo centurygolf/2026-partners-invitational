@@ -1,0 +1,33 @@
+{
+  "_note": "Jim Hinckley's welcome letter, transcribed from page 3 of 2026-Partners-Invitational-Registration-Booklet-1st draft.pdf, Sep 28. The booklet is image based, so tools/pdftext.js returns nothing and the page was rendered and read by eye. This is a signed letter, so it is reproduced as written rather than rewritten to the wall's voice. If the booklet goes past first draft, check this against the new page 3.",
+  "eyebrow": "18th Annual Sponsor Celebration",
+  "title": "Welcome",
+  "salutation": "Dear Member Partners,",
+  "body": [
+    "On behalf of Arnold Palmer Golf Management and Century Golf Partners, it is our pleasure to welcome you to our 18th Annual Member Sponsor Celebration, The National Partners Invitational.",
+    "We hope you are impressed with your accommodations during your visit to PGA WEST, and we will strive to provide you with the best food, service, and golf as we recognize and celebrate you as great Ambassador Members. Enjoy the camaraderie of meeting other sponsoring Members from your fellow Clubs across the nation, as new life-long friendships are formed each year!",
+    "A strong and connected membership roster is the greatest asset of your private Club. Nothing is more critical of your focus than perpetuating the value of your private club through “Membership by Invitation.” Thank you for embracing and participating in your Club’s membership culture. By inviting your friends to consider membership and taking ownership of your membership roster, you are ensuring that your Club is full of friends who reflect the values and friendships of all Members.",
+    "I believe this quote from a plaque at St. Andrews Golf Club in Scotland best describes the real meaning of a private Club."
+  ],
+  "quote": {
+    "title": "“A Club”",
+    "attribution": "by St. Andrews, Scotland",
+    "lines": [
+      "A Club is a haven of refuge and accord in a world torn by strife and discord.",
+      "A Club is a place where kindred spirits gather to have fun and make friends.",
+      "A Club is a place of courtesy, good breeding and good manners.",
+      "A Club is a place expressly for camaraderie, merriment, good will and good cheer.",
+      "It humbles the mighty, draws out the timid and casts out the sorehead.",
+      "And, a Club is one of the noblest inventions of mankind."
+    ]
+  },
+  "closing": [
+    "We will work hard to make you proud this week with celebration and recognition of your membership efforts. If there is anything we can do to make your stay more enjoyable, please let one of our Event Volunteers know."
+  ],
+  "signoff": "Sincerely,",
+  "signature": {
+    "name": "Jim Hinckley",
+    "role": "CEO",
+    "orgs": ["Arnold Palmer Golf Management", "Century Golf Partners"]
+  }
+}

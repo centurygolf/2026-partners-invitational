@@ -1,0 +1,53 @@
+{
+  "_note": "Donny, Sep 28. Transcribed from page 24 of the 2026 registration booklet, first draft, which is titled EVENT AND BRAND SPONSORS. The page is artwork, so every name was read off the rendered logos rather than extracted. These are the companies backing the event. They are NOT the Top Sponsors tab, which ranks members by how many full privilege members they brought in. One mark in the adidas box could not be identified and is deliberately absent, see the note in CLAUDE.md. Logos are not reproduced here: the files are embedded in the PDF and their use is a trademark question for Carol, not a technical one.",
+  "intro": "The companies behind the week. We hope you enjoy their products.",
+  "groups": [
+    {
+      "id": "hosts",
+      "title": "Hosts",
+      "sponsors": [
+        { "name": "Arnold Palmer Golf Management" },
+        { "name": "Century Golf Partners" },
+        { "name": "PGA WEST" }
+      ]
+    },
+    {
+      "id": "brands",
+      "title": "Event and Brand Sponsors",
+      "sponsors": [
+        { "name": "AHEAD" },
+        { "name": "adidas" },
+        { "name": "Bobby Jones" },
+        { "name": "Black Clover" },
+        { "name": "Callaway" },
+        { "name": "Cleveland Golf" },
+        { "name": "Srixon" },
+        { "name": "CMC Design" },
+        { "name": "FootJoy" },
+        { "name": "IBKUL" },
+        { "name": "Linksoul" },
+        { "name": "Pinned" },
+        { "name": "TaylorMade" },
+        { "name": "Titleist" },
+        { "name": "Vivid Golf" }
+      ]
+    },
+    {
+      "id": "compliments",
+      "title": "Compliments of",
+      "note": "Palmer Advantage, The Ultimate Club Network.",
+      "sponsors": [
+        { "name": "Ketel One Vodka" },
+        { "name": "The Cocktail Collection" },
+        { "name": "Valor" },
+        { "name": "Nolet's Gin" },
+        { "name": "Caddy Snacks" },
+        { "name": "Honey Stinger" },
+        { "name": "Hubs Peanuts" },
+        { "name": "Kingdom" },
+        { "name": "Premier Capitol Cigar Company" },
+        { "name": "Sun Cruiser, from Boston Beer Company" }
+      ]
+    }
+  ]
+}

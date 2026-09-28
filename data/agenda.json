@@ -1,5 +1,5 @@
 {
-  "_note": "Source: 2026 Partners final agenda for live wall (1).docx, the Sep 15 update. iso is the machine readable date, which is what the weather strip keys on. spouses:true marks starred events where spouses and significant others are invited. Session photos are from last year's event, cropped from the 2026 brochure collage as a look test; swap for originals when available.",
+  "_note": "Source: page 10 of the 2026 registration booklet, first draft, checked Sep 28. Supersedes 2026 Partners final agenda for live wall (1).docx, which had the Monday team dinners half an hour early. iso is the machine readable date, which is what the weather strip keys on. spouses:true marks starred events where spouses and significant others are invited. Session photos are from last year's event, cropped from the 2026 brochure collage as a look test; swap for originals when available.",
   "eventName": "The Partners Invitational",
   "edition": "18th Annual",
   "venue": "PGA WEST, La Quinta, California",
@@ -14,7 +14,8 @@
       "sessions": [
         {
           "time": "All day",
-          "title": "Resort arrivals"
+          "title": "Resort arrivals",
+          "detail": "La Quinta Resort & Club."
         },
         {
           "time": "5:00 pm",
@@ -69,12 +70,12 @@
           "title": "Member Shootout",
           "spouses": true,
           "photo": "assets/photos/last-trio.jpg",
-          "detail": "25 teams. Group A plays Hole 1 then Hole 9. Group B plays Hole 9 then Hole 1. The final hole is 18. Men play the blue tees."
+          "detail": "Spouses come cheer and join the fun. 25 teams. Group A plays Hole 1 then Hole 9. Group B plays Hole 9 then Hole 1. The final hole is 18. Men play the blue tees."
         },
         {
-          "time": "6:00 pm",
-          "title": "Teams dinner",
-          "detail": "La Quinta Cliffhouse. Smart or elegant casual.",
+          "time": "6:30 pm",
+          "title": "Team Dinners",
+          "detail": "La Quinta Cliffhouse Grill and Bar, 78250 Highway 111, La Quinta. Smart or elegant casual.",
           "spouses": true
         }
       ],
@@ -105,7 +106,7 @@
         {
           "time": "2:00 pm",
           "title": "Top 3 Teams Shoot-Out",
-          "detail": "The top three scoring teams, and ties, play a two-hole shoot-out for first, second, and third.",
+          "detail": "Spouses come cheer and join the fun. The top three scoring teams, and ties, play a two-hole shoot-out for first, second, and third.",
           "spouses": true
         },
         {

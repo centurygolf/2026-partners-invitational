@@ -322,6 +322,72 @@ a { color: var(--pool-deep); }
 }
 
 /* ----------------------------------------------------------------- pills */
+/* The welcome letter. Slightly looser than the rest of the wall, because it
+   is a page of prose rather than a list of facts. */
+.letter { padding: 22px 18px 18px; }
+.letter p { margin: 0 0 14px; line-height: 1.62; }
+.letter p:last-of-type { margin-bottom: 0; }
+.letter-salutation { font-weight: 600; }
+.letter-quote {
+  margin: 20px 0;
+  padding: 16px 14px;
+  border-left: 3px solid var(--mustard);
+  background: var(--sand);
+  border-radius: 0 10px 10px 0;
+  text-align: center;
+}
+.letter-quote-title {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--dusk);
+}
+.letter-quote-by { font-size: 12px; color: var(--dim); margin-bottom: 10px; }
+.letter-quote-line {
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.letter-sign { margin-top: 20px; }
+.letter-signoff { margin-bottom: 4px; }
+.letter-name {
+  font-family: "Yellowtail", cursive;
+  font-size: 27px;
+  line-height: 1.15;
+  color: var(--terra);
+}
+.letter-org { font-size: 13px; color: var(--dim); }
+
+/* Event sponsors. A plain roll of names, two up on a phone and wider on a
+   desktop, so a long list stays scannable without turning into a wall. */
+.evs-card { margin-bottom: 12px; }
+.evs-title {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dusk);
+  margin: 0 0 4px;
+}
+.evs-note { font-size: 13px; color: var(--dim); margin: 0 0 10px; }
+.evs-grid {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1px 14px;
+}
+.evs-name {
+  font-size: 14px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--edge);
+}
+
 /* Weather strip. Four tiles that also work as day pickers, so it earns the
    space instead of just decorating the top of the schedule. */
 .wx-card { margin-bottom: 14px; padding: 18px 14px 14px; }
@@ -921,9 +987,11 @@ const LS = {
    the event book. The book has not arrived, so that tab does not exist yet.
    It belongs first when it does, and nothing else has to move. */
 const TABS = [
+  { id: "welcome",   label: "Welcome" },
   { id: "agenda",    label: "Events Schedule" },
   { id: "guide",     label: "Event Book" },
   { id: "sponsors",  label: "Top Sponsors" },
+  { id: "evsponsors", label: "Event Sponsors" },
   { id: "teams",     label: "Teams" },
   { id: "scoring",   label: "Live Scoring" },
   { id: "area",      label: "Area Guide" },
@@ -1308,6 +1376,82 @@ function WeatherStrip({ days, activeId, onPick }) {
           : "Updated through the day. Highs and lows in Fahrenheit."}
       </div>
     </div>
+  );
+}
+
+/* ---------------------------------------------------------------- welcome */
+/* Jim Hinckley's letter, page 3 of the registration booklet. Carol asked for
+   it as the landing tab on Sep 28. It is a signed letter, so it is set as one
+   rather than broken into the label-and-detail rows the guide uses, and the
+   wording is his, not rewritten to the wall's voice. */
+function Welcome() {
+  const w = useJson("data/welcome.json");
+  if (w === undefined) return null;
+  if (!w) return <div className="empty">The welcome letter is on its way.</div>;
+  return (
+    <section>
+      <h2 className="t-display page-title">{w.title}</h2>
+      {w.eyebrow && <p className="page-sub">{w.eyebrow}</p>}
+      <div className="card roof letter">
+        {w.salutation && <p className="letter-salutation">{w.salutation}</p>}
+        {(w.body || []).map((t, i) => <p key={i}>{t}</p>)}
+        {w.quote && (
+          <blockquote className="letter-quote">
+            <div className="letter-quote-title">{w.quote.title}</div>
+            <div className="letter-quote-by">{w.quote.attribution}</div>
+            {(w.quote.lines || []).map((l, i) => (
+              <div className="letter-quote-line" key={i}>{l}</div>
+            ))}
+          </blockquote>
+        )}
+        {(w.closing || []).map((t, i) => <p key={i}>{t}</p>)}
+        {w.signature && (
+          <div className="letter-sign">
+            {w.signoff && <div className="letter-signoff">{w.signoff}</div>}
+            <div className="letter-name">
+              {w.signature.name}{w.signature.role ? ", " + w.signature.role : ""}
+            </div>
+            {(w.signature.orgs || []).map((o, i) => (
+              <div className="letter-org" key={i}>{o}</div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------- event sponsors */
+/* Donny, Sep 28. The companies backing the event, from page 24 of the
+   booklet. Deliberately a separate tab from Top Sponsors: that one ranks
+   members by how many full privilege members they brought in, and folding
+   brands into it would blur the thing the members are being thanked for.
+
+   Names only. The logos are embedded artwork in the booklet and reproducing
+   a trademark is Carol's call, not a technical one. If cleared, each sponsor
+   gains a logo field and this grid becomes images. */
+function EventSponsors() {
+  const d = useJson("data/event-sponsors.json");
+  if (d === undefined) return null;
+  if (!d || !(d.groups || []).length) {
+    return <div className="empty">The sponsor list is being finalized. Check back soon.</div>;
+  }
+  return (
+    <section>
+      <h2 className="t-display page-title">Event Sponsors</h2>
+      {d.intro && <p className="page-sub">{d.intro}</p>}
+      {d.groups.map((g) => (
+        <div className="card roof evs-card" key={g.id}>
+          <h3 className="evs-title">{g.title}</h3>
+          {g.note && <p className="evs-note">{g.note}</p>}
+          <ul className="evs-grid">
+            {(g.sponsors || []).map((sp, i) => (
+              <li className="evs-name" key={i}>{sp.name}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
   );
 }
 
@@ -2655,7 +2799,9 @@ function AdminPanel({ onExit }) {
 
 /* -------------------------------------------------------------------- app */
 function App() {
-  const [tab, setTab] = useState("agenda");
+  /* Open on whatever is first in TABS, so the landing view follows the tab
+     order instead of drifting from it. */
+  const [tab, setTab] = useState(TABS[0].id);
   const [admin, setAdmin] = useState(() => lsGet(LS.admin, false));
   const [gate, setGate] = useState(false);
   const settings = useNode("settings");
@@ -2671,7 +2817,7 @@ function App() {
   }, [tab, visibleTabs.map((t) => t.id).join(",")]);
 
   const enterAdmin = () => { setAdmin(true); lsSet(LS.admin, true); setGate(false); setTab("admin"); };
-  const exitAdmin = () => { setAdmin(false); lsSet(LS.admin, false); setTab("agenda"); };
+  const exitAdmin = () => { setAdmin(false); lsSet(LS.admin, false); setTab(TABS[0].id); };
 
   return (
     <React.Fragment>
@@ -2702,10 +2848,12 @@ function App() {
       </nav>
 
       <main className="shell">
+        {tab === "welcome" && <Welcome />}
         {tab === "agenda" && <Agenda />}
         {tab === "scoring" && <LiveScoring />}
         {tab === "teams" && <Teams />}
         {tab === "sponsors" && <Sponsors admin={admin} />}
+        {tab === "evsponsors" && <EventSponsors />}
         {tab === "guide" && <Guide />}
         {tab === "area" && <AreaGuide />}
         {tab === "photos" && <Gallery admin={admin} />}
