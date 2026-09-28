@@ -87,9 +87,11 @@ const PLAYER_RENAMES = {
    mobile after they came off the job. Omitted details render as absent, and
    the rebuild warns about them every time until they are filled in. */
 const CAPTAIN_OVERRIDES = {
-  /* Jim, Sep 28. Logan Cook is not in the workbook, so there is no mobile or
-     email for him yet. Matt LoPresti's were deliberately not carried over. */
-  "spanish hills club": { name: "Logan Cook" },
+  /* Jim, Sep 28. Logan Cook is not in the workbook. Mobile came off his
+     player profile sheet. His email on that sheet is a personal address, not
+     a club one, so it is held back pending a work address. Nothing else from
+     that sheet belongs anywhere near this repo. */
+  "spanish hills club": { name: "Logan Cook", mobile: "(424) 234-0920" },
 };
 
 const TOP_SPONSOR_MIN = 4;
@@ -185,7 +187,7 @@ for (const r of pros) {
     if (over.email) e.captain.email = over.email.toLowerCase();
     const gaps = ["mobile", "email"].filter((k) => !e.captain[k]);
     warnings.push(`captain replaced: ${from} / ${was} -> ${over.name}` +
-      (gaps.length ? `. NO ${gaps.join(" OR ").toUpperCase()} YET, so the card shows a name only` : ""));
+      (gaps.length ? `. STILL MISSING: ${gaps.join(" and ").toUpperCase()}` : ""));
     continue;
   }
 
