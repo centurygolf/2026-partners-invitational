@@ -909,12 +909,23 @@ const LS = {
 };
 
 /* Donny's seven, in his order. Sep 15. */
+/* Carol's order, Sep 28. Donny set the original list and its names on Sep 15,
+   so tell him before this ships anywhere beyond the wall.
+
+   The ids are load bearing and must not move. Each one picks the component
+   that renders, and each is a key under settings/tabs in Firebase, so
+   renaming an id would blank a tab and strand its visibility switch. Labels
+   and order are the only things that change here.
+
+   Carol's list opens with a Welcome tab built from Jim's letter, page 3 of
+   the event book. The book has not arrived, so that tab does not exist yet.
+   It belongs first when it does, and nothing else has to move. */
 const TABS = [
-  { id: "agenda",    label: "Agenda" },
-  { id: "scoring",   label: "Live Scoring" },
-  { id: "teams",     label: "Teams" },
+  { id: "agenda",    label: "Events Schedule" },
+  { id: "guide",     label: "Event Book" },
   { id: "sponsors",  label: "Top Sponsors" },
-  { id: "guide",     label: "Program Guide" },
+  { id: "teams",     label: "Teams" },
+  { id: "scoring",   label: "Live Scoring" },
   { id: "area",      label: "Area Guide" },
   { id: "photos",    label: "Photos" },
   { id: "questions", label: "Questions" },
@@ -1311,7 +1322,7 @@ function Agenda() {
   const active = agenda.days.find((d) => d.id === dayId) || agenda.days[0];
   return (
     <section>
-      <h2 className="t-display page-title">Agenda</h2>
+      <h2 className="t-display page-title">Events Schedule</h2>
       <p className="page-sub">The schedule for your stay.</p>
       <WeatherStrip days={agenda.days} activeId={active.id} onPick={setDayId} />
       <div className="day-pills">
@@ -2276,7 +2287,7 @@ function Guide() {
   const docs = data?.documents || [];
   return (
     <section>
-      <h2 className="t-display page-title">Event Program Guide</h2>
+      <h2 className="t-display page-title">Event Book</h2>
       <p className="page-sub">{data?.intro}</p>
       <InfoSections sections={data?.sections} />
       {docs.length > 0 && (

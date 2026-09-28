@@ -410,9 +410,33 @@ the contact details do not end up in search results.
 
 ## The eight tabs
 
-Donny set this list on Sep 15. His order, his names. Do not add, rename, or
-reorder a tab without him. Jim added Live Scoring on Sep 19, in second place
-so it is reachable without scrolling the strip on a phone.
+Donny set this list on Sep 15. **Carol reordered and renamed it on Sep 28**
+and Jim approved, so Donny's original order is gone. Still do not add, rename
+or reorder without checking with both of them.
+
+Carol's order is Events Schedule, Event Book, Top Sponsors, Teams, Live
+Scoring, Area Guide, Photos, Questions. "Agenda" became **Events Schedule**
+and "Program Guide" became **Event Book**. Page headings follow the tab names.
+
+**The tab ids did not move and must not.** Each id picks the component that
+renders AND is a key under `settings/tabs` in Firebase. Renaming `guide` to
+`book` would blank that tab and strand its visibility switch. Labels and
+order are the only safe things to change.
+
+**Live Scoring fell from second to fifth**, which undoes the reason Jim put it
+second on Sep 19. Measured at 375px, it now sits 347px off the right edge and
+needs a horizontal swipe past almost two tabs. That is the worst place for it
+on a tournament morning. Flagged to Jim on Sep 28.
+
+**Two tabs Carol and Donny asked for do not exist yet**, both blocked on
+content that has not arrived:
+- **Welcome**, first in Carol's list, built from Jim's welcome letter on page
+  3 of the event book. The book has not been sent. It belongs at position one
+  and nothing else has to move when it lands.
+- **Event Sponsors**, asked for by Donny on Sep 28, a table of the companies
+  sponsoring the event. This is NOT Top Sponsors, which is members ranked by
+  how many new members they brought in. No event sponsor list has been
+  supplied. Do not populate it from the Top Sponsors sheet.
 
 | Tab | Function | Data source |
 |---|---|---|
@@ -549,6 +573,29 @@ All eleven names were read off the artwork. Ten decoded from the PDF text.
 Jamie & Todd Spitzer would not, so page 2 was split out with JXA and PDFKit,
 rendered with `qlmanage -t -s 2000`, and read by eye. Page order was confirmed
 against page 11, Rochelle & Blake Sherman.
+
+**A captain change replaces the whole contact block.** `CAPTAIN_OVERRIDES` in
+tools/build-roster.js is keyed on the normalised club name. It swaps the name,
+the mobile and the email together, and never carries the old captain's details
+under the new name. The captain block is the only place this wall publishes a
+direct mobile and a work email, so leaving Matt LoPresti's number under Logan
+Cook's name would have pointed attendees at the wrong person and kept
+publishing Matt's mobile after he came off the job.
+
+Currently: **Spanish Hills Club, Logan Cook** (Jim, Sep 28), replacing Matt
+LoPresti. Logan is not in the workbook, so there is no mobile or email for him
+and his card shows a name only. The rebuild warns about the gap every run.
+**Get his mobile and work email.** An override naming a club the pro sheet
+does not list also warns, so a typo cannot fail quietly.
+
+**A player substitution is not a rename.** `PLAYER_RENAMES` takes two shapes.
+A string keeps the workbook's sponsored count, which is right when a household
+keeps the spot, as with the Sages. An object `{ name, sponsored }` is for a
+different person taking the spot, and their count has to be given because
+sponsorships are not transferable. Currently: **Steve Le** replaces Trey
+Showalter at Balcones (Jim, Sep 25). Trey keeps his Platinum credit and his 7
+on Top Sponsors, which is correct, and Steve shows the default 1 because his
+own figure has not been supplied.
 
 **Corrections to the workbook live in the builder, not the JSON.** The master
 xlsx still carries the old values, so a hand edit to data/teams.json is undone
