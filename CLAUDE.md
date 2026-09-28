@@ -420,8 +420,10 @@ Donny set this list on Sep 15. **Carol reordered and renamed it on Sep 28**
 and Jim approved, so Donny's original order is gone. Still do not add, rename
 or reorder without checking with both of them.
 
-Carol's order is Events Schedule, Event Book, Top Sponsors, Teams, Live
-Scoring, Area Guide, Photos, Questions. "Agenda" became **Events Schedule**
+Current order is Welcome, Events Schedule, Event Book, Brand Sponsors, Top
+Sponsors, Teams, Live Scoring, Area Guide, Photos, Questions. Carol set the
+spine of it on Sep 28; Jim added Welcome from the booklet and placed the two
+sponsor tabs, brands before members, the same day. "Agenda" became **Events Schedule**
 and "Program Guide" became **Event Book**. Page headings follow the tab names.
 
 **The tab ids did not move and must not.** Each id picks the component that
