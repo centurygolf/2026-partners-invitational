@@ -991,7 +991,7 @@ const TABS = [
   { id: "agenda",    label: "Events Schedule" },
   { id: "guide",     label: "Event Book" },
   { id: "sponsors",  label: "Top Sponsors" },
-  { id: "evsponsors", label: "Event Sponsors" },
+  { id: "evsponsors", label: "Brand Sponsors" },
   { id: "teams",     label: "Teams" },
   { id: "scoring",   label: "Live Scoring" },
   { id: "area",      label: "Area Guide" },
@@ -1421,11 +1421,14 @@ function Welcome() {
   );
 }
 
-/* -------------------------------------------------------- event sponsors */
+/* -------------------------------------------------------- brand sponsors */
 /* Donny, Sep 28. The companies backing the event, from page 24 of the
-   booklet. Deliberately a separate tab from Top Sponsors: that one ranks
-   members by how many full privilege members they brought in, and folding
-   brands into it would blur the thing the members are being thanked for.
+   booklet, which titles the page EVENT AND BRAND SPONSORS. The tab says
+   Brand Sponsors (Jim, Sep 28) so that nobody reads it as the member page.
+   Deliberately separate from Top Sponsors: that one ranks members by how many
+   full privilege members they brought in, and folding brands into it would
+   blur the thing the members are being thanked for. The id stays evsponsors,
+   because it drives the render and is a key under settings/tabs.
 
    Names only. The logos are embedded artwork in the booklet and reproducing
    a trademark is Carol's call, not a technical one. If cleared, each sponsor
@@ -1438,7 +1441,7 @@ function EventSponsors() {
   }
   return (
     <section>
-      <h2 className="t-display page-title">Event Sponsors</h2>
+      <h2 className="t-display page-title">Brand Sponsors</h2>
       {d.intro && <p className="page-sub">{d.intro}</p>}
       {d.groups.map((g) => (
         <div className="card roof evs-card" key={g.id}>

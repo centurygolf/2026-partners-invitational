@@ -443,13 +443,17 @@ on a tournament morning. Flagged to Jim on Sep 28.
   in Yellowtail. **That is the one sanctioned exception to the Yellowtail
   ration**, because a signature is the one place a script face reads as
   meaning rather than decoration.
-- **Event Sponsors** is page 24, in data/event-sponsors.json, 28 names in the
+- **Brand Sponsors** is page 24, in data/event-sponsors.json, 28 names in the
   three groups the page uses: Hosts, Event and Brand Sponsors, and Compliments
-  of. It is a separate tab from Top Sponsors on purpose. Top Sponsors ranks
-  members by how many full privilege members they brought in, and folding
-  brands into it would blur what the members are being thanked for.
+  of. Donny asked for it as Event Sponsors; Jim renamed the tab to **Brand
+  Sponsors** the same day so nobody reads it as the member page. The tab id
+  stays `evsponsors` and the data file keeps its name, because the id drives
+  the render and is a key under settings/tabs. It is a separate tab from Top
+  Sponsors on purpose. Top Sponsors ranks members by how many full privilege
+  members they brought in, and folding brands into it would blur what the
+  members are being thanked for.
 
-**Names only on Event Sponsors, no logos.** The artwork is embedded in the
+**Names only on Brand Sponsors, no logos.** The artwork is embedded in the
 booklet and reproducing a trademark is Carol's call, not a technical one. If
 she clears it, add a logo field per sponsor and the grid becomes images.
 
@@ -468,7 +472,7 @@ moves the opening view with it.
 | Live Scoring | Golf Genius hand-off per round | data/scoring.json |
 | Teams | Club, captain contact, players | data/teams.json (GENERATED) |
 | Top Sponsors | Platinum and Gold members, posters | data/sponsors.json (GENERATED) |
-| Event Sponsors | Companies backing the event | data/event-sponsors.json |
+| Brand Sponsors | Companies backing the event | data/event-sponsors.json |
 | Program Guide | Venues, format, dress, travel, documents | data/guide.json |
 | Area Guide | La Quinta and Coachella Valley | data/area-guide.json |
 | Photos | Photo uploads with likes | Firebase photos/ |
