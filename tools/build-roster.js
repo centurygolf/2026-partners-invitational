@@ -87,11 +87,16 @@ const PLAYER_RENAMES = {
    mobile after they came off the job. Omitted details render as absent, and
    the rebuild warns about them every time until they are filled in. */
 const CAPTAIN_OVERRIDES = {
-  /* Jim, Sep 28. Logan Cook is not in the workbook. Mobile came off his
-     player profile sheet. His email on that sheet is a personal address, not
-     a club one, so it is held back pending a work address. Nothing else from
-     that sheet belongs anywhere near this repo. */
-  "spanish hills club": { name: "Logan Cook", mobile: "(424) 234-0920" },
+  /* Jim, Sep 28. Logan Cook is not in the workbook. Both of these came off
+     his player profile sheet. The email is his personal address rather than a
+     club one, which Jim chose deliberately after it was flagged. Nothing else
+     from that sheet belongs anywhere near this repo: it also carries his date
+     of birth, home address, emergency number and clothing sizes. */
+  "spanish hills club": {
+    name: "Logan Cook",
+    mobile: "(424) 234-0920",
+    email: "troutfishing0955@gmail.com",
+  },
 };
 
 const TOP_SPONSOR_MIN = 4;

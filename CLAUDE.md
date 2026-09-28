@@ -583,10 +583,20 @@ Cook's name would have pointed attendees at the wrong person and kept
 publishing Matt's mobile after he came off the job.
 
 Currently: **Spanish Hills Club, Logan Cook** (Jim, Sep 28), replacing Matt
-LoPresti. Logan is not in the workbook, so there is no mobile or email for him
-and his card shows a name only. The rebuild warns about the gap every run.
-**Get his mobile and work email.** An override naming a club the pro sheet
-does not list also warns, so a typo cannot fail quietly.
+LoPresti. Logan is not in the workbook. His mobile and email came off his
+player profile sheet, which Jim sent as a PDF. **That email is his personal
+Gmail, not a club address.** It was flagged as the one departure from the
+"work email" rule and Jim chose it deliberately, so leave it. Sylvania is the
+same shape, via the workbook rather than a decision. An override naming a club
+the pro sheet does not list warns, so a typo cannot fail quietly.
+
+**Player profile sheets are radioactive.** Logan's carried his date of birth,
+home address, emergency number, food allergies, clothing sizes and the full
+name on his licence. Only the name, mobile and email were taken. If another
+one arrives, take those three fields and nothing else, then grep the repo for
+the rest before publishing. Note the sheets use a subset font, so
+tools/pdftext.js drops characters: render with `qlmanage -t -s 2200` and read
+the numbers off the image instead of trusting the extraction.
 
 **A player substitution is not a rename.** `PLAYER_RENAMES` takes two shapes.
 A string keeps the workbook's sponsored count, which is right when a household
