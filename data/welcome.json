@@ -28,6 +28,9 @@
   "signature": {
     "name": "Jim Hinckley",
     "role": "CEO",
-    "orgs": ["Arnold Palmer Golf Management", "Century Golf Partners"]
+    "orgs": [
+      "Century Golf Partners",
+      "Arnold Palmer Golf Management"
+    ]
   }
 }

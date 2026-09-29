@@ -25,32 +25,8 @@
       ]
     },
     {
-      "id": "clubhouses",
-      "title": "The Other Clubhouses",
-      "items": [
-        {
-          "label": "Greg Norman Clubhouse",
-          "detail": "81-405 Kingston Heath. Wallabys WEST serves lunch 11 am to 3 pm.",
-          "phone": "760.564.3900"
-        },
-        {
-          "label": "Pete Dye Clubhouse",
-          "detail": "50200 Avenida Vista Bonita. Golf shop daily 6 am to 5 pm. Bunker Bar serves lunch 11 am to 3 pm.",
-          "phone": "760.564.7610"
-        },
-        {
-          "label": "Tournament Clubhouse",
-          "detail": "Ernie's Bar & Grill. Grab and go breakfast from 6 am, full breakfast 7 am to 11 am, bar until 8 pm."
-        },
-        {
-          "label": "The Citrus Club",
-          "detail": "Mandarina, La Quinta."
-        }
-      ]
-    },
-    {
       "id": "amenities",
-      "title": "At the Private Clubhouse",
+      "title": "PGAW – Private Clubhouse",
       "items": [
         {
           "label": "Golf Shop",
@@ -77,6 +53,30 @@
         {
           "label": "Kennedy's",
           "detail": "Lunch, first come first served."
+        }
+      ]
+    },
+    {
+      "id": "clubhouses",
+      "title": "The Other PGA West Clubhouses",
+      "items": [
+        {
+          "label": "Greg Norman Clubhouse",
+          "detail": "81-405 Kingston Heath. Wallabys WEST serves lunch 11 am to 3 pm.",
+          "phone": "760.564.3900"
+        },
+        {
+          "label": "Pete Dye Clubhouse",
+          "detail": "50200 Avenida Vista Bonita. Golf shop daily 6 am to 5 pm. Bunker Bar serves lunch 11 am to 3 pm.",
+          "phone": "760.564.7610"
+        },
+        {
+          "label": "Tournament Clubhouse",
+          "detail": "Ernie's Bar & Grill. Grab and go breakfast from 6 am, full breakfast 7 am to 11 am, bar until 8 pm."
+        },
+        {
+          "label": "The Citrus Club",
+          "detail": "Mandarina, La Quinta."
         }
       ]
     },

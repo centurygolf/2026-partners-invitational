@@ -7,7 +7,7 @@ Standing instructions for this repository. Read before acting in any session.
 ## The project
 
 A mobile web application serving as the live wall for the 18th Annual Partners
-Invitational, October 4 to 7, 2026, at PGA WEST in La Quinta, California, with
+Invitational, at PGA WEST in La Quinta, California, with
 lodging at the La Quinta Resort & Club. Attendees reach it by QR code. The
 audience is partners and owners, so the register is polished and upscale. The
 look is mid-century Palm Springs: light, airy, cream and aqua and mustard,
@@ -124,6 +124,25 @@ new project could not be created. A separate instance means separate data and
 separate rules. Nothing in this wall can read or write the membership wall's
 database. If the quota is ever freed, moving to a dedicated project is a one
 line change to `databaseURL` plus a rules deploy.
+
+**The masthead is Carol's stack, via Yolanda, Sep 29.** Top to bottom: the
+script greeting, "18th Annual" on its own line, the wordmark, then the venue
+and dates. Century Golf Partners came off the kicker, because the logo below
+already says whose event it is.
+
+**The wall bills the dates as October 4 to 6**, not 4 to 7. The event runs
+Sunday to Tuesday and Wednesday is departures. The Events Schedule still
+carries Wednesday, because people need their flight day on it. `agenda.dates`
+drives the masthead line and the meta description was changed to match.
+
+**The purple marquee band is off.** Yolanda asked for it on Sep 29. The text
+was archived to `settings/marqueeRetiredSep29` in Firebase and
+`settings/marquee` set to an empty string, which hides the band. Nothing in
+the code changed, so the admin marquee field still works: type into it during
+the event and the band comes back.
+
+**The starred footnote only shows on a day that has a starred event.**
+Wednesday is flights home and has none, so it renders nothing there.
 
 **Home screen identity.** The icon is the golfer from the event wordmark,
 recoloured to #0C547C (sampled from the silhouette Jim supplied) on the cream
