@@ -34,6 +34,7 @@ const TIER_ROWS = { Gold: [4, 5] };
 const CLUB_RENAMES = {
   "citrus club": "The Citrus Club",
   "huntington club": "The Huntington Club",
+  "valor club": "The Valor Club",
 };
 
 /* How the sponsor posters name each couple, which is spouse first. Taken

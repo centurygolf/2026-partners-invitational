@@ -660,11 +660,22 @@ Three is under TOP_SPONSOR_MIN, so Steve does not appear on that page.
 **Corrections to the workbook live in the builder, not the JSON.** The master
 xlsx still carries the old values, so a hand edit to data/teams.json is undone
 by the next rebuild. `CLUB_RENAMES` and `PLAYER_RENAMES` at the top of
-tools/build-roster.js are where a correction goes. Currently: Citrus and
-Huntington carry their legal names with the leading "The", and Ballantyne's
+tools/build-roster.js are where a correction goes. Currently: Citrus,
+Huntington and Valor carry their legal names with the leading "The" (Valor
+added Sep 29), and Ballantyne's
 golfer is Melissa Sage rather than Bob, the Sages having swapped. Club renames
 key on the normalised name, so they match whether or not a sheet wrote the
 "The", and they apply to the sponsor list as well as Teams.
+
+Two side effects of adding a "The". The club sorts under T on the Teams tab,
+which is already true of five others, and its generated id gains the prefix
+(valor-club became the-valor-club). Nothing keys off a team id: the Firebase
+`teams/` and `scores/` nodes belong to the parked leaderboard and are null.
+Sponsor slugs are person based, so no poster detaches.
+
+**Do not confuse The Valor Club with Valor.** The club is on Teams and Top
+Sponsors. "Valor" on the Brand Sponsors tab is a drinks brand from page 24 of
+the booklet and is a different thing entirely. It stays as it is.
 
 **A blank sponsored count becomes 1.** Yolanda, Sep 22: everyone in the field
 sponsored at least one member, so an empty cell in the workbook is a gap in
