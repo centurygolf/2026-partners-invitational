@@ -76,6 +76,13 @@ const PLAYER_RENAMES = {
      Platinum poster, which are his: sponsorships do not travel with the tee
      time. Three is below TOP_SPONSOR_MIN, so Steve does not join that page. */
   "Trey Showalter": { name: "Steve Le", sponsored: 3 },
+
+  /* The Oregon Golf Club, per page 20 of the final booklet, Sep 30. The
+     workbook still lists Kevin Dodds and Rudy Caffall; the book plays Nick
+     Footer and Cody Gibson. Neither has a sponsored count anywhere, so both
+     take the default and the rebuild prints them. */
+  "Kevin Dodds": { name: "Nick Footer", sponsored: null },
+  "Rudy Caffall": { name: "Cody Gibson", sponsored: null },
 };
 
 /* A club whose Team Captain Host has changed since the workbook was frozen.
@@ -170,6 +177,7 @@ const defaultedSponsors = [];
 const pros = sheet("Golf Pro Roster").slice(1);
 const playerRows = sheet("Player Profiles").slice(1);
 
+const substitutions = [];  // reported once the sponsor list is known
 const clubs = new Map();   // key -> { club, captain, players }
 function clubEntry(rawName, preferName) {
   const k = clubKey(rawName);
@@ -228,8 +236,9 @@ for (const r of playerRows) {
   const sponsored = own || 1;
   if (!own) defaultedSponsors.push(name + (substituted ? " (substitute)" : ""));
   if (substituted) {
-    warnings.push(`substitution: ${rawName} -> ${sub.name} on ${clean(r[0])}. ` +
-      `Top Sponsors still credits ${rawName}.`);
+    /* Only say the credit stays if it actually exists. Most substitutes
+       replace someone who was never on the Top Sponsors page at all. */
+    substitutions.push({ from: rawName, to: sub.name, club: clean(r[0]) });
   }
   clubEntry(r[0], false).players.push({ name, sponsored });
 }
@@ -329,6 +338,12 @@ if (defaultedSponsors.length) {
     defaultedSponsors.length + ":");
   defaultedSponsors.forEach((n) => console.log("  " + n));
 }
+for (const x of substitutions) {
+  const onPage = picked.some((p) => p.name.includes(x.from) || x.from.includes(p.name.split(" & ").pop()));
+  warnings.push(`substitution: ${x.from} -> ${x.to} on ${x.club}` +
+    (onPage ? `. Top Sponsors still credits ${x.from}, which is correct.` : "."));
+}
+
 if (warnings.length) {
   console.log("\nWARNINGS");
   warnings.forEach((w) => console.log("  ! " + w));

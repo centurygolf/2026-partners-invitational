@@ -601,15 +601,15 @@
       "club": "The Oregon Golf Club",
       "players": [
         {
+          "name": "Cody Gibson",
+          "sponsored": 1
+        },
+        {
           "name": "Jim McLoughlin",
           "sponsored": 1
         },
         {
-          "name": "Kevin Dodds",
-          "sponsored": 3
-        },
-        {
-          "name": "Rudy Caffall",
+          "name": "Nick Footer",
           "sponsored": 1
         },
         {

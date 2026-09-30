@@ -1,7 +1,7 @@
 {
-  "_note": "Live Scoring. Golf Genius runs scoring for this event. The ONLY URL shape that opens the Golf Genius app rather than a browser is https://www.golfgenius.com/deeplink_ggid?ggid=<GGID>, confirmed against their apple-app-site-association and assetlinks.json on Sep 15. Put each round's GGID below and the buttons light up. Leave it null and the round shows a clearly labelled placeholder.",
+  "_note": "Live Scoring. Golf Genius runs scoring for this event. The ONLY URL shape that opens the Golf Genius app rather than a browser is https://www.golfgenius.com/deeplink_ggid?ggid=<GGID>, confirmed against their apple-app-site-association and assetlinks.json on Sep 15. PRTINV26 is printed on page 14 of the final registration booklet as the GGID to type into the Golf Genius app, and it is the same for both rounds. Leave a ggid null and that round shows a Coming Soon placeholder instead of a dead button.",
   "intro": "Scoring runs in Golf Genius. Tap your round to open your scorecard.",
-  "appNote": "Opens the Golf Genius app if you have it installed, otherwise your browser.",
+  "appNote": "Opens the Golf Genius app if you have it installed, otherwise your browser. The code is PRTINV26 if you are asked for it.",
   "rounds": [
     {
       "id": "r1",
@@ -10,7 +10,7 @@
       "date": "2026-10-05",
       "course": "Nicklaus Private",
       "format": "Two-person scramble",
-      "ggid": null
+      "ggid": "PRTINV26"
     },
     {
       "id": "r2",
@@ -19,7 +19,7 @@
       "date": "2026-10-06",
       "course": "Palmer Private",
       "format": "Two-person shamble",
-      "ggid": null
+      "ggid": "PRTINV26"
     }
   ],
   "leaderboardUrl": null
