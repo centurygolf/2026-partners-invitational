@@ -525,12 +525,10 @@ Two gaps were left open rather than guessed. Eric gave the men's tees and said
 nothing about the women's, and he gave a scoring code for Monday and none for
 Tuesday. **Do not fill either in without asking him.**
 
-**PRTINV26 is printed, not wired.** It shows as text in Format of Play. It is
-NOT in data/scoring.json, because a GGID that turns out to be wrong gives 125
-partners a button to a dead page, and Golf Genius serves the same client-side
-page for a real code and for nonsense, so it cannot be validated from here.
-Confirm with Eric or Amy whether PRTINV26 is the deeplink GGID and whether it
-differs per round, then fill in `ggid` and the Coming Soon chips go away.
+**PRTINV26 is wired, as of Sep 30.** Page 14 of the final booklet settles it:
+"You may follow the live leaderboard by using the Golf Genius App and clicking
+on GGID and typing: PRTINV26." One code, both rounds. It is in
+data/scoring.json and both Live Scoring buttons are live.
 
 **The stale site is still up.** `creightonjames-jpg.github.io/2026-partners-invitational/`
 still serves and is now a week behind: no posters, no weather, still says
@@ -567,11 +565,36 @@ Partners read this wall, and a gap they are promised is easier to take than a
 gap they are shown. The flag name stayed as it is so nothing in the data files
 had to move.
 
-**The Event Book is a Coming Soon document.** It is not final until about
-Sep 28, but the link went out before that, so `documents` in data/guide.json
-carries an entry with `url: null` and `placeholder: true`. That renders the
-title with a chip instead of a dead link. **When the book arrives, drop the PDF
-in assets/ and set `url`. The chip disappears on its own.**
+**The Event Book is a live download.** The final booklet arrived Sep 30 and
+is served at `assets/book/2026-partners-invitational-event-book.pdf`, 7.6MB,
+28 pages, linked from the Documents block on the Event Book tab. The Coming
+Soon chip removed itself when `url` was set.
+
+**publish.js used to drop it silently.** `SKIP_DIRS` matched a bare folder
+NAME at any depth, so `assets/docs/` was excluded along with the private
+`docs/` folder and the PDF 404'd after a publish that printed success. The
+walker now matches the path from the repo root, and the book lives in
+`assets/book/` so the two cannot be confused. **Check that a new asset
+actually serves after publishing. A reported success is not proof.**
+
+**The final booklet is the source of truth for format.** Pages 14 and 15
+carry more than Eric's note did, and all of it is now on the Event Book tab:
+four drives per player minimum both rounds, gross double bogey max on Monday
+and net double bogey on Tuesday, Tuesday men on **modified** blue tees, and
+**ladies on the red tees both days**, which was the open question. The Monday
+Shoot-Out is three holes with two groups split by combined handicap index,
+four teams advancing from each group after the first hole and two after the
+second. The Tuesday Shoot-Out is holes **10 and 18**. A shared "Shoot-Out
+rules, both days" item carries the chip-off, putting order and announcing
+rules. The 35/15 and 70% allowances are NOT in the booklet and still come
+from the original agenda docx.
+
+**The booklet QR points through a shortener.** Page 2 prints a QR that decodes
+to `https://qr-codes.io/GZPQaU`, a Uniqode link that forwards to the wall.
+It resolves correctly, but it is a third party in front of a printed code
+that cannot be reissued, and it fires a Facebook pixel and a Google Ads tag
+on the way through. If the wall ever moves, that redirect has to be updated
+by whoever owns the Uniqode account, not here.
 
 **Live Scoring needs GGIDs.** `data/scoring.json` holds one per round. Until
 they arrive each round shows a labelled placeholder instead of a dead button.
