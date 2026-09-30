@@ -16,7 +16,12 @@ const REPO = "2026-partners-invitational";
 const ROOT = "/Users/creighton_macbook_2/Documents/Claude Code/Projects/cgp-partners-invitational";
 const BRANCH = "main";
 
-/* Everything except the internal docs/ folder, per .gitignore. */
+/* Everything except the internal docs/ folder, per .gitignore.
+
+   These are paths from the REPO ROOT, not bare folder names. Matching on the
+   name alone dropped assets/docs/ on Sep 30, which meant the event book
+   404'd after a publish that reported success. A skip that silently removes
+   a file is the worst kind, so keep these anchored. */
 const SKIP_DIRS = new Set(["docs", ".git", "node_modules", "confidential", "incoming"]);
 const SKIP_FILES = new Set([".DS_Store"]);
 
@@ -25,7 +30,7 @@ function walk(dir, base = "") {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const rel = base ? base + "/" + entry.name : entry.name;
     if (entry.isDirectory()) {
-      if (SKIP_DIRS.has(entry.name)) continue;
+      if (SKIP_DIRS.has(rel)) continue;
       out.push(...walk(path.join(dir, entry.name), rel));
     } else {
       if (SKIP_FILES.has(entry.name)) continue;
