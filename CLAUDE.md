@@ -565,6 +565,18 @@ Partners read this wall, and a gap they are promised is easier to take than a
 gap they are shown. The flag name stayed as it is so nothing in the data files
 had to move.
 
+**The Event Book tab is only the download, as of Oct 1.** Jim cut the info
+sections: everything they held is in the booklet, and two copies means two
+copies to keep correct. The nine sections are parked in data/guide.json under
+`sectionsRetiredOct1` and render nowhere. **Rename that key back to
+`sections` and they return**, Format of Play and all. `InfoSections` is still
+wired up for exactly that reason.
+
+One thing went with them: **"Make This Website an App On Your Home Screen"**.
+That guidance now lives only on page 2 of the printed booklet. It is the one
+section that does not work as a PDF, since someone reads it on the phone in
+order to install the wall. Flagged to Jim Oct 1.
+
 **The Event Book is a live download.** The final booklet arrived Sep 30 and
 is served at `assets/book/2026-partners-invitational-event-book.pdf`, 7.6MB,
 28 pages, linked from the Documents block on the Event Book tab. The Coming

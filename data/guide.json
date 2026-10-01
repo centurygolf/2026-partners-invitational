@@ -1,7 +1,14 @@
 {
-  "_note": "The Event Program Guide. This is the old concierge.json content plus the format of play and any documents. Source: 2026 Partners final agenda for live wall (1).docx, the Sep 15 update. Still open: Who to Call, pending Team Captain Host names (ROADMAP P1.6). documents[] shows on the Program Guide; an entry with url:null and placeholder:true renders a Coming Soon chip instead of a dead link.",
-  "intro": "Everything you need for the week, in one place.",
-  "sections": [
+  "_note": "The Event Program Guide. This is the old concierge.json content plus the format of play and any documents. Source: 2026 Partners final agenda for live wall (1).docx, the Sep 15 update. Still open: Who to Call, pending Team Captain Host names (ROADMAP P1.6). documents[] shows on the Program Guide; an entry with url:null and placeholder:true renders a Coming Soon chip instead of a dead link. Oct 1: the tab is the download and nothing else. The nine info sections are parked under sectionsRetiredOct1 and render nowhere. Rename that key back to sections to restore them. Everything they said is in the booklet.",
+  "intro": "The full booklet for the week.",
+  "documents": [
+    {
+      "title": "Event Book",
+      "detail": "Tap to open it. 7.6MB, so grab it on good wifi before you travel.",
+      "url": "assets/book/2026-partners-invitational-event-book.pdf"
+    }
+  ],
+  "sectionsRetiredOct1": [
     {
       "id": "homescreen",
       "title": "Make This Website an App On Your Home Screen",
@@ -157,13 +164,6 @@
           "detail": "Every club captain, with their mobile and email, is on the Teams tab. They are your first call for anything during the week."
         }
       ]
-    }
-  ],
-  "documents": [
-    {
-      "title": "Event Book",
-      "detail": "The full booklet for the week. Tap to open it, 7.6MB.",
-      "url": "assets/book/2026-partners-invitational-event-book.pdf"
     }
   ]
 }

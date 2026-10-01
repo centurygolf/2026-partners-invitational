@@ -323,6 +323,24 @@ a { color: var(--pool-deep); }
 }
 
 /* ----------------------------------------------------------------- pills */
+/* The Event Book tab is a single download, so the link carries the page
+   rather than sitting as one row in a list. */
+.book-card { margin-top: 4px; padding: 20px 18px; }
+.book-doc + .book-doc { margin-top: 16px; border-top: 1px solid var(--edge); padding-top: 16px; }
+.book-link {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pool-deep);
+  text-decoration: none;
+  border-bottom: 2px solid var(--mustard);
+  padding-bottom: 2px;
+}
+.book-link.is-pending { color: var(--dim); border-bottom-color: var(--edge); }
+.book-detail { font-size: 14px; color: var(--dim); margin-top: 10px; line-height: 1.5; }
+
 /* The welcome letter. Slightly looser than the rest of the wall, because it
    is a page of prose rather than a list of facts. */
 .letter { padding: 22px 18px 18px; }
@@ -2437,19 +2455,23 @@ function Guide() {
     <section>
       <h2 className="t-display page-title">Event Book</h2>
       <p className="page-sub">{data?.intro}</p>
+      {/* The tab is the download. InfoSections still renders if sections ever
+          come back, which is why the guard is on the data and not removed. */}
       <InfoSections sections={data?.sections} />
       {docs.length > 0 && (
-        <div className="card roof roof-mustard" style={{ marginTop: 12 }}>
-          <h3 className="t-display" style={{ fontSize: 15, letterSpacing: "0.14em", margin: "0 0 4px" }}>
-            Documents
-          </h3>
+        <div className="card roof roof-mustard book-card">
           {docs.map((d, i) => (
-            <div className="con-item" key={i}>
-              <div className="con-label">
-                {d.url ? <a href={d.url} target="_blank" rel="noopener">{d.title}</a> : d.title}
-                {" "}{d.placeholder && <PhChip />}
-              </div>
-              {d.detail && <div className="con-detail">{d.detail}</div>}
+            <div className="book-doc" key={i}>
+              {d.url ? (
+                <a className="book-link" href={d.url} target="_blank" rel="noopener">
+                  {d.title}
+                </a>
+              ) : (
+                <span className="book-link is-pending">
+                  {d.title} {d.placeholder && <PhChip />}
+                </span>
+              )}
+              {d.detail && <div className="book-detail">{d.detail}</div>}
             </div>
           ))}
         </div>
