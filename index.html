@@ -406,6 +406,11 @@ a { color: var(--pool-deep); }
 .book-link.is-pending { color: var(--dim); border-bottom-color: var(--edge); }
 .book-detail { font-size: 14px; color: var(--dim); margin-top: 10px; line-height: 1.5; }
 
+/* A round card can carry two buttons now, so they need room between them,
+   and the Round 2 caveat needs to read as a caveat. */
+.score-card .score-btn + .score-btn { margin-top: 8px; }
+.score-note { font-size: 13px; color: var(--dim); margin-top: 9px; line-height: 1.45; }
+
 /* The welcome letter. Slightly looser than the rest of the wall, because it
    is a page of prose rather than a list of facts. */
 .letter { padding: 22px 18px 18px; }
@@ -1755,6 +1760,18 @@ function LiveScoring() {
                 <div className="score-pending">
                   Scoring opens here on the morning of the round. <PhChip />
                 </div>
+              )}
+              {/* Two different things. The button above hands off to the Golf
+                  Genius app for your own card. This one is their public web
+                  leaderboard, which needs no app and no login. */}
+              {r.leaderboard && (
+                <a className="btn btn-quiet score-btn" href={r.leaderboard}
+                  target="_blank" rel="noopener">
+                  Live leaderboard
+                </a>
+              )}
+              {r.leaderboardNote && (
+                <div className="score-note">{r.leaderboardNote}</div>
               )}
             </div>
           );

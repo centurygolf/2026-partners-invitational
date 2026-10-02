@@ -1,6 +1,6 @@
 {
-  "_note": "Live Scoring. Golf Genius runs scoring for this event. The ONLY URL shape that opens the Golf Genius app rather than a browser is https://www.golfgenius.com/deeplink_ggid?ggid=<GGID>, confirmed against their apple-app-site-association and assetlinks.json on Sep 15. PRTINV26 is printed on page 14 of the final registration booklet as the GGID to type into the Golf Genius app, and it is the same for both rounds. Leave a ggid null and that round shows a Coming Soon placeholder instead of a dead button.",
-  "intro": "Scoring runs in Golf Genius. Tap your round to open your scorecard.",
+  "_note": "Live Scoring. Golf Genius runs scoring for this event. The ONLY URL shape that opens the Golf Genius app rather than a browser is https://www.golfgenius.com/deeplink_ggid?ggid=<GGID>, confirmed against their apple-app-site-association and assetlinks.json on Sep 15. PRTINV26 is printed on page 14 of the final registration booklet as the GGID to type into the Golf Genius app, and it is the same for both rounds. Leave a ggid null and that round shows a Coming Soon placeholder instead of a dead button. Oct 2: leaderboard links from Eric Gray. These are the Golf Genius PORTAL, a public web leaderboard that needs no app, which is a different thing from the ggid deeplink above. Both rounds live on one portal page and Round 2 appears Tuesday via the page's own round toggle, so r2 deliberately carries no round_id.",
+  "intro": "Scoring runs in Golf Genius. Open your own scorecard, or follow the live leaderboard in your browser.",
   "appNote": "Opens the Golf Genius app if you have it installed, otherwise your browser. The code is PRTINV26 if you are asked for it.",
   "rounds": [
     {
@@ -10,7 +10,8 @@
       "date": "2026-10-05",
       "course": "Nicklaus Private",
       "format": "Two-person scramble",
-      "ggid": "PRTINV26"
+      "ggid": "PRTINV26",
+      "leaderboard": "https://www.golfgenius.com/pages/13069510434925615385?no_header=true&round_id=13069510471533500643"
     },
     {
       "id": "r2",
@@ -19,7 +20,9 @@
       "date": "2026-10-06",
       "course": "Palmer Private",
       "format": "Two-person shamble",
-      "ggid": "PRTINV26"
+      "ggid": "PRTINV26",
+      "leaderboard": "https://www.golfgenius.com/pages/13069510434925615385?no_header=true",
+      "leaderboardNote": "Round 2 opens Tuesday morning once play is under way. Until then this shows Round 1. Use the round toggle on the page to switch."
     }
   ],
   "leaderboardUrl": null

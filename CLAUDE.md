@@ -549,6 +549,30 @@ Two gaps were left open rather than guessed. Eric gave the men's tees and said
 nothing about the women's, and he gave a scoring code for Monday and none for
 Tuesday. **Do not fill either in without asking him.**
 
+**Two different Golf Genius links, do not merge them.** Each round card
+carries both:
+
+- **Open my scorecard** is the `deeplink_ggid` URL with PRTINV26. It hands off
+  to the Golf Genius APP, which is where a player keeps their own card.
+- **Live leaderboard** is the Golf Genius PORTAL, a public web page that
+  needs no app and no login. Eric Gray sent these on Oct 2 and they live in
+  `rounds[].leaderboard`.
+
+Both rounds share one portal page, `/pages/13069510434925615385`. Round 1
+carries its `round_id`; **Round 2 deliberately carries none**, because Eric
+says Round 2 only appears Tuesday morning once play starts and viewers pick
+it with the toggle on the page. Until then the Round 2 button shows Round 1,
+which `rounds[].leaderboardNote` says on the card.
+
+The portal sends `x-frame-options: ALLOWALL`, so it COULD be embedded, and
+the `no_header=true` in Eric's links is there for exactly that. It is not
+embedded, for two reasons: an iframe is a fixed-height inner scroll
+container, which is a hard rule here, and a third party page on venue wifi
+that loads slowly makes the tab look broken. Ask Jim before changing that.
+
+The standalone `leaderboardUrl` block at the foot of the tab is null now, or
+it would say the same thing a third time.
+
 **PRTINV26 is wired, as of Sep 30.** Page 14 of the final booklet settles it:
 "You may follow the live leaderboard by using the Golf Genius App and clicking
 on GGID and typing: PRTINV26." One code, both rounds. It is in
