@@ -71,6 +71,9 @@ const SPONSOR_RENAMES = {
    sponsored seven people keeps that credit whether or not he tees it up. */
 const PLAYER_RENAMES = {
   "Bob Sage": "Melissa Sage",
+  /* Jim, Oct 2. El Camino. Note the booklet page 19 prints "Geoff Parker",
+     so the printed book and the wall disagree on this one by instruction. */
+  "Geoff Parker": "Geoff Park",
   /* Jim, Sep 25. Steve Le takes Trey Showalter's place on the Balcones team.
      His own count is 3, supplied by Jim on Sep 28. Trey keeps the 7 and his
      Platinum poster, which are his: sponsorships do not travel with the tee

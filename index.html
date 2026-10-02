@@ -272,16 +272,81 @@ a { color: var(--pool-deep); }
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--edge);
 }
-.nav-row {
+.nav-wrap {
+  position: relative;
   max-width: var(--shell-max);
   margin: 0 auto;
+}
+.nav-row {
   display: flex;
   gap: 8px;
   overflow-x: auto;
   padding: 10px 16px;
   scrollbar-width: none;
+  overscroll-behavior-x: contain;
 }
 .nav-row::-webkit-scrollbar { display: none; }
+
+/* Arrows. Hidden until there is somewhere to go, so a short strip looks
+   exactly as it did before. */
+.nav-arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 2;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--pool-deep);
+  background: none;
+}
+.nav-arrow-left { left: 0; }
+.nav-arrow-right { right: 0; }
+.nav.can-left .nav-arrow-left,
+.nav.can-right .nav-arrow-right { display: flex; }
+.nav-arrow span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding-bottom: 3px;
+  border-radius: 999px;
+  background: var(--paper);
+  border: 1px solid var(--edge);
+  box-shadow: 0 1px 4px rgba(46, 42, 36, 0.14);
+}
+.nav-arrow:hover span { background: var(--sand); }
+
+/* A fade under each arrow so the pills look cut off rather than finished. */
+.nav-wrap::before, .nav-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 52px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.nav-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--linen), rgba(247, 242, 232, 0));
+}
+.nav-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--linen), rgba(247, 242, 232, 0));
+}
+.nav.can-left .nav-wrap::before,
+.nav.can-right .nav-wrap::after { opacity: 1; }
+
 .nav-pill {
   flex: none;
   border: 1px solid var(--edge);
@@ -300,7 +365,7 @@ a { color: var(--pool-deep); }
   border-color: var(--pool-deep);
   color: var(--paper);
 }
-.nav-gear { margin-left: auto; }
+.nav-gear { margin-left: 4px; }
 
 /* ------------------------------------------------------------- sections */
 .page-title { font-size: 22px; letter-spacing: 0.16em; margin: 26px 0 4px; }
@@ -1395,6 +1460,117 @@ function WeatherStrip({ days, activeId, onPick }) {
           : "Updated through the day. Highs and lows in Fahrenheit."}
       </div>
     </div>
+  );
+}
+
+/* ------------------------------------------------------------- tab strip */
+/* Ten tabs plus the gear do not fit a phone, and after Carol's reorder they
+   did not fit a laptop either. The strip has always scrolled, but its
+   scrollbar is hidden, so a mouse with no horizontal wheel had no way to
+   reach the right hand end. Jeannette could open the gear on her phone and
+   not on her computer, which is the same bug seen from the other side:
+   Photos, Questions and staff access were all off the edge.
+
+   So: arrows that appear only when there is somewhere to go, a fade at each
+   live edge, the vertical wheel mapped to horizontal scroll, and the active
+   pill pulled into view when the tab changes. */
+function TabStrip({ tabs, tab, setTab, admin, onGear }) {
+  const rowRef = useRef(null);
+  const [edges, setEdges] = useState({ left: false, right: false });
+
+  const measure = useCallback(() => {
+    const el = rowRef.current;
+    if (!el) return;
+    /* A pixel of slack: fractional widths otherwise leave an arrow lit
+       at the end of the track with nothing left to scroll to. */
+    setEdges({
+      left: el.scrollLeft > 1,
+      right: el.scrollLeft + el.clientWidth < el.scrollWidth - 1,
+    });
+  }, []);
+
+  useEffect(() => {
+    measure();
+    const el = rowRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", measure, { passive: true });
+    window.addEventListener("resize", measure);
+    /* Fonts land after first paint and change every pill's width. */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    return () => {
+      el.removeEventListener("scroll", measure);
+      window.removeEventListener("resize", measure);
+    };
+  }, [measure, tabs.length]);
+
+  /* Keep the current tab on screen, including when code changes it. */
+  useEffect(() => {
+    const el = rowRef.current;
+    if (!el) return;
+    const active = el.querySelector(".nav-pill.active");
+    if (active) {
+      /* Only when it is actually out of view. Scrolling a pill that is
+         already visible moves the track off zero and lights an arrow that
+         points at nothing. */
+      const r = active.getBoundingClientRect(), box = el.getBoundingClientRect();
+      if (r.left < box.left + 4 || r.right > box.right - 4) {
+        el.scrollLeft += r.left - box.left - 56;
+      }
+    }
+    const t = setTimeout(measure, 350);
+    return () => clearTimeout(t);
+  }, [tab, measure]);
+
+  const nudge = (dir) => {
+    const el = rowRef.current;
+    if (!el) return;
+    el.scrollLeft += dir * Math.max(160, el.clientWidth * 0.7);
+    /* The scroll event is async, so an arrow would otherwise stay lit for a
+       frame after it has run out of track. Settle the state now. */
+    measure();
+  };
+
+  /* A plain mouse only has a vertical wheel. Lend it to the strip, but only
+     while there is actually somewhere to scroll, so the page still scrolls
+     normally over the nav on a short tab list. */
+  const onWheel = (e) => {
+    const el = rowRef.current;
+    if (!el || el.scrollWidth <= el.clientWidth) return;
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+    el.scrollLeft += e.deltaY;
+    e.preventDefault();
+  };
+
+  return (
+    <nav className={"nav" + (edges.left ? " can-left" : "") + (edges.right ? " can-right" : "")}
+      aria-label="Sections">
+      <div className="nav-wrap">
+        <button type="button" className="nav-arrow nav-arrow-left" aria-label="Scroll tabs left"
+          tabIndex={edges.left ? 0 : -1} onClick={() => nudge(-1)}>
+          <span aria-hidden="true">&#8249;</span>
+        </button>
+
+        <div className="nav-row" ref={rowRef} onWheel={onWheel}>
+          {tabs.map((t) => (
+            <button key={t.id}
+              className={"nav-pill" + (tab === t.id ? " active" : "")}
+              onClick={() => setTab(t.id)}>
+              {t.label}
+            </button>
+          ))}
+          <button className={"nav-pill nav-gear" + (tab === "admin" ? " active" : "")}
+            aria-label="Event staff"
+            onClick={onGear}>
+            &#9881;
+          </button>
+        </div>
+
+        <button type="button" className="nav-arrow nav-arrow-right" aria-label="Scroll tabs right"
+          tabIndex={edges.right ? 0 : -1} onClick={() => nudge(1)}>
+          <span aria-hidden="true">&#8250;</span>
+        </button>
+      </div>
+    </nav>
   );
 }
 
@@ -2856,22 +3032,8 @@ function App() {
 
       <Masthead agenda={agenda} />
 
-      <nav className="nav" aria-label="Sections">
-        <div className="nav-row">
-          {visibleTabs.map((t) => (
-            <button key={t.id}
-              className={"nav-pill" + (tab === t.id ? " active" : "")}
-              onClick={() => setTab(t.id)}>
-              {t.label}
-            </button>
-          ))}
-          <button className={"nav-pill nav-gear" + (tab === "admin" ? " active" : "")}
-            aria-label="Event staff"
-            onClick={() => (admin ? setTab("admin") : setGate(true))}>
-            &#9881;
-          </button>
-        </div>
-      </nav>
+      <TabStrip tabs={visibleTabs} tab={tab} setTab={setTab}
+        admin={admin} onGear={() => (admin ? setTab("admin") : setGate(true))} />
 
       <main className="shell">
         {tab === "welcome" && <Welcome />}

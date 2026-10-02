@@ -450,10 +450,30 @@ renders AND is a key under `settings/tabs` in Firebase. Renaming `guide` to
 `book` would blank that tab and strand its visibility switch. Labels and
 order are the only safe things to change.
 
-**Live Scoring fell from second to fifth**, which undoes the reason Jim put it
-second on Sep 19. Measured at 375px, it now sits 347px off the right edge and
-needs a horizontal swipe past almost two tabs. That is the worst place for it
-on a tournament morning. Flagged to Jim on Sep 28.
+**The strip has scroll arrows, Oct 2.** Ten tabs plus the gear overflow a
+phone and a laptop alike. The strip always scrolled, but its scrollbar is
+hidden, so a mouse with no horizontal wheel could not reach the right hand
+end. Jeannette could open the gear on her phone and not on her computer,
+which was that bug seen from the other side: Photos, Questions and staff
+access were all past the edge.
+
+`TabStrip` now shows a chevron at each edge, but only when there is track
+left in that direction, with a fade under it and the vertical wheel mapped to
+horizontal scroll. Two things that bit during the build, do not reintroduce
+them:
+
+- **No dynamic padding on the row.** Widening the padding when an arrow
+  appeared nudged scrollLeft off zero, which kept the arrow lit, which kept
+  the padding. The arrows overlay the pills instead, which is fine because an
+  arrow only ever shows on an edge you have already scrolled away from.
+- **No `scroll-behavior: smooth`.** With it set, assigning scrollLeft waits on
+  an animation that can simply never finish, and the arrows do nothing at
+  all. Reaching the gear matters more than the easing, so the jog is instant.
+  `measure()` is also called straight after a nudge, because the scroll event
+  is async and an arrow would otherwise stay lit a frame past the end.
+
+**Live Scoring is still fifth.** Jim has not moved it back. At 375px it is
+off the right edge, though now reachable with the arrow.
 
 **Both are built as of Sep 28**, from the registration booklet first draft:
 
@@ -499,8 +519,12 @@ moves the opening view with it.
 | Photos | Photo uploads with likes | Firebase photos/ |
 | Questions | Attendees ask, organizers answer | Firebase questions/ |
 
-**Questions is moderated by default.** A question goes to the organizers and
-publishes when it is answered. The asker sees their own marked as sent, via
+**Questions are public as of Oct 2.** Jim set `settings/qaPublic` to true, so
+every question appears the moment it is asked, answered or not. The code is
+unchanged and the admin toggle still flips it back.
+
+Previously, and still the behaviour when qaPublic is false: a question goes
+to the organizers and publishes when it is answered. The asker sees their own marked as sent, via
 `pinv_asked`. A room of partners should never see a column of unanswered
 questions. `settings/qaPublic` flips this to publish everything immediately,
 toggled from the admin panel.
@@ -698,7 +722,9 @@ by the next rebuild. `CLUB_RENAMES` and `PLAYER_RENAMES` at the top of
 tools/build-roster.js are where a correction goes. Currently: Citrus,
 Huntington and Valor carry their legal names with the leading "The" (Valor
 added Sep 29), and Ballantyne's
-golfer is Melissa Sage rather than Bob, the Sages having swapped. Club renames
+golfer is Melissa Sage rather than Bob, the Sages having swapped, and El
+Camino plays **Geoff Park** (Jim, Oct 2). Note page 19 of the booklet prints
+"Geoff Parker", so the printed book and the wall disagree there on purpose. Club renames
 key on the normalised name, so they match whether or not a sheet wrote the
 "The", and they apply to the sponsor list as well as Teams.
 
