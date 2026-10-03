@@ -625,6 +625,22 @@ That guidance now lives only on page 2 of the printed booklet. It is the one
 section that does not work as a PDF, since someone reads it on the phone in
 order to install the wall. Flagged to Jim Oct 1.
 
+**The Event Book link branches on standalone, Oct 2.** Added to the home
+screen there is no address bar and no back button, so opening a PDF stranded
+the reader in it with no way back to the wall short of force quitting. Jim hit
+this on a phone.
+
+`isStandalone()` checks `navigator.standalone` for iOS and the
+`display-mode` media query for everyone else. In a browser tab the link keeps
+`target="_blank"`, because a tab has a back button and can be closed. From
+the home screen it uses the `download` attribute instead: the file saves and
+the reader never leaves the app. The line under the link changes to match,
+since telling someone to "open" a file that silently downloads is its own
+small bug. **`download` only works same origin**, which is why the book is
+served from assets/book/ rather than linked anywhere else.
+
+Anything else on this wall that navigates away needs the same thought.
+
 **The Event Book is a live download.** The final booklet arrived Sep 30 and
 is served at `assets/book/2026-partners-invitational-event-book.pdf`, 7.6MB,
 28 pages, linked from the Documents block on the Event Book tab. The Coming

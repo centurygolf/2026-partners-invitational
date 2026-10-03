@@ -1231,6 +1231,19 @@ function useJson(url) {
   return val;
 }
 
+/* True when the wall is running from the home screen rather than in a
+   browser. iOS uses a non standard property; everyone else has the media
+   query. This matters for anything that navigates away: standalone has no
+   address bar and no back button, so a PDF opened there traps the reader
+   with no way home short of force quitting the app. */
+function isStandalone() {
+  try {
+    return window.navigator.standalone === true ||
+      window.matchMedia("(display-mode: standalone)").matches ||
+      window.matchMedia("(display-mode: fullscreen)").matches;
+  } catch { return false; }
+}
+
 function lsGet(key, fallback) {
   try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
   catch { return fallback; }
@@ -2627,6 +2640,7 @@ function Guide() {
   const data = useJson("data/guide.json");
   if (data === undefined) return null;
   const docs = data?.documents || [];
+  const standalone = isStandalone();
   return (
     <section>
       <h2 className="t-display page-title">Event Book</h2>
@@ -2639,15 +2653,34 @@ function Guide() {
           {docs.map((d, i) => (
             <div className="book-doc" key={i}>
               {d.url ? (
-                <a className="book-link" href={d.url} target="_blank" rel="noopener">
-                  {d.title}
-                </a>
+                /* In a browser tab, open it: there is a back button and a tab
+                   to close. Added to the home screen there is neither, so
+                   download instead. The file saves and the reader stays in
+                   the wall rather than being stranded in a PDF. The download
+                   attribute only works same origin, which this is. */
+                standalone ? (
+                  <a className="book-link" href={d.url}
+                    download={d.filename || "partners-invitational-event-book.pdf"}>
+                    {d.title}
+                  </a>
+                ) : (
+                  <a className="book-link" href={d.url} target="_blank" rel="noopener">
+                    {d.title}
+                  </a>
+                )
               ) : (
                 <span className="book-link is-pending">
                   {d.title} {d.placeholder && <PhChip />}
                 </span>
               )}
-              {d.detail && <div className="book-detail">{d.detail}</div>}
+              {/* One line, and it has to match what tapping actually does. */}
+              {d.url && standalone ? (
+                <div className="book-detail">
+                  Tap to save it. It goes to your files, so you stay here on the wall.
+                </div>
+              ) : (
+                d.detail && <div className="book-detail">{d.detail}</div>
+              )}
             </div>
           ))}
         </div>
