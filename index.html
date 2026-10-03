@@ -388,6 +388,26 @@ a { color: var(--pool-deep); }
 }
 
 /* ----------------------------------------------------------------- pills */
+/* The book, page by page. width and height are on the img so the page does
+   not jump around as lazy images arrive. */
+.book-pages { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+.book-page {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  background: var(--paper);
+}
+.book-file {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--dim);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* The Event Book tab is a single download, so the link carries the page
    rather than sitting as one row in a list. */
 .book-card { margin-top: 4px; padding: 20px 18px; }
@@ -2640,7 +2660,7 @@ function Guide() {
   const data = useJson("data/guide.json");
   if (data === undefined) return null;
   const docs = data?.documents || [];
-  const standalone = isStandalone();
+  const book = docs.find((d) => d.pages && d.pagePath);
   return (
     <section>
       <h2 className="t-display page-title">Event Book</h2>
@@ -2652,37 +2672,43 @@ function Guide() {
         <div className="card roof roof-mustard book-card">
           {docs.map((d, i) => (
             <div className="book-doc" key={i}>
-              {d.url ? (
-                /* In a browser tab, open it: there is a back button and a tab
-                   to close. Added to the home screen there is neither, so
-                   download instead. The file saves and the reader stays in
-                   the wall rather than being stranded in a PDF. The download
-                   attribute only works same origin, which this is. */
-                standalone ? (
-                  <a className="book-link" href={d.url}
-                    download={d.filename || "partners-invitational-event-book.pdf"}>
-                    {d.title}
-                  </a>
-                ) : (
-                  <a className="book-link" href={d.url} target="_blank" rel="noopener">
-                    {d.title}
-                  </a>
-                )
-              ) : (
+              {!d.url && (
                 <span className="book-link is-pending">
                   {d.title} {d.placeholder && <PhChip />}
                 </span>
               )}
-              {/* One line, and it has to match what tapping actually does. */}
-              {d.url && standalone ? (
-                <div className="book-detail">
-                  Tap to save it. It goes to your files, so you stay here on the wall.
-                </div>
-              ) : (
-                d.detail && <div className="book-detail">{d.detail}</div>
+              {d.detail && <div className="book-detail">{d.detail}</div>}
+              {/* The PDF is still here for anyone who wants the file itself.
+                  Quiet, because the pages below are the main way to read it,
+                  and on an installed phone this link is the one that strands
+                  people. Never the only route to the content. */}
+              {d.url && (
+                <a className="book-file" href={d.url} target="_blank" rel="noopener">
+                  Open the PDF in a browser
+                </a>
               )}
             </div>
           ))}
+        </div>
+      )}
+
+      {/* The book itself, as pages. No navigation, so nothing to come back
+          from. This exists because a PDF link breaks badly once the wall is
+          added to an iPhone home screen: standalone mode has no address bar
+          and no back button, and iOS ignores the download attribute there,
+          so the reader ends up stuck in the PDF. Images cannot do that. */}
+      {book && book.pages > 0 && (
+        <div className="book-pages">
+          {Array.from({ length: book.pages }, (_, i) => {
+            const num = String(i + 1).padStart(2, "0");
+            return (
+              <img className="book-page" key={num}
+                src={book.pagePath.replace("{n}", num)}
+                alt={"Event book, page " + (i + 1)}
+                width="1500" height="1941"
+                loading={i < 2 ? "eager" : "lazy"} decoding="async" />
+            );
+          })}
         </div>
       )}
     </section>

@@ -625,7 +625,38 @@ That guidance now lives only on page 2 of the printed booklet. It is the one
 section that does not work as a PDF, since someone reads it on the phone in
 order to install the wall. Flagged to Jim Oct 1.
 
-**The Event Book link branches on standalone, Oct 2.** Added to the home
+**The Event Book reads IN the tab, as page images. Oct 2.** This is the
+third attempt and the only one that works, so do not "simplify" it back to a
+link.
+
+What failed, in order: `target="_blank"` on the PDF, which in an installed
+iPhone app opens the file with no address bar and no back button and strands
+the reader. Then the `download` attribute, on the reasoning that saving beats
+navigating. **iOS ignores `download` in standalone mode**, so that changed
+nothing and Jim confirmed it was still broken after a force quit and a
+reinstall of the icon.
+
+Page images cannot navigate anywhere, so they cannot strand anyone. All 28
+pages live at `assets/book/pages/pNN.jpg`, 1500px wide, mozjpeg q76, 106 to
+254KB each and 4.4MB for the set. The first two load eagerly and the rest are
+lazy, with width and height on every img so the page does not jump as they
+arrive. `documents[0].pages` and `pagePath` in data/guide.json drive it, and
+`{n}` in the path is the zero padded page number.
+
+They were made by splitting the PDF with the JXA and PDFKit script, rendering
+each page with `qlmanage -t -s 2600`, then resizing with sharp. **If the
+booklet is reissued, regenerate these too.** A stale page set would be worse
+than a stale PDF, because this is now the primary way people read it.
+
+The viewport meta carries no `user-scalable=no` and no `maximum-scale`, so
+pinch to zoom genuinely works and the copy saying so is honest. Do not add
+either of those attributes.
+
+The PDF is still published and still linked, quietly, as "Open the PDF in a
+browser". **It must never be the only route to the content**, for the reason
+above.
+
+**Superseded, kept for the reasoning: the link used to branch on standalone.** Added to the home
 screen there is no address bar and no back button, so opening a PDF stranded
 the reader in it with no way back to the wall short of force quitting. Jim hit
 this on a phone.
