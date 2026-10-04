@@ -399,14 +399,6 @@ a { color: var(--pool-deep); }
   border-radius: 10px;
   background: var(--paper);
 }
-.book-file {
-  display: inline-block;
-  margin-top: 12px;
-  font-size: 13px;
-  color: var(--dim);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
 
 /* The Event Book tab is a single download, so the link carries the page
    rather than sitting as one row in a list. */
@@ -2668,9 +2660,12 @@ function Guide() {
       {/* The tab is the download. InfoSections still renders if sections ever
           come back, which is why the guard is on the data and not removed. */}
       <InfoSections sections={data?.sections} />
-      {docs.length > 0 && (
+      {/* Only for a document that is not already rendered inline below.
+          The book is, so this draws nothing and the pages speak for
+          themselves. A second document later would still get a card. */}
+      {docs.some((d) => d !== book) && (
         <div className="card roof roof-mustard book-card">
-          {docs.map((d, i) => (
+          {docs.filter((d) => d !== book).map((d, i) => (
             <div className="book-doc" key={i}>
               {!d.url && (
                 <span className="book-link is-pending">
@@ -2678,15 +2673,10 @@ function Guide() {
                 </span>
               )}
               {d.detail && <div className="book-detail">{d.detail}</div>}
-              {/* The PDF is still here for anyone who wants the file itself.
-                  Quiet, because the pages below are the main way to read it,
-                  and on an installed phone this link is the one that strands
-                  people. Never the only route to the content. */}
-              {d.url && (
-                <a className="book-file" href={d.url} target="_blank" rel="noopener">
-                  Open the PDF in a browser
-                </a>
-              )}
+              {/* No link to the PDF. The pages below ARE the book, and on a
+                  phone with the wall installed a PDF link is the one thing
+                  that strands the reader with no way back. The file is still
+                  published at d.url if it is ever needed. Jim, Oct 4. */}
             </div>
           ))}
         </div>

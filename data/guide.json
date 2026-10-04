@@ -1,10 +1,9 @@
 {
   "_note": "The Event Program Guide. This is the old concierge.json content plus the format of play and any documents. Source: 2026 Partners final agenda for live wall (1).docx, the Sep 15 update. Still open: Who to Call, pending Team Captain Host names (ROADMAP P1.6). documents[] shows on the Program Guide; an entry with url:null and placeholder:true renders a Coming Soon chip instead of a dead link. Oct 1: the tab is the download and nothing else. The nine info sections are parked under sectionsRetiredOct1 and render nowhere. Rename that key back to sections to restore them. Everything they said is in the booklet. Oct 2: the book reads in the tab as page images. The download attribute is ignored by iOS when the wall is installed to the home screen, so a PDF link there navigated away with no back button and stranded the reader. Images never navigate. pagePath is a template, {n} is the zero padded page number, and the PDF stays available underneath for anyone who wants the file.",
-  "intro": "The full booklet for the week.",
+  "intro": "All 28 pages of the booklet. Pinch to zoom.",
   "documents": [
     {
       "title": "Event Book",
-      "detail": "All 28 pages, right here. Pinch to zoom.",
       "url": "assets/book/2026-partners-invitational-event-book.pdf",
       "pages": 28,
       "pagePath": "assets/book/pages/p{n}.jpg"

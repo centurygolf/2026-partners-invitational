@@ -652,9 +652,14 @@ The viewport meta carries no `user-scalable=no` and no `maximum-scale`, so
 pinch to zoom genuinely works and the copy saying so is honest. Do not add
 either of those attributes.
 
-The PDF is still published and still linked, quietly, as "Open the PDF in a
-browser". **It must never be the only route to the content**, for the reason
-above.
+**There is no link to the PDF at all.** Jim removed it on Oct 4: publishing
+the pages on the page is enough, and a PDF link is the one thing that strands
+a reader on an installed phone. The file is still published at
+`assets/book/2026-partners-invitational-event-book.pdf` and
+`documents[0].url` still points at it, so it can be linked again in one line
+if anyone needs the file. The documents card now skips any document that is
+rendered inline, so it draws nothing here while still working for a second
+document later.
 
 **Superseded, kept for the reasoning: the link used to branch on standalone.** Added to the home
 screen there is no address bar and no back button, so opening a PDF stranded
