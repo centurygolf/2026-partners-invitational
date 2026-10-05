@@ -388,6 +388,37 @@ a { color: var(--pool-deep); }
 }
 
 /* ----------------------------------------------------------------- pills */
+/* Pairings. Two up on a desktop, one on a phone. */
+.pair-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  margin-top: 14px;
+}
+.pair-card { padding: 16px 16px 14px; }
+.pair-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.pair-hole {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pool-deep);
+}
+.pair-time { font-size: 12px; color: var(--mute); }
+.pair-players { list-style: none; margin: 0; padding: 0; }
+.pair-players li { padding: 5px 0; border-bottom: 1px solid var(--edge); }
+.pair-players li:last-child { border-bottom: none; }
+.pair-captain { margin-top: 9px; padding-top: 9px; border-top: 2px solid var(--mustard); }
+.pair-name { display: block; font-size: 14px; font-weight: 600; }
+.pair-club { display: block; font-size: 12px; color: var(--dim); }
+
 /* The book, page by page. width and height are on the img so the page does
    not jump around as lazy images arrive. */
 .book-pages { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
@@ -1084,6 +1115,7 @@ const TABS = [
   { id: "sponsors",  label: "Top Sponsors" },
   { id: "teams",     label: "Teams" },
   { id: "scoring",   label: "Live Scoring" },
+  { id: "pairings",  label: "Pairings" },
   { id: "area",      label: "Area Guide" },
   { id: "photos",    label: "Photos" },
   { id: "questions", label: "Questions" },
@@ -1479,6 +1511,83 @@ function WeatherStrip({ days, activeId, onPick }) {
           : "Updated through the day. Highs and lows in Fahrenheit."}
       </div>
     </div>
+  );
+}
+
+/* --------------------------------------------------------------- pairings */
+/* Shotgun start, so the only question at 8am is which hole am I on. The
+   search box answers that in one go and is focused on nothing, because a
+   keyboard popping up on load would hide the very groups people scroll.
+
+   Hole order is by the printed sheet, not alphabetical: 1A, 1B, 2 ... 18B.
+   A plain sort puts 10 before 2, hence holeKey. */
+function holeKey(h) {
+  const m = String(h).match(/^(\d+)([A-Z]?)$/);
+  return m ? parseInt(m[1], 10) * 10 + (m[2] ? m[2].charCodeAt(0) - 64 : 0) : 9999;
+}
+
+function Pairings() {
+  const data = useJson("data/pairings.json");
+  const [q, setQ] = useState("");
+  if (data === undefined) return null;
+
+  const round = (data?.rounds || [])[0];
+  if (!round || !(round.groups || []).length) {
+    return (
+      <section>
+        <h2 className="t-display page-title">Pairings</h2>
+        <div className="empty">Pairings post the evening before each round.</div>
+      </section>
+    );
+  }
+
+  const groups = [...round.groups].sort((a, b) => holeKey(a.hole) - holeKey(b.hole));
+  const needle = q.trim().toLowerCase();
+  const hit = (g) =>
+    !needle ||
+    String(g.hole).toLowerCase() === needle ||
+    (g.captain || "").toLowerCase().includes(needle) ||
+    (g.players || []).some((pl) =>
+      pl.name.toLowerCase().includes(needle) || (pl.club || "").toLowerCase().includes(needle));
+  const shown = groups.filter(hit);
+
+  return (
+    <section>
+      <h2 className="t-display page-title">Pairings</h2>
+      <p className="page-sub">
+        {round.label}. {round.day} &middot; {round.course} &middot; {round.tee}
+      </p>
+      <input className="search" value={q} onChange={(e) => setQ(e.target.value)}
+        placeholder="Find your name, your club, or a hole" />
+      {shown.length === 0 ? (
+        <div className="empty">No one by that name. Try a surname or your club.</div>
+      ) : (
+        <div className="pair-grid">
+          {shown.map((g) => (
+            <div className="card roof pair-card" key={g.hole}>
+              <div className="pair-head">
+                <span className="pair-hole">Hole {g.hole}</span>
+                <span className="pair-time">{round.tee}</span>
+              </div>
+              <ul className="pair-players">
+                {(g.players || []).map((pl, i) => (
+                  <li key={i}>
+                    <span className="pair-name">{pl.name}</span>
+                    <span className="pair-club">{pl.club}</span>
+                  </li>
+                ))}
+              </ul>
+              {g.captain && (
+                <div className="pair-captain">
+                  <span className="pair-name">{g.captain}</span>
+                  <span className="pair-club">Team Captain</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -3088,6 +3197,7 @@ function App() {
         {tab === "welcome" && <Welcome />}
         {tab === "agenda" && <Agenda />}
         {tab === "scoring" && <LiveScoring />}
+        {tab === "pairings" && <Pairings />}
         {tab === "teams" && <Teams />}
         {tab === "sponsors" && <Sponsors admin={admin} />}
         {tab === "evsponsors" && <EventSponsors />}
