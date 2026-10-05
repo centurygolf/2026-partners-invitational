@@ -1,5 +1,5 @@
 {
-  "_note": "Round 1 pairings, transcribed Oct 5 from 'Partners Invitational Round 1 Pairings.pdf' and cross checked against 'Partners Invitational round 1 Alpha.pdf'. Both are image based, so every name was read off the rendered page. Names and club spellings are the pairing sheets' own, NOT the wall's Teams tab, because this is the sheet the starters are working from. Two names were corrected AGAINST the sheets on Jim's instruction, Oct 5: the sheets print Kelly Nelson and Geoff Parker, the wall shows Barry Nelson and Geoff Park. Steve Le was aligned the same way: the sheets print Stephen Le, and Steve Le is the name Jim gave on Sep 25 when the substitution was made. Both pairing PDFs agree with each other on both, so the printed sheets at the starter tables will not match the wall on those two. That is deliberate.",
+  "_note": "Round 1 pairings, transcribed Oct 5 from 'Partners Invitational Round 1 Pairings.pdf' and cross checked against 'Partners Invitational round 1 Alpha.pdf'. Both are image based, so every name was read off the rendered page. Names and club spellings are the pairing sheets' own, NOT the wall's Teams tab, because this is the sheet the starters are working from. Two names were corrected AGAINST the sheets on Jim's instruction, Oct 5: the sheets print Kelly Nelson and Geoff Parker, the wall shows Barry Nelson and Geoff Park. Steve Le was aligned the same way: the sheets print Stephen Le, and Steve Le is the name Jim gave on Sep 25 when the substitution was made. Both pairing PDFs agree with each other on both, so the printed sheets at the starter tables will not match the wall on those two. That is deliberate. Jim set the general rule the same day: where the pairing sheets and the Teams tab disagree, the Teams tab wins. Club spellings were aligned the same way.",
   "rounds": [
     {
       "id": "r1",
@@ -14,11 +14,11 @@
           "players": [
             {
               "name": "Jordan Gugino",
-              "club": "The Club at PGA West"
+              "club": "PGA WEST"
             },
             {
               "name": "Beth Gordon",
-              "club": "The Club at PGA West"
+              "club": "PGA WEST"
             },
             {
               "name": "Josh Weiss",
@@ -44,11 +44,11 @@
             },
             {
               "name": "John Shelden",
-              "club": "The Club at PGA West"
+              "club": "PGA WEST"
             },
             {
               "name": "John Williams",
-              "club": "The Club at PGA West"
+              "club": "PGA WEST"
             }
           ]
         },
@@ -256,11 +256,11 @@
           "players": [
             {
               "name": "Davis Parker",
-              "club": "Eagles Landing Country Club"
+              "club": "Eagle's Landing Country Club"
             },
             {
               "name": "Jackson Baker",
-              "club": "Eagles Landing Country Club"
+              "club": "Eagle's Landing Country Club"
             },
             {
               "name": "Jenny Tronson",
@@ -286,11 +286,11 @@
             },
             {
               "name": "Justin Connelly",
-              "club": "Eagles Landing Country Club"
+              "club": "Eagle's Landing Country Club"
             },
             {
               "name": "Colin Lake",
-              "club": "Eagles Landing Country Club"
+              "club": "Eagle's Landing Country Club"
             }
           ]
         },
@@ -300,11 +300,11 @@
           "players": [
             {
               "name": "Steve Snyder",
-              "club": "The Medallion Club"
+              "club": "Medallion Club"
             },
             {
               "name": "Stuart Johnston",
-              "club": "The Medallion Club"
+              "club": "Medallion Club"
             },
             {
               "name": "Mark Buckman",
@@ -330,11 +330,11 @@
             },
             {
               "name": "Eric Kress",
-              "club": "The Medallion Club"
+              "club": "Medallion Club"
             },
             {
               "name": "Chris Wilkin",
-              "club": "The Medallion Club"
+              "club": "Medallion Club"
             }
           ]
         },
@@ -344,11 +344,11 @@
           "players": [
             {
               "name": "Nick Footer",
-              "club": "Oregon Golf Club"
+              "club": "The Oregon Golf Club"
             },
             {
               "name": "Cody Gibson",
-              "club": "Oregon Golf Club"
+              "club": "The Oregon Golf Club"
             },
             {
               "name": "Glenn Wasil",
@@ -374,11 +374,11 @@
             },
             {
               "name": "Jim McLoughlin",
-              "club": "Oregon Golf Club"
+              "club": "The Oregon Golf Club"
             },
             {
               "name": "Shan Stach",
-              "club": "Oregon Golf Club"
+              "club": "The Oregon Golf Club"
             }
           ]
         },

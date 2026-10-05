@@ -529,6 +529,34 @@ to the organizers and publishes when it is answered. The asker sees their own ma
 questions. `settings/qaPublic` flips this to publish everything immediately,
 toggled from the admin panel.
 
+**The Teams tab wins. Jim, Oct 5.** Standing rule. Where a pairing sheet,
+a booklet page or any other document disagrees with data/teams.json on a
+player name, a captain or a club spelling, **the wall follows Teams**. The
+printed sheets at the starter tables will differ in places and that is
+accepted.
+
+Applied to Round 1 pairings: the sheets print Kelly Nelson, Geoff Parker and
+Stephen Le, the wall shows **Barry Nelson, Geoff Park and Steve Le**. Four
+club spellings were aligned the same way: The Club at PGA West to **PGA
+WEST**, Eagles Landing to **Eagle's Landing Country Club**, The Medallion
+Club to **Medallion Club**, Oregon Golf Club to **The Oregon Golf Club**.
+
+**Check this on every new pairing sheet.** The cross-check is worth running
+rather than eyeballing, because a transcribed name that is subtly wrong looks
+right:
+
+    node -e 'const t=require("./data/teams.json"),pr=require("./data/pairings.json");
+    const T=(t.teams||t.clubs||t);
+    const names=new Set(T.flatMap(c=>c.players.map(p=>p.name)));
+    const clubs=new Set(T.map(c=>c.club));
+    const caps=new Set(T.map(c=>c.captain&&c.captain.name).filter(Boolean));
+    for(const r of pr.rounds) for(const g of r.groups){
+      for(const p of g.players){ if(!names.has(p.name))console.log("name",p.name);
+        if(!clubs.has(p.club))console.log("club",p.club); }
+      if(g.captain&&!caps.has(g.captain))console.log("captain",g.captain); }'
+
+It prints nothing when the two agree.
+
 **Format of Play is Eric Gray's, Sep 24.** Eric is the Director of Golf and
 the authority on format. He sent corrections written against his own Terms of
 Competition documents, not against this wall, so most of them had nothing here
