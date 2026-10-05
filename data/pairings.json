@@ -1,5 +1,5 @@
 {
-  "_note": "Round 1 pairings, transcribed Oct 5 from 'Partners Invitational Round 1 Pairings.pdf' and cross checked against 'Partners Invitational round 1 Alpha.pdf'. Both are image based, so every name was read off the rendered page. Names and club spellings are the pairing sheets' own, NOT the wall's Teams tab, because this is the sheet the starters are working from. Two differ on purpose: Kelly Nelson (Teams says Barry Nelson) and Geoff Parker (Teams says Geoff Park, per Jim Oct 2). Both pairing documents agree with each other on both. Flagged to Jim Oct 5.",
+  "_note": "Round 1 pairings, transcribed Oct 5 from 'Partners Invitational Round 1 Pairings.pdf' and cross checked against 'Partners Invitational round 1 Alpha.pdf'. Both are image based, so every name was read off the rendered page. Names and club spellings are the pairing sheets' own, NOT the wall's Teams tab, because this is the sheet the starters are working from. Two names were corrected AGAINST the sheets on Jim's instruction, Oct 5: the sheets print Kelly Nelson and Geoff Parker, the wall shows Barry Nelson and Geoff Park. Steve Le was aligned the same way: the sheets print Stephen Le, and Steve Le is the name Jim gave on Sep 25 when the substitution was made. Both pairing PDFs agree with each other on both, so the printed sheets at the starter tables will not match the wall on those two. That is deliberate.",
   "rounds": [
     {
       "id": "r1",
@@ -8,131 +8,556 @@
       "course": "Jack Nicklaus Private",
       "tee": "8:30 am shotgun",
       "groups": [
-        { "hole": "1A", "captain": "James Williams", "players": [
-          { "name": "Jordan Gugino", "club": "The Club at PGA West" },
-          { "name": "Beth Gordon", "club": "The Club at PGA West" },
-          { "name": "Josh Weiss", "club": "The Nelson Golf & Sports Club" },
-          { "name": "Jake Istnick", "club": "The Nelson Golf & Sports Club" } ] },
-        { "hole": "1B", "captain": "Eric Gray", "players": [
-          { "name": "Harry Lake", "club": "The Nelson Golf & Sports Club" },
-          { "name": "Rob Winter", "club": "The Nelson Golf & Sports Club" },
-          { "name": "John Shelden", "club": "The Club at PGA West" },
-          { "name": "John Williams", "club": "The Club at PGA West" } ] },
-        { "hole": "2", "captain": "Zac Casey", "players": [
-          { "name": "Jeff Casady", "club": "Bear Creek Country Club" },
-          { "name": "Bryan Egly", "club": "Bear Creek Country Club" },
-          { "name": "Tim McDaniel", "club": "The Citrus Club" },
-          { "name": "Miguel Garcia", "club": "The Citrus Club" } ] },
-        { "hole": "3", "captain": "Jason Humrich", "players": [
-          { "name": "Tristan Talbert", "club": "Chenal Country Club" },
-          { "name": "Ben Babcock", "club": "Chenal Country Club" },
-          { "name": "Dean Ehlers", "club": "Bear Creek Country Club" },
-          { "name": "Dom Gross", "club": "Bear Creek Country Club" } ] },
-        { "hole": "4A", "captain": "Casey Smith", "players": [
-          { "name": "Doug Rychard", "club": "The Citrus Club" },
-          { "name": "Rye Dahlman", "club": "The Citrus Club" },
-          { "name": "Steve Cathey", "club": "Chenal Country Club" },
-          { "name": "Steve Webster", "club": "Chenal Country Club" } ] },
-        { "hole": "4B", "captain": "Travis Long", "players": [
-          { "name": "Ness Cohen", "club": "Palm Valley Country Club" },
-          { "name": "Susan O'Dell", "club": "Palm Valley Country Club" },
-          { "name": "Scott Machabee", "club": "Anthem Country Club" },
-          { "name": "Patrick McNaught", "club": "Anthem Country Club" } ] },
-        { "hole": "5", "captain": "Bryan Miller", "players": [
-          { "name": "Kelly Nelson", "club": "Anthem Country Club" },
-          { "name": "Tom Weniger", "club": "Anthem Country Club" },
-          { "name": "Paul Zintel", "club": "Palm Valley Country Club" },
-          { "name": "Jeff Chanen", "club": "Palm Valley Country Club" } ] },
-        { "hole": "6", "captain": "Todd Leonard", "players": [
-          { "name": "Jeff Blumer", "club": "Monterey Country Club" },
-          { "name": "Barry Ehlers", "club": "Monterey Country Club" },
-          { "name": "Charles Abernathy", "club": "Balcones Country Club" },
-          { "name": "Demi Wilder", "club": "Balcones Country Club" } ] },
-        { "hole": "7", "captain": "Michael Feeney", "players": [
-          { "name": "Stephen Le", "club": "Balcones Country Club" },
-          { "name": "Andrew Smith", "club": "Balcones Country Club" },
-          { "name": "Lynn Burns", "club": "Monterey Country Club" },
-          { "name": "Todd Spitzer", "club": "Monterey Country Club" } ] },
-        { "hole": "8A", "captain": "Dan Cordaro", "players": [
-          { "name": "Rick McLimore", "club": "Marbella Country Club" },
-          { "name": "Will Wallett", "club": "Marbella Country Club" },
-          { "name": "Mike Madden", "club": "Ballantyne Country Club" },
-          { "name": "Steven Lorimer", "club": "Ballantyne Country Club" } ] },
-        { "hole": "8B", "captain": "Doug Hoffort", "players": [
-          { "name": "Melissa Sage", "club": "Ballantyne Country Club" },
-          { "name": "AJ Johnson", "club": "Ballantyne Country Club" },
-          { "name": "Andrew Lamming", "club": "Marbella Country Club" },
-          { "name": "Matt Wisler", "club": "Marbella Country Club" } ] },
-        { "hole": "9", "captain": "Nikki Ernenwein", "players": [
-          { "name": "Davis Parker", "club": "Eagles Landing Country Club" },
-          { "name": "Jackson Baker", "club": "Eagles Landing Country Club" },
-          { "name": "Jenny Tronson", "club": "Canyon Oaks Country Club" },
-          { "name": "Robert Nevers", "club": "Canyon Oaks Country Club" } ] },
-        { "hole": "10A", "captain": "Jay McLuen", "players": [
-          { "name": "Ben Raymond", "club": "Canyon Oaks Country Club" },
-          { "name": "Emily Mellon", "club": "Canyon Oaks Country Club" },
-          { "name": "Justin Connelly", "club": "Eagles Landing Country Club" },
-          { "name": "Colin Lake", "club": "Eagles Landing Country Club" } ] },
-        { "hole": "10B", "captain": "Parker Whitehead", "players": [
-          { "name": "Steve Snyder", "club": "The Medallion Club" },
-          { "name": "Stuart Johnston", "club": "The Medallion Club" },
-          { "name": "Mark Buckman", "club": "El Camino Country Club" },
-          { "name": "Dan Ledee", "club": "El Camino Country Club" } ] },
-        { "hole": "11", "captain": "Dustin Riggs", "players": [
-          { "name": "Geoff Parker", "club": "El Camino Country Club" },
-          { "name": "Ken Rodriguez", "club": "El Camino Country Club" },
-          { "name": "Eric Kress", "club": "The Medallion Club" },
-          { "name": "Chris Wilkin", "club": "The Medallion Club" } ] },
-        { "hole": "12", "captain": "Brett Brummett", "players": [
-          { "name": "Nick Footer", "club": "Oregon Golf Club" },
-          { "name": "Cody Gibson", "club": "Oregon Golf Club" },
-          { "name": "Glenn Wasil", "club": "The Huntington Club" },
-          { "name": "Jeff Farley", "club": "The Huntington Club" } ] },
-        { "hole": "13A", "captain": "Jeff Kragt", "players": [
-          { "name": "Ryan Wynne", "club": "The Huntington Club" },
-          { "name": "Garrett Stinson", "club": "The Huntington Club" },
-          { "name": "Jim McLoughlin", "club": "Oregon Golf Club" },
-          { "name": "Shan Stach", "club": "Oregon Golf Club" } ] },
-        { "hole": "13B", "captain": "Brandon Resnick", "players": [
-          { "name": "Chris Snyder", "club": "Sycamore Creek Country Club" },
-          { "name": "Andrew Hudock", "club": "Sycamore Creek Country Club" },
-          { "name": "Mark Stadler", "club": "Las Posas Country Club" },
-          { "name": "Chris Bannon", "club": "Las Posas Country Club" } ] },
-        { "hole": "14", "captain": "Casey Lewis", "players": [
-          { "name": "Derek Marquis", "club": "Las Posas Country Club" },
-          { "name": "Chris Wood", "club": "Las Posas Country Club" },
-          { "name": "Todd Lucius", "club": "Sycamore Creek Country Club" },
-          { "name": "Karl Frydryk", "club": "Sycamore Creek Country Club" } ] },
-        { "hole": "15", "captain": "Logan Cook", "players": [
-          { "name": "Chris Hill", "club": "Sylvania Country Club" },
-          { "name": "Chris Slavin", "club": "Sylvania Country Club" },
-          { "name": "Matt Bradley", "club": "Spanish Hills Club" },
-          { "name": "Jaime Jaquez", "club": "Spanish Hills Club" } ] },
-        { "hole": "16A", "captain": "Jason Stuller", "players": [
-          { "name": "Alexander Althaus", "club": "Spanish Hills Club" },
-          { "name": "Darryl Gordon", "club": "Spanish Hills Club" },
-          { "name": "Tim DeCant", "club": "Sylvania Country Club" },
-          { "name": "Ryan Buckenmeyer", "club": "Sylvania Country Club" } ] },
-        { "hole": "16B", "captain": "Pierre Peroz", "players": [
-          { "name": "Paul Border", "club": "The Club at Prescott Lakes" },
-          { "name": "John Peterson", "club": "The Club at Prescott Lakes" },
-          { "name": "Mike Hoyle", "club": "Sunset Hills Country Club" },
-          { "name": "Scott Norris", "club": "Sunset Hills Country Club" } ] },
-        { "hole": "17", "captain": "Dave Horn", "players": [
-          { "name": "Rob Jacobus", "club": "Sunset Hills Country Club" },
-          { "name": "John Lange", "club": "Sunset Hills Country Club" },
-          { "name": "Blake Sherman", "club": "The Club at Prescott Lakes" },
-          { "name": "Brandon Hanigan", "club": "The Club at Prescott Lakes" } ] },
-        { "hole": "18A", "captain": "John Lewis", "players": [
-          { "name": "Craig Russell", "club": "Wood Ranch Golf Club" },
-          { "name": "Kevin Underwood", "club": "Wood Ranch Golf Club" },
-          { "name": "Lynn Bailey", "club": "The Valor Club" },
-          { "name": "Julie Smith", "club": "The Valor Club" } ] },
-        { "hole": "18B", "captain": "Krisno Bridge", "players": [
-          { "name": "Kim Ashmore", "club": "The Valor Club" },
-          { "name": "Jeff Edmunds", "club": "The Valor Club" },
-          { "name": "Hyung Cho", "club": "Wood Ranch Golf Club" },
-          { "name": "Scott Grogin", "club": "Wood Ranch Golf Club" } ] }
+        {
+          "hole": "1A",
+          "captain": "James Williams",
+          "players": [
+            {
+              "name": "Jordan Gugino",
+              "club": "The Club at PGA West"
+            },
+            {
+              "name": "Beth Gordon",
+              "club": "The Club at PGA West"
+            },
+            {
+              "name": "Josh Weiss",
+              "club": "The Nelson Golf & Sports Club"
+            },
+            {
+              "name": "Jake Istnick",
+              "club": "The Nelson Golf & Sports Club"
+            }
+          ]
+        },
+        {
+          "hole": "1B",
+          "captain": "Eric Gray",
+          "players": [
+            {
+              "name": "Harry Lake",
+              "club": "The Nelson Golf & Sports Club"
+            },
+            {
+              "name": "Rob Winter",
+              "club": "The Nelson Golf & Sports Club"
+            },
+            {
+              "name": "John Shelden",
+              "club": "The Club at PGA West"
+            },
+            {
+              "name": "John Williams",
+              "club": "The Club at PGA West"
+            }
+          ]
+        },
+        {
+          "hole": "2",
+          "captain": "Zac Casey",
+          "players": [
+            {
+              "name": "Jeff Casady",
+              "club": "Bear Creek Country Club"
+            },
+            {
+              "name": "Bryan Egly",
+              "club": "Bear Creek Country Club"
+            },
+            {
+              "name": "Tim McDaniel",
+              "club": "The Citrus Club"
+            },
+            {
+              "name": "Miguel Garcia",
+              "club": "The Citrus Club"
+            }
+          ]
+        },
+        {
+          "hole": "3",
+          "captain": "Jason Humrich",
+          "players": [
+            {
+              "name": "Tristan Talbert",
+              "club": "Chenal Country Club"
+            },
+            {
+              "name": "Ben Babcock",
+              "club": "Chenal Country Club"
+            },
+            {
+              "name": "Dean Ehlers",
+              "club": "Bear Creek Country Club"
+            },
+            {
+              "name": "Dom Gross",
+              "club": "Bear Creek Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "4A",
+          "captain": "Casey Smith",
+          "players": [
+            {
+              "name": "Doug Rychard",
+              "club": "The Citrus Club"
+            },
+            {
+              "name": "Rye Dahlman",
+              "club": "The Citrus Club"
+            },
+            {
+              "name": "Steve Cathey",
+              "club": "Chenal Country Club"
+            },
+            {
+              "name": "Steve Webster",
+              "club": "Chenal Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "4B",
+          "captain": "Travis Long",
+          "players": [
+            {
+              "name": "Ness Cohen",
+              "club": "Palm Valley Country Club"
+            },
+            {
+              "name": "Susan O'Dell",
+              "club": "Palm Valley Country Club"
+            },
+            {
+              "name": "Scott Machabee",
+              "club": "Anthem Country Club"
+            },
+            {
+              "name": "Patrick McNaught",
+              "club": "Anthem Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "5",
+          "captain": "Bryan Miller",
+          "players": [
+            {
+              "name": "Barry Nelson",
+              "club": "Anthem Country Club"
+            },
+            {
+              "name": "Tom Weniger",
+              "club": "Anthem Country Club"
+            },
+            {
+              "name": "Paul Zintel",
+              "club": "Palm Valley Country Club"
+            },
+            {
+              "name": "Jeff Chanen",
+              "club": "Palm Valley Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "6",
+          "captain": "Todd Leonard",
+          "players": [
+            {
+              "name": "Jeff Blumer",
+              "club": "Monterey Country Club"
+            },
+            {
+              "name": "Barry Ehlers",
+              "club": "Monterey Country Club"
+            },
+            {
+              "name": "Charles Abernathy",
+              "club": "Balcones Country Club"
+            },
+            {
+              "name": "Demi Wilder",
+              "club": "Balcones Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "7",
+          "captain": "Michael Feeney",
+          "players": [
+            {
+              "name": "Steve Le",
+              "club": "Balcones Country Club"
+            },
+            {
+              "name": "Andrew Smith",
+              "club": "Balcones Country Club"
+            },
+            {
+              "name": "Lynn Burns",
+              "club": "Monterey Country Club"
+            },
+            {
+              "name": "Todd Spitzer",
+              "club": "Monterey Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "8A",
+          "captain": "Dan Cordaro",
+          "players": [
+            {
+              "name": "Rick McLimore",
+              "club": "Marbella Country Club"
+            },
+            {
+              "name": "Will Wallett",
+              "club": "Marbella Country Club"
+            },
+            {
+              "name": "Mike Madden",
+              "club": "Ballantyne Country Club"
+            },
+            {
+              "name": "Steven Lorimer",
+              "club": "Ballantyne Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "8B",
+          "captain": "Doug Hoffort",
+          "players": [
+            {
+              "name": "Melissa Sage",
+              "club": "Ballantyne Country Club"
+            },
+            {
+              "name": "AJ Johnson",
+              "club": "Ballantyne Country Club"
+            },
+            {
+              "name": "Andrew Lamming",
+              "club": "Marbella Country Club"
+            },
+            {
+              "name": "Matt Wisler",
+              "club": "Marbella Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "9",
+          "captain": "Nikki Ernenwein",
+          "players": [
+            {
+              "name": "Davis Parker",
+              "club": "Eagles Landing Country Club"
+            },
+            {
+              "name": "Jackson Baker",
+              "club": "Eagles Landing Country Club"
+            },
+            {
+              "name": "Jenny Tronson",
+              "club": "Canyon Oaks Country Club"
+            },
+            {
+              "name": "Robert Nevers",
+              "club": "Canyon Oaks Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "10A",
+          "captain": "Jay McLuen",
+          "players": [
+            {
+              "name": "Ben Raymond",
+              "club": "Canyon Oaks Country Club"
+            },
+            {
+              "name": "Emily Mellon",
+              "club": "Canyon Oaks Country Club"
+            },
+            {
+              "name": "Justin Connelly",
+              "club": "Eagles Landing Country Club"
+            },
+            {
+              "name": "Colin Lake",
+              "club": "Eagles Landing Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "10B",
+          "captain": "Parker Whitehead",
+          "players": [
+            {
+              "name": "Steve Snyder",
+              "club": "The Medallion Club"
+            },
+            {
+              "name": "Stuart Johnston",
+              "club": "The Medallion Club"
+            },
+            {
+              "name": "Mark Buckman",
+              "club": "El Camino Country Club"
+            },
+            {
+              "name": "Dan Ledee",
+              "club": "El Camino Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "11",
+          "captain": "Dustin Riggs",
+          "players": [
+            {
+              "name": "Geoff Park",
+              "club": "El Camino Country Club"
+            },
+            {
+              "name": "Ken Rodriguez",
+              "club": "El Camino Country Club"
+            },
+            {
+              "name": "Eric Kress",
+              "club": "The Medallion Club"
+            },
+            {
+              "name": "Chris Wilkin",
+              "club": "The Medallion Club"
+            }
+          ]
+        },
+        {
+          "hole": "12",
+          "captain": "Brett Brummett",
+          "players": [
+            {
+              "name": "Nick Footer",
+              "club": "Oregon Golf Club"
+            },
+            {
+              "name": "Cody Gibson",
+              "club": "Oregon Golf Club"
+            },
+            {
+              "name": "Glenn Wasil",
+              "club": "The Huntington Club"
+            },
+            {
+              "name": "Jeff Farley",
+              "club": "The Huntington Club"
+            }
+          ]
+        },
+        {
+          "hole": "13A",
+          "captain": "Jeff Kragt",
+          "players": [
+            {
+              "name": "Ryan Wynne",
+              "club": "The Huntington Club"
+            },
+            {
+              "name": "Garrett Stinson",
+              "club": "The Huntington Club"
+            },
+            {
+              "name": "Jim McLoughlin",
+              "club": "Oregon Golf Club"
+            },
+            {
+              "name": "Shan Stach",
+              "club": "Oregon Golf Club"
+            }
+          ]
+        },
+        {
+          "hole": "13B",
+          "captain": "Brandon Resnick",
+          "players": [
+            {
+              "name": "Chris Snyder",
+              "club": "Sycamore Creek Country Club"
+            },
+            {
+              "name": "Andrew Hudock",
+              "club": "Sycamore Creek Country Club"
+            },
+            {
+              "name": "Mark Stadler",
+              "club": "Las Posas Country Club"
+            },
+            {
+              "name": "Chris Bannon",
+              "club": "Las Posas Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "14",
+          "captain": "Casey Lewis",
+          "players": [
+            {
+              "name": "Derek Marquis",
+              "club": "Las Posas Country Club"
+            },
+            {
+              "name": "Chris Wood",
+              "club": "Las Posas Country Club"
+            },
+            {
+              "name": "Todd Lucius",
+              "club": "Sycamore Creek Country Club"
+            },
+            {
+              "name": "Karl Frydryk",
+              "club": "Sycamore Creek Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "15",
+          "captain": "Logan Cook",
+          "players": [
+            {
+              "name": "Chris Hill",
+              "club": "Sylvania Country Club"
+            },
+            {
+              "name": "Chris Slavin",
+              "club": "Sylvania Country Club"
+            },
+            {
+              "name": "Matt Bradley",
+              "club": "Spanish Hills Club"
+            },
+            {
+              "name": "Jaime Jaquez",
+              "club": "Spanish Hills Club"
+            }
+          ]
+        },
+        {
+          "hole": "16A",
+          "captain": "Jason Stuller",
+          "players": [
+            {
+              "name": "Alexander Althaus",
+              "club": "Spanish Hills Club"
+            },
+            {
+              "name": "Darryl Gordon",
+              "club": "Spanish Hills Club"
+            },
+            {
+              "name": "Tim DeCant",
+              "club": "Sylvania Country Club"
+            },
+            {
+              "name": "Ryan Buckenmeyer",
+              "club": "Sylvania Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "16B",
+          "captain": "Pierre Peroz",
+          "players": [
+            {
+              "name": "Paul Border",
+              "club": "The Club at Prescott Lakes"
+            },
+            {
+              "name": "John Peterson",
+              "club": "The Club at Prescott Lakes"
+            },
+            {
+              "name": "Mike Hoyle",
+              "club": "Sunset Hills Country Club"
+            },
+            {
+              "name": "Scott Norris",
+              "club": "Sunset Hills Country Club"
+            }
+          ]
+        },
+        {
+          "hole": "17",
+          "captain": "Dave Horn",
+          "players": [
+            {
+              "name": "Rob Jacobus",
+              "club": "Sunset Hills Country Club"
+            },
+            {
+              "name": "John Lange",
+              "club": "Sunset Hills Country Club"
+            },
+            {
+              "name": "Blake Sherman",
+              "club": "The Club at Prescott Lakes"
+            },
+            {
+              "name": "Brandon Hanigan",
+              "club": "The Club at Prescott Lakes"
+            }
+          ]
+        },
+        {
+          "hole": "18A",
+          "captain": "John Lewis",
+          "players": [
+            {
+              "name": "Craig Russell",
+              "club": "Wood Ranch Golf Club"
+            },
+            {
+              "name": "Kevin Underwood",
+              "club": "Wood Ranch Golf Club"
+            },
+            {
+              "name": "Lynn Bailey",
+              "club": "The Valor Club"
+            },
+            {
+              "name": "Julie Smith",
+              "club": "The Valor Club"
+            }
+          ]
+        },
+        {
+          "hole": "18B",
+          "captain": "Krisno Bridge",
+          "players": [
+            {
+              "name": "Kim Ashmore",
+              "club": "The Valor Club"
+            },
+            {
+              "name": "Jeff Edmunds",
+              "club": "The Valor Club"
+            },
+            {
+              "name": "Hyung Cho",
+              "club": "Wood Ranch Golf Club"
+            },
+            {
+              "name": "Scott Grogin",
+              "club": "Wood Ranch Golf Club"
+            }
+          ]
+        }
       ]
     }
   ]
