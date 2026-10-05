@@ -29,6 +29,10 @@
       "title": "PGAW – Private Clubhouse",
       "items": [
         {
+          "label": "Address",
+          "detail": "55955 PGA Blvd, La Quinta, CA 92253."
+        },
+        {
           "label": "Golf Shop",
           "detail": "PGA WEST Private Clubhouse.",
           "phone": "760.564.3914"
