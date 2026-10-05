@@ -1,5 +1,5 @@
 {
-  "_note": "Source: page 10 of the 2026 registration booklet, first draft, checked Sep 28. Supersedes 2026 Partners final agenda for live wall (1).docx, which had the Monday team dinners half an hour early. iso is the machine readable date, which is what the weather strip keys on. spouses:true marks starred events where spouses and significant others are invited. Session photos are from last year's event, cropped from the 2026 brochure collage as a look test; swap for originals when available.",
+  "_note": "Source: page 10 of the 2026 registration booklet, first draft, checked Sep 28. The Monday team dinners are an exception: the booklet prints 6:30 pm, the wall says 6:00 pm on Jim's instruction, Oct 5, the day of the dinner. iso is the machine readable date, which is what the weather strip keys on. spouses:true marks starred events where spouses and significant others are invited. Session photos are from last year's event, cropped from the 2026 brochure collage as a look test; swap for originals when available.",
   "eventName": "The Partners Invitational",
   "edition": "18th Annual",
   "venue": "PGA WEST, La Quinta, California",
@@ -73,7 +73,7 @@
           "detail": "Spouses come cheer and join the fun. 25 teams. Group A plays Hole 1 then Hole 9. Group B plays Hole 9 then Hole 1. The final hole is 18. Men play the blue tees."
         },
         {
-          "time": "6:30 pm",
+          "time": "6:00 pm",
           "title": "Team Dinners",
           "detail": "La Quinta Cliffhouse Grill and Bar, 78250 Highway 111, La Quinta. Smart or elegant casual.",
           "spouses": true
