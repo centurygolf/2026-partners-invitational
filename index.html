@@ -388,6 +388,49 @@ a { color: var(--pool-deep); }
 }
 
 /* ----------------------------------------------------------------- pills */
+/* Results. The leaderboard is a numbered list rather than a table, because a
+   table of 25 rows does not fit a phone without side scrolling. */
+.res-round {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dusk);
+  margin: 18px 0 2px;
+}
+.res-sub { font-size: 13px; color: var(--dim); margin: 0 0 10px; }
+.res-card { margin-bottom: 10px; padding: 16px; }
+.res-title {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pool-deep);
+  margin-bottom: 8px;
+}
+.res-board { list-style: none; margin: 0; padding: 0; }
+.res-board li {
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--edge);
+  font-size: 14px;
+}
+.res-board li:last-child { border-bottom: none; }
+.res-board li.res-top { background: var(--glow); }
+.res-pos { color: var(--mute); font-size: 13px; }
+.res-board li.res-top .res-pos { color: var(--mustard); font-weight: 700; }
+.res-score { font-weight: 700; font-variant-numeric: tabular-nums; }
+.res-line { padding: 6px 0; border-bottom: 1px solid var(--edge); }
+.res-line:last-of-type { border-bottom: none; }
+.res-name { display: block; font-size: 14px; font-weight: 600; }
+.res-detail { display: block; font-size: 12px; color: var(--dim); }
+.res-foot { font-size: 12px; color: var(--mute); margin-top: 9px; }
+
 /* Pairings. Two up on a desktop, one on a phone. */
 .pair-grid {
   display: grid;
@@ -1514,6 +1557,71 @@ function WeatherStrip({ days, activeId, onPick }) {
   );
 }
 
+/* ---------------------------------------------------------------- results */
+/* Posted after each round by the scoring table. The club names here are the
+   scoring sheet's own and are deliberately NOT normalised onto the Teams
+   tab: a leaderboard should read the way it was published. */
+function Results() {
+  const data = useJson("data/results.json");
+  if (data === undefined) return null;
+  const rounds = (data?.rounds || []);
+  if (!rounds.length) return null;
+
+  const par = (v) => (v === 0 ? "E" : v > 0 ? "+" + v : String(v));
+
+  return (
+    <div className="stack" style={{ marginTop: 14 }}>
+      {rounds.map((r) => (
+        <div key={r.id}>
+          <h3 className="res-round">{r.label} results</h3>
+          <p className="res-sub">{r.day} &middot; {r.course} &middot; {r.format}</p>
+
+          {r.leaderboard && (
+            <div className="card roof res-card">
+              <div className="res-title">{r.leaderboard.title}</div>
+              <ol className="res-board">
+                {r.leaderboard.teams.map((t) => (
+                  <li key={t.pos} className={t.pos <= 3 ? "res-top" : ""}>
+                    <span className="res-pos">{t.pos}</span>
+                    <span className="res-club">{t.club}</span>
+                    <span className="res-score">{par(t.toPar)}</span>
+                  </li>
+                ))}
+              </ol>
+              <div className="res-foot">{r.leaderboard.column}.</div>
+            </div>
+          )}
+
+          {r.skins && (
+            <div className="card roof res-card">
+              <div className="res-title">{r.skins.title}</div>
+              {r.skins.winners.map((w, i) => (
+                <div className="res-line" key={i}>
+                  <span className="res-name">{w.name}</span>
+                  <span className="res-detail">{w.detail} &middot; {w.purse}</span>
+                </div>
+              ))}
+              {r.skins.total && <div className="res-foot">Total purse {r.skins.total}.</div>}
+            </div>
+          )}
+
+          {r.closest && (
+            <div className="card roof res-card">
+              <div className="res-title">{r.closest.title}</div>
+              {r.closest.winners.map((w, i) => (
+                <div className="res-line" key={i}>
+                  <span className="res-name">Hole {w.hole}: {w.name}</span>
+                  <span className="res-detail">{w.club} &middot; {w.detail}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 /* --------------------------------------------------------------- pairings */
 /* Shotgun start, so the only question at 8am is which hole am I on. The
    search box answers that in one go and is focused on nothing, because a
@@ -1529,9 +1637,23 @@ function holeKey(h) {
 function Pairings() {
   const data = useJson("data/pairings.json");
   const [q, setQ] = useState("");
+  const [pick, setPick] = useState(null);
   if (data === undefined) return null;
 
-  const round = (data?.rounds || [])[0];
+  const rounds = (data?.rounds || []).filter((r) => (r.groups || []).length);
+  /* Default to the round being played today, so nobody taps anything at
+     8am. Falls forward to the next one, and back to the last when the golf
+     is over. */
+  const todayIso = (() => {
+    const d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") +
+      "-" + String(d.getDate()).padStart(2, "0");
+  })();
+  const defaultId = (rounds.find((r) => r.date === todayIso) ||
+    rounds.find((r) => r.date && r.date > todayIso) ||
+    rounds[rounds.length - 1] || {}).id;
+  const round = rounds.find((r) => r.id === (pick || defaultId)) || rounds[0];
+
   if (!round || !(round.groups || []).length) {
     return (
       <section>
@@ -1554,8 +1676,19 @@ function Pairings() {
   return (
     <section>
       <h2 className="t-display page-title">Pairings</h2>
+      {rounds.length > 1 && (
+        <div className="day-pills">
+          {rounds.map((r) => (
+            <button key={r.id}
+              className={"day-pill" + (r.id === round.id ? " active" : "")}
+              onClick={() => setPick(r.id)}>
+              {r.label}
+            </button>
+          ))}
+        </div>
+      )}
       <p className="page-sub">
-        {round.label}. {round.day} &middot; {round.course} &middot; {round.tee}
+        {round.day} &middot; {round.course} &middot; {round.tee}
       </p>
       <input className="search" value={q} onChange={(e) => setQ(e.target.value)}
         placeholder="Find your name, your club, or a hole" />
@@ -1900,6 +2033,8 @@ function LiveScoring() {
           );
         })}
       </div>
+
+      <Results />
 
       {data?.leaderboardUrl && (
         <div className="card roof roof-mustard" style={{ marginTop: 12 }}>
