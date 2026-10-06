@@ -11,50 +11,211 @@
         "title": "Round 1 Scramble, Members",
         "column": "Total to par",
         "teams": [
-          { "pos": 1, "club": "Balcones Country Club", "toPar": -17.5 },
-          { "pos": 2, "club": "Sylvania Country Club", "toPar": -16.8 },
-          { "pos": 3, "club": "The Medallion Club", "toPar": -16.3 },
-          { "pos": 4, "club": "Eagles Landing Country Club", "toPar": -16.3 },
-          { "pos": 5, "club": "The Club at PGA West", "toPar": -14.6 },
-          { "pos": 6, "club": "Sunset Hills Country Club", "toPar": -14.4 },
-          { "pos": 7, "club": "The Huntington Club", "toPar": -13.4 },
-          { "pos": 8, "club": "Chenal Country Club", "toPar": -13.1 },
-          { "pos": 9, "club": "Sycamore Creek Country Club", "toPar": -13 },
-          { "pos": 10, "club": "Spanish Hills Club", "toPar": -12.8 },
-          { "pos": 11, "club": "Oregon Golf Club", "toPar": -12.6 },
-          { "pos": 12, "club": "Marbella Country Club", "toPar": -12.4 },
-          { "pos": 13, "club": "Monterey Country Club", "toPar": -11.1 },
-          { "pos": 14, "club": "Las Posas Country Club", "toPar": -10.9 },
-          { "pos": 15, "club": "Anthem Country Club", "toPar": -10.2 },
-          { "pos": 16, "club": "El Camino Country Club", "toPar": -10.1 },
-          { "pos": 17, "club": "The Citrus Club", "toPar": -7.7 },
-          { "pos": 18, "club": "The Nelson Golf & Sports Club", "toPar": -7.6 },
-          { "pos": 19, "club": "Ballantyne Country Club", "toPar": -5.4 },
-          { "pos": 20, "club": "Canyon Oaks Country Club", "toPar": -5.1 },
-          { "pos": 21, "club": "The Valor Club", "toPar": -3.8 },
-          { "pos": 22, "club": "Bear Creek Country Club", "toPar": -3.7 },
-          { "pos": 23, "club": "Palm Valley Country Club", "toPar": -2.6 },
-          { "pos": 24, "club": "The Club at Prescott Lakes", "toPar": 1.7 },
-          { "pos": 25, "club": "Wood Ranch Golf Club", "toPar": 1.7 }
+          {
+            "pos": 1,
+            "club": "Balcones Country Club",
+            "toPar": -17.5
+          },
+          {
+            "pos": 2,
+            "club": "Sylvania Country Club",
+            "toPar": -16.8
+          },
+          {
+            "pos": 3,
+            "club": "The Medallion Club",
+            "toPar": -16.3
+          },
+          {
+            "pos": 4,
+            "club": "Eagles Landing Country Club",
+            "toPar": -16.3
+          },
+          {
+            "pos": 5,
+            "club": "The Club at PGA West",
+            "toPar": -14.6
+          },
+          {
+            "pos": 6,
+            "club": "Sunset Hills Country Club",
+            "toPar": -14.4
+          },
+          {
+            "pos": 7,
+            "club": "The Huntington Club",
+            "toPar": -13.4
+          },
+          {
+            "pos": 8,
+            "club": "Chenal Country Club",
+            "toPar": -13.1
+          },
+          {
+            "pos": 9,
+            "club": "Sycamore Creek Country Club",
+            "toPar": -13
+          },
+          {
+            "pos": 10,
+            "club": "Spanish Hills Club",
+            "toPar": -12.8
+          },
+          {
+            "pos": 11,
+            "club": "Oregon Golf Club",
+            "toPar": -12.6
+          },
+          {
+            "pos": 12,
+            "club": "Marbella Country Club",
+            "toPar": -12.4
+          },
+          {
+            "pos": 13,
+            "club": "Monterey Country Club",
+            "toPar": -11.1
+          },
+          {
+            "pos": 14,
+            "club": "Las Posas Country Club",
+            "toPar": -10.9
+          },
+          {
+            "pos": 15,
+            "club": "Anthem Country Club",
+            "toPar": -10.2
+          },
+          {
+            "pos": 16,
+            "club": "El Camino Country Club",
+            "toPar": -10.1
+          },
+          {
+            "pos": 17,
+            "club": "The Citrus Club",
+            "toPar": -7.7
+          },
+          {
+            "pos": 18,
+            "club": "The Nelson Golf & Sports Club",
+            "toPar": -7.6
+          },
+          {
+            "pos": 19,
+            "club": "Ballantyne Country Club",
+            "toPar": -5.4
+          },
+          {
+            "pos": 20,
+            "club": "Canyon Oaks Country Club",
+            "toPar": -5.1
+          },
+          {
+            "pos": 21,
+            "club": "The Valor Club",
+            "toPar": -3.8
+          },
+          {
+            "pos": 22,
+            "club": "Bear Creek Country Club",
+            "toPar": -3.7
+          },
+          {
+            "pos": 23,
+            "club": "Palm Valley Country Club",
+            "toPar": -2.6
+          },
+          {
+            "pos": 24,
+            "club": "The Club at Prescott Lakes",
+            "toPar": 1.7
+          },
+          {
+            "pos": 25,
+            "club": "Wood Ranch Golf Club",
+            "toPar": 1.7
+          }
         ]
       },
       "skins": {
         "title": "Pro Skins, Team Captains",
         "total": "$750.00",
         "winners": [
-          { "name": "Todd Leonard", "skins": 1, "purse": "$150.00", "detail": "Eagle on 13" },
-          { "name": "Brett Brummett", "skins": 1, "purse": "$150.00", "detail": "Birdie on 11" },
-          { "name": "Parker Whitehead", "skins": 1, "purse": "$150.00", "detail": "Birdie on 2" },
-          { "name": "John Lewis", "skins": 1, "purse": "$150.00", "detail": "Birdie on 3" },
-          { "name": "Dan Cordaro", "skins": 1, "purse": "$150.00", "detail": "Eagle on 4" }
+          {
+            "name": "Todd Leonard",
+            "skins": 1,
+            "purse": "$150.00",
+            "detail": "Eagle on 13"
+          },
+          {
+            "name": "Brett Brummett",
+            "skins": 1,
+            "purse": "$150.00",
+            "detail": "Birdie on 11"
+          },
+          {
+            "name": "Parker Whitehead",
+            "skins": 1,
+            "purse": "$150.00",
+            "detail": "Birdie on 2"
+          },
+          {
+            "name": "John Lewis",
+            "skins": 1,
+            "purse": "$150.00",
+            "detail": "Birdie on 3"
+          },
+          {
+            "name": "Dan Cordaro",
+            "skins": 1,
+            "purse": "$150.00",
+            "detail": "Eagle on 4"
+          }
         ]
       },
       "closest": {
         "title": "Closest to the hole",
         "winners": [
-          { "hole": "3", "name": "Bryan Egly", "club": "Bear Creek Country Club", "detail": "5' 11\"" },
-          { "hole": "7", "name": "Tom Weniger", "club": "Anthem Country Club", "detail": "4' 4\"" },
-          { "hole": "17", "name": "Karl Frydryk", "club": "Sycamore Creek Country Club", "detail": "1' 11\"" }
+          {
+            "hole": "3",
+            "name": "Bryan Egly",
+            "club": "Bear Creek Country Club",
+            "detail": "5' 11\""
+          },
+          {
+            "hole": "7",
+            "name": "Tom Weniger",
+            "club": "Anthem Country Club",
+            "detail": "4' 4\""
+          },
+          {
+            "hole": "17",
+            "name": "Karl Frydryk",
+            "club": "Sycamore Creek Country Club",
+            "detail": "1' 11\""
+          }
+        ]
+      },
+      "shootout": {
+        "title": "Member Shootout finalists",
+        "places": [
+          {
+            "pos": 1,
+            "club": "Las Posas Country Club"
+          },
+          {
+            "pos": 2,
+            "club": "Sunset Hills Country Club"
+          },
+          {
+            "pos": 3,
+            "club": "The Valor Club"
+          },
+          {
+            "pos": 4,
+            "club": "Eagles Landing Country Club"
+          }
         ]
       }
     }

@@ -1612,6 +1612,20 @@ function Results() {
             </div>
           )}
 
+          {r.shootout && (
+            <div className="card roof roof-mustard res-card">
+              <div className="res-title">{r.shootout.title}</div>
+              <ol className="res-board">
+                {r.shootout.places.map((x) => (
+                  <li key={x.pos} className="res-top">
+                    <span className="res-pos">{x.pos}</span>
+                    <span className="res-club">{x.club}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
+
           {r.skins && (
             <div className="card roof res-card">
               <div className="res-title">{r.skins.title}</div>
