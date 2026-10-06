@@ -1,5 +1,5 @@
 {
-  "_note": "Live Scoring. Golf Genius runs scoring for this event. The ONLY URL shape that opens the Golf Genius app rather than a browser is https://www.golfgenius.com/deeplink_ggid?ggid=<GGID>, confirmed against their apple-app-site-association and assetlinks.json on Sep 15. PRTINV26 is printed on page 14 of the final registration booklet as the GGID to type into the Golf Genius app, and it is the same for both rounds. Leave a ggid null and that round shows a Coming Soon placeholder instead of a dead button. Oct 2: leaderboard links from Eric Gray. These are the Golf Genius PORTAL, a public web leaderboard that needs no app, which is a different thing from the ggid deeplink above. Both rounds live on one portal page and Round 2 appears Tuesday via the page's own round toggle, so r2 deliberately carries no round_id.",
+  "_note": "Live Scoring. Golf Genius runs scoring for this event. The ONLY URL shape that opens the Golf Genius app rather than a browser is https://www.golfgenius.com/deeplink_ggid?ggid=<GGID>, confirmed against their apple-app-site-association and assetlinks.json on Sep 15. PRTINV26 is printed on page 14 of the final registration booklet as the GGID to type into the Golf Genius app, and it is the same for both rounds. Leave a ggid null and that round shows a Coming Soon placeholder instead of a dead button. Oct 2: leaderboard links from Eric Gray. These are the Golf Genius PORTAL, a public web leaderboard that needs no app, which is a different thing from the ggid deeplink above. Both rounds live on one portal page and Round 2 appears Tuesday via the page's own round toggle, so r2 deliberately carries no round_id. Oct 5: rounds[].notes carry the Terms of Competition for each round, Round 2 from Partners_Invitational_Round_2_TOC.pdf. Kept short on purpose: the full TOC and the PGA WEST local rules are printed and on the tables.",
   "intro": "Scoring runs in Golf Genius. Open your own scorecard, or follow the live leaderboard in your browser.",
   "appNote": "Opens the Golf Genius app if you have it installed, otherwise your browser. The code is PRTINV26 if you are asked for it.",
   "rounds": [
@@ -11,7 +11,17 @@
       "course": "Nicklaus Private",
       "format": "Two-person scramble",
       "ggid": "PRTINV26",
-      "leaderboard": "https://www.golfgenius.com/pages/13069510434925615385?no_header=true&round_id=13069510471533500643"
+      "leaderboard": "https://www.golfgenius.com/pages/13069510434925615385?no_header=true&round_id=13069510471533500643",
+      "notes": [
+        {
+          "label": "Format",
+          "detail": "Two-person scramble net. 35% of the low handicap player plus 15% of the high. Four drives per player minimum. Maximum score was gross double bogey."
+        },
+        {
+          "label": "Tees",
+          "detail": "Men played blue, ladies red."
+        }
+      ]
     },
     {
       "id": "r2",
@@ -22,7 +32,45 @@
       "format": "Two-person shamble",
       "ggid": "PRTINV26",
       "leaderboard": "https://www.golfgenius.com/pages/13069510434925615385?no_header=true",
-      "leaderboardNote": "Round 2 opens Tuesday morning once play is under way. Until then this shows Round 1. Use the round toggle on the page to switch."
+      "leaderboardNote": "Round 2 opens Tuesday morning once play is under way. Until then this shows Round 1. Use the round toggle on the page to switch.",
+      "notes": [
+        {
+          "label": "Format",
+          "detail": "Two-person shamble net. One tee shot is selected, both play their second from there, then each plays their own ball and the better score counts. Maximum score is net double bogey."
+        },
+        {
+          "label": "Second shot only",
+          "detail": "You may place within one club length of where the original ball lay, no closer to the hole, and on the same terrain. A selected tee shot in a bunker may be raked after the shot."
+        },
+        {
+          "label": "After the second shot",
+          "detail": "Play the ball as it lies."
+        },
+        {
+          "label": "Tee shots",
+          "detail": "Four per player minimum."
+        },
+        {
+          "label": "Tees",
+          "detail": "Men play blue, at modified blue and white yardage. Ladies play red."
+        },
+        {
+          "label": "Handicap",
+          "detail": "70% of your individual index, as submitted by your captain. No tie-breaker is used."
+        },
+        {
+          "label": "Closest to the hole",
+          "detail": "Holes 3, 5, 12, 15 and 17. Members only, men and women combined."
+        },
+        {
+          "label": "Shoot-Out",
+          "detail": "After lunch and scoring, the top three scores and ties play two holes, 10 and 18, for first, second and third."
+        },
+        {
+          "label": "Pace",
+          "detail": "Four hours thirty minutes or less. Hole out all strokes in contention. The fourteen club rule is in effect."
+        }
+      ]
     }
   ],
   "leaderboardUrl": null

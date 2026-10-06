@@ -388,6 +388,26 @@ a { color: var(--pool-deep); }
 }
 
 /* ----------------------------------------------------------------- pills */
+/* Format for a round, folded away so the buttons above stay the point. */
+.score-toc { margin-top: 12px; border-top: 1px solid var(--edge); padding-top: 10px; }
+.score-toc > summary {
+  cursor: pointer;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pool-deep);
+  list-style: none;
+}
+.score-toc > summary::-webkit-details-marker { display: none; }
+.score-toc > summary::before { content: "+ "; }
+.score-toc[open] > summary::before { content: "\2212 "; }
+.score-toc-item { margin-top: 9px; }
+.score-toc-label { display: block; font-size: 13px; font-weight: 700; }
+.score-toc-detail { display: block; font-size: 13px; color: var(--dim); line-height: 1.5; }
+.score-toc-foot { font-size: 12px; color: var(--mute); margin-top: 11px; }
+
 /* Results. The leaderboard is a numbered list rather than a table, because a
    table of 25 rows does not fit a phone without side scrolling. */
 .res-round {
@@ -2028,6 +2048,21 @@ function LiveScoring() {
               )}
               {r.leaderboardNote && (
                 <div className="score-note">{r.leaderboardNote}</div>
+              )}
+              {(r.notes || []).length > 0 && (
+                <details className="score-toc" open={isToday}>
+                  <summary>Format and rules for this round</summary>
+                  {r.notes.map((t, i) => (
+                    <div className="score-toc-item" key={i}>
+                      <span className="score-toc-label">{t.label}</span>
+                      <span className="score-toc-detail">{t.detail}</span>
+                    </div>
+                  ))}
+                  <div className="score-toc-foot">
+                    The full Terms of Competition and the PGA WEST local rules
+                    are on the tables.
+                  </div>
+                </details>
               )}
             </div>
           );
