@@ -408,6 +408,53 @@ a { color: var(--pool-deep); }
 .score-toc-detail { display: block; font-size: 13px; color: var(--dim); line-height: 1.5; }
 .score-toc-foot { font-size: 12px; color: var(--mute); margin-top: 11px; }
 
+/* A winning team: photo on top where there is one, then the placing, the
+   club and who played. */
+.win { padding: 10px 0; border-bottom: 1px solid var(--edge); }
+.win:last-child { border-bottom: none; }
+.win-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid var(--edge);
+}
+.win-label {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mustard);
+}
+.win-club { font-size: 16px; font-weight: 700; line-height: 1.25; }
+.win-players { font-size: 13px; color: var(--dim); margin-top: 2px; line-height: 1.45; }
+
+/* The two round table. Four numeric columns would not fit a phone as a real
+   table, so it is a grid that lets the club name take the slack. */
+.ov-head, .ov-board li {
+  display: grid;
+  grid-template-columns: 26px 1fr 42px 42px 52px;
+  align-items: baseline;
+  gap: 6px;
+}
+.ov-head {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--edge);
+}
+.ov-head span:nth-child(n+3) { text-align: right; }
+.ov-board { list-style: none; margin: 0; padding: 0; }
+.ov-board li { padding: 6px 0; border-bottom: 1px solid var(--edge); font-size: 14px; }
+.ov-board li:last-child { border-bottom: none; }
+.ov-board li.res-top { background: var(--glow); }
+.ov-r { font-size: 12px; color: var(--dim); text-align: right; font-variant-numeric: tabular-nums; }
+.ov-board .res-score { text-align: right; }
+
 /* Results. The leaderboard is a numbered list rather than a table, because a
    table of 25 rows does not fit a phone without side scrolling. */
 .res-round {
@@ -1584,24 +1631,76 @@ function WeatherStrip({ days, activeId, onPick }) {
 function Results() {
   const data = useJson("data/results.json");
   if (data === undefined) return null;
-  const rounds = (data?.rounds || []);
-  if (!rounds.length) return null;
+  if (!data) return null;
 
+  /* The sheets write a score as a number; the wall writes it as golf. */
   const par = (v) => (v === 0 ? "E" : v > 0 ? "+" + v : String(v));
+  const Team = ({ club, players, photo, label, pos }) => (
+    <div className="win">
+      {photo && <img className="win-photo" src={photo} alt={club} loading="lazy" />}
+      <div className="win-body">
+        {label && <div className="win-label">{pos ? pos + ". " : ""}{label}</div>}
+        <div className="win-club">{club}</div>
+        {(players || []).length > 0 && (
+          <div className="win-players">{players.join(", ")}</div>
+        )}
+      </div>
+    </div>
+  );
+
+  const f = data.final;
+  const o = data.overall;
 
   return (
     <div className="stack" style={{ marginTop: 14 }}>
-      {rounds.map((r) => (
+      {f && (
+        <div className="card roof roof-mustard res-card">
+          <div className="res-title">{f.title}</div>
+          {f.subtitle && <div className="res-foot" style={{ marginTop: 0, marginBottom: 10 }}>{f.subtitle}</div>}
+          <Team club={f.champion.club} players={f.champion.players}
+            photo={f.champion.photo} label={f.champion.label} />
+          {(f.places || []).map((x) => (
+            <Team key={x.pos} club={x.club} players={x.players} label={x.label} pos={x.pos} />
+          ))}
+        </div>
+      )}
+
+      {o && (
+        <div className="card roof res-card">
+          <div className="res-title">{o.title}</div>
+          <div className="ov-head">
+            <span />
+            <span>Team</span>
+            <span>R1</span>
+            <span>R2</span>
+            <span>Total</span>
+          </div>
+          <ol className="ov-board">
+            {o.teams.map((t, i) => (
+              <li key={i} className={i < 3 ? "res-top" : ""}>
+                <span className="res-pos">{t.pos}</span>
+                <span className="res-club">{t.club}</span>
+                <span className="ov-r">{par(t.r1)}</span>
+                <span className="ov-r">{par(t.r2)}</span>
+                <span className="res-score">{par(t.total)}</span>
+              </li>
+            ))}
+          </ol>
+          {o.note && <div className="res-foot">{o.note}</div>}
+        </div>
+      )}
+
+      {(data.rounds || []).map((r) => (
         <div key={r.id}>
-          <h3 className="res-round">{r.label} results</h3>
+          <h3 className="res-round">{r.label}</h3>
           <p className="res-sub">{r.day} &middot; {r.course} &middot; {r.format}</p>
 
           {r.leaderboard && (
             <div className="card roof res-card">
               <div className="res-title">{r.leaderboard.title}</div>
               <ol className="res-board">
-                {r.leaderboard.teams.map((t) => (
-                  <li key={t.pos} className={t.pos <= 3 ? "res-top" : ""}>
+                {r.leaderboard.teams.map((t, i) => (
+                  <li key={i} className={i < 3 ? "res-top" : ""}>
                     <span className="res-pos">{t.pos}</span>
                     <span className="res-club">{t.club}</span>
                     <span className="res-score">{par(t.toPar)}</span>
@@ -1615,14 +1714,10 @@ function Results() {
           {r.shootout && (
             <div className="card roof roof-mustard res-card">
               <div className="res-title">{r.shootout.title}</div>
-              <ol className="res-board">
-                {r.shootout.places.map((x) => (
-                  <li key={x.pos} className="res-top">
-                    <span className="res-pos">{x.pos}</span>
-                    <span className="res-club">{x.club}</span>
-                  </li>
-                ))}
-              </ol>
+              {r.shootout.places.map((x) => (
+                <Team key={x.pos} club={x.club} players={x.players} photo={x.photo}
+                  label={x.pos === 1 ? "Winners" : x.pos === 2 ? "Second" : x.pos === 3 ? "Third" : "Fourth"} />
+              ))}
             </div>
           )}
 
@@ -1638,20 +1733,22 @@ function Results() {
               {r.skins.total && <div className="res-foot">Total purse {r.skins.total}.</div>}
             </div>
           )}
-
-          {r.closest && (
-            <div className="card roof res-card">
-              <div className="res-title">{r.closest.title}</div>
-              {r.closest.winners.map((w, i) => (
-                <div className="res-line" key={i}>
-                  <span className="res-name">Hole {w.hole}: {w.name}</span>
-                  <span className="res-detail">{w.club} &middot; {w.detail}</span>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       ))}
+
+      {data.closest && (
+        <div className="card roof res-card">
+          <div className="res-title">{data.closest.title}</div>
+          {data.closest.winners.map((w, i) => (
+            <div className="res-line" key={i}>
+              <span className="res-name">{w.name}</span>
+              <span className="res-detail">
+                {w.round} &middot; {w.course} hole {w.hole} &middot; {w.detail}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
